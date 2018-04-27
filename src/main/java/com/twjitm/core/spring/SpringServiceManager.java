@@ -12,6 +12,7 @@ public class SpringServiceManager {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext*.xml");
         SpringLoadManager springLoadManager = (SpringLoadManager) applicationContext.getBean("springLoadManager");
         springLoadManager.getTestService().say();
+        springLoadManager.getDispatcherService().getMessage("test dispatcher");
     }
 
 }

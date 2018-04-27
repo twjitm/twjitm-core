@@ -12,5 +12,8 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="com.twjitm.core.service.*" use-default-filters="false"/>
     <bean id="springLoadManager" class="com.twjitm.core.spring.SpringLoadManager"/>
+    <bean id="messageRegistryFactory" class="com.twjitm.core.factory.MessageRegistryFactory" init-method="init">
+        <property name="namespace" value="com.twjitm.core.factory"/>
+    </bean>
 
 </beans>
