@@ -3,16 +3,18 @@ package com.twjitm.core.spring;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * Created by 文江 on 2018/4/16.
+ *spring 启动入口
  */
 
 public class SpringServiceManager {
 
     public static void init() {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext*.xml");
-        SpringLoadManager springLoadManager = (SpringLoadManager) applicationContext.getBean("springLoadManager");
+        springLoadManager = (SpringLoadManager) applicationContext.getBean("springLoadManager");
         springLoadManager.getTestService().say();
         springLoadManager.getDispatcherService().getMessage("test dispatcher");
+
     }
+    public static SpringLoadManager springLoadManager;
 
 }

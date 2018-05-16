@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 public class StartService implements IStartService {
     private static Logger logger = LogManager.getLogManager().getLogger(StartService.class.getName());
-    private int port = 8080;
+    private int port = 9090;
     private String ip = "127.0.0.1";
     private static StartService startService;
 
@@ -47,11 +47,12 @@ public class StartService implements IStartService {
         // 绑定端口，开始接收进来的连接
         ChannelFuture f = null; // (7)
         try {
-            f = b.bind("127.0.0.1", 9090).sync();
+            f = b.bind("127.0.0.1", port).sync();
             // 等待服务器  socket 关闭 。
             // 在这个例子中，这不会发生，但你可以优雅地关闭你的服务器。
+            System.out.println("服务器启动了");
             f.channel().closeFuture().sync();
-           
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {

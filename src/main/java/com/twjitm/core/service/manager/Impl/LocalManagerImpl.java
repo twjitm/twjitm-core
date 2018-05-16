@@ -1,10 +1,12 @@
 package com.twjitm.core.service.manager.Impl;
 
 import com.twjitm.core.service.manager.ILocalManager;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by ÎÄ½­ on 2018/4/27.
  */
+@Service
 public class LocalManagerImpl implements ILocalManager {
 
     public <T> T get(Class<T> clazz) {
@@ -20,6 +22,10 @@ public class LocalManagerImpl implements ILocalManager {
     }
 
     public <T> void add(Object service, Class<T> inter) {
-
+        try {
+            create((Class<T>) service,inter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

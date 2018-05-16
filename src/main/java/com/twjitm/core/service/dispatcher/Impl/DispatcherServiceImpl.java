@@ -1,8 +1,9 @@
 package com.twjitm.core.service.dispatcher.Impl;
 
-import com.twjitm.core.factory.MessageRegistryFactory;
-import com.twjitm.core.handler.BaseHandler;
-import com.twjitm.core.netstack.entity.AbstractNettyNetProtoBufMessage;
+
+import com.twjitm.core.common.factory.MessageRegistryFactory;
+import com.twjitm.core.common.logic.handler.BaseHandler;
+import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.service.test.TestService;
 import org.springframework.stereotype.Service;
