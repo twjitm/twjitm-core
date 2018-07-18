@@ -4,6 +4,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *spring Æô¶¯Èë¿Ú
+ * @author twjtim
  */
 
 public class SpringServiceManager {
