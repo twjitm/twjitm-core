@@ -25,7 +25,6 @@ public class ResponseMessage extends AbstractNettyNetProtoBufMessage {
     }
 
     public void encodeNetProtoBufMessageBody() throws CodecException, Exception {
-
     }
 
     public void decoderNetProtoBufMessageBody() throws CodecException, Exception {

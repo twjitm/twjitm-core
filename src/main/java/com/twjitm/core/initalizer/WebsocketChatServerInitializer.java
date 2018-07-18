@@ -8,6 +8,7 @@ import com.twjitm.core.test.TestServiceHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
@@ -18,19 +19,19 @@ public class WebsocketChatServerInitializer extends ChannelInitializer<SocketCha
     @Override
     public void initChannel(SocketChannel ch) throws Exception {//2
         ChannelPipeline pipeline = ch.pipeline();
-
+        int maxLength=Integer.MAX_VALUE;
         /*pipeline.addLast(new HttpServerCodec());
         pipeline.addLast(new HttpObjectAggregator(64 * 1024));
         pipeline.addLast(new ChunkedWriteHandler());*/
         //请求handler
         // pipeline.addLast(new HttpRequestHandler("/ws"));
-       // pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
-      //  pipeline.addLast(new NettyNetProtoBufMessageTCPDecoder());
+        // pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
+        //  pipeline.addLast(new NettyNetProtoBufMessageTCPDecoder());
+        pipeline.addLast(new LengthFieldBasedFrameDecoder(maxLength,2,4,0,0));
         pipeline.addLast(new RepeatNettyMessageDecoder());
-       pipeline.addLast(new StringDecoder());
+        pipeline.addLast(new StringDecoder());
         pipeline.addLast(new StringEncoder());
         //pipeline.addLast(new ProtobufVarint32FrameDecoder());
-       pipeline.addLast(new RepeatNettyMessageDecoder());
         pipeline.addLast(new NettyNetProtoBufMessageTCPDecoder());
         pipeline.addLast(new NettyNetProtoBufMessageTCPEncoder());
         //pipeline.addLast(new NettyCommonSessionWebSocketHandler());
