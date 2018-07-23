@@ -10,7 +10,6 @@ import com.twjitm.core.common.netstack.entity.NettyNetMessageBody;
  */
 public abstract class AbstractNettyNetProtoBufHttpMessage extends AbstractNettyNetProtoBufMessage {
     public AbstractNettyNetProtoBufHttpMessage(String json){
-        super(json);
         setNettyNetMessageHead(new NettyNetHttpMessageHead());
         setNettyNetMessageBody(new NettyNetMessageBody());
         initHeadCommId();

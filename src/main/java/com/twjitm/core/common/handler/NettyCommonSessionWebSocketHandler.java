@@ -40,6 +40,7 @@ public class NettyCommonSessionWebSocketHandler extends SimpleChannelInboundHand
      * @param msg
      * @throws Exception
      */
+    @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         ByteBuf buff = msg.copy().content();
 

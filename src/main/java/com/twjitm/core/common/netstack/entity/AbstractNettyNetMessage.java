@@ -16,9 +16,6 @@ public abstract class AbstractNettyNetMessage implements INettyMessage {
      */
     private final ConcurrentHashMap<Object, Object> attributes = new ConcurrentHashMap<Object, Object>(3);
 
-    public AbstractNettyNetMessage(String json) {
-        nettyNetMessageHead= JSON.parseObject(json,NettyNetMessageHead.class);
-    }
 
     public NettyNetMessageHead getNettyNetMessageHead() {
         return nettyNetMessageHead;
@@ -46,14 +43,4 @@ public abstract class AbstractNettyNetMessage implements INettyMessage {
        attributes.remove(key);
     }
 
-    /**
-     * 初始化协议头
-     * @param json
-     */
-    public  abstract void  initNettyNetMessageHead(String json);
-    public  abstract  void decoderNetJsonMessageBody(String json);
-    public  abstract  void encodeNetJsonMessageBody(String json);
-    public  static   int getCmdToJson(String json){
-     return 0;
-    };
 }

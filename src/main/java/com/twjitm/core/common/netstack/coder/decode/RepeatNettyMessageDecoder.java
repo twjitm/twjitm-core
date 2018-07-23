@@ -34,7 +34,7 @@ public class RepeatNettyMessageDecoder  extends ByteToMessageDecoder {
             System.out.println(length);
             if (in.readableBytes() < length) {
                 in.resetReaderIndex();
-            //    return;
+               return;
             }
 
             // 读取body

@@ -6,6 +6,8 @@ import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.netstack.entity.NettyNetMessageBody;
 import com.twjitm.core.common.netstack.entity.NettyNetMessageHead;
 import com.twjitm.core.common.netstack.entity.udp.NettyUDPMessageHead;
+import com.twjitm.core.spring.SpringLoadManager;
+import com.twjitm.core.spring.SpringServiceManager;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import org.springframework.stereotype.Service;
@@ -25,10 +27,10 @@ public class NettyNetProtoBuffTCPToMessageDecoderFactory implements INettyNetPro
         //read message context
         //读取内容
         short cmd = byteBuf.readShort();
-        netMessageHead.setCmd((short) 2);
+        netMessageHead.setCmd(cmd);
         netMessageHead.setSerial(byteBuf.readInt());
-        MessageRegistryFactory registryFactory = LocalManager.getInstance().getRegistryFactory();
-        AbstractNettyNetProtoBufMessage nettyMessage = registryFactory.get(2);
+        MessageRegistryFactory registryFactory =SpringServiceManager.springLoadManager.getMessageRegistryFactory(); //LocalManager.getInstance().getRegistryFactory();
+        AbstractNettyNetProtoBufMessage nettyMessage = registryFactory.get(cmd);
         nettyMessage.setNettyNetMessageHead(netMessageHead);
         NettyNetMessageBody nettyNetMessageBody=new NettyNetMessageBody();
 

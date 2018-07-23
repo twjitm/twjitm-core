@@ -1,0 +1,2 @@
+12:06:43 - AsyncEventService processor executorService started [com.snowcattle.game.thread.executor.OrderedQueuePoolExecutor@25aca718[Running, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0] with 60 threads ]
+12:09:01 - AsyncEventService processor executorService started [com.snowcattle.game.thread.executor.OrderedQueuePoolExecutor@4463d9d3[Running, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0] with 60 threads ]

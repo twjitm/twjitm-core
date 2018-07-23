@@ -16,9 +16,6 @@ import io.netty.handler.codec.CodecException;
 public class ResponseMessage extends AbstractNettyNetProtoBufMessage {
 
 
-    public ResponseMessage(String json) {
-        super(json);
-    }
 
     public void release() throws CodecException {
 

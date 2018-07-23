@@ -12,12 +12,7 @@ import java.util.List;
 public class BoradCastAllChatMessage extends AbstractNettyNetProtoBufMessage {
     private List<ChatMessage> messages;
 
-    public BoradCastAllChatMessage() {
-        super(null);
-    }
-    public BoradCastAllChatMessage(String json) {
-        super(json);
-    }
+
 
     public List<ChatMessage> getMessages() {
         return messages;

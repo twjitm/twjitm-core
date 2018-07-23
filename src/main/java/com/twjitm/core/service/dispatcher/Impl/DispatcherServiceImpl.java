@@ -9,6 +9,8 @@ import com.twjitm.core.service.test.TestService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,8 +32,26 @@ public class DispatcherServiceImpl implements IDispatcherService {
 
 
     public AbstractNettyNetProtoBufMessage dispatcher(AbstractNettyNetProtoBufMessage message) {
-
-
+        int commId = message.getNetMessageHead().getCmd();
+        BaseHandler baseHandler = handlerMap.get(commId);
+        /*if (baseHandler == null) {
+            return null;
+        }
+        Method method = baseHandler.getMethod(commId);
+        method.setAccessible(true);
+        try {
+            Object object = method.invoke(baseHandler,
+                    message);
+            AbstractNettyNetProtoBufMessage baseMessage = null;
+            if (object != null) {
+                baseMessage = (AbstractNettyNetProtoBufMessage) object;
+            }
+            return baseMessage;
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }*/
         return null;
     }
 

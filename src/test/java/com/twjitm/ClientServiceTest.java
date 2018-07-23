@@ -21,6 +21,7 @@ public class ClientServiceTest {
     static int port = 9090;
 
     public static void main(String[] args) {
+        TestSpring.initSpring();
          startup(ip,port);
     }
 

@@ -34,14 +34,14 @@ public class Dispatcher implements IDispatcher {
     public void dispatchAction(Channel channel, Object byteBuf) throws Exception {
         MessageRegistryFactory messageRegistryFactory = LocalManager.getInstance().getRegistryFactory();
         String date=((TextWebSocketFrame) byteBuf).text();
-        short messageCommId = (short) AbstractNettyNetProtoBufMessage.getCmdToJson(date);
-        AbstractNettyNetProtoBufMessage baseMessage = messageRegistryFactory.get(messageCommId);
+       /* short messageCommId = (short) AbstractNettyNetProtoBufMessage.getCmdToJson(date);*/
+      /*  AbstractNettyNetProtoBufMessage baseMessage = messageRegistryFactory.get(messageCommId);*/
         //baseMessage.decodeMessage(byteBuf);
-        if(byteBuf instanceof TextWebSocketFrame){
+      /*  if(byteBuf instanceof TextWebSocketFrame){
             baseMessage.initNettyNetMessageHead(date);
             baseMessage.decoderNetJsonMessageBody(date);
             dispatcher(baseMessage);
-        }
+        }*/
         if(byteBuf instanceof AbstractNettyNetProtoBufMessage){
             dispatcher((AbstractNettyNetProtoBufMessage) byteBuf);
         }

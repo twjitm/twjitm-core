@@ -11,7 +11,7 @@ public class GroupChatMessage extends ChatMessage {
 
 
     public GroupChatMessage(String json) {
-        super(json);
+
         GroupChatMessage chatMessage = (GroupChatMessage) JSON.parse(json);
         this.groupId = chatMessage.getGroupId();
 

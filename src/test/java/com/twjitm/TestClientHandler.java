@@ -1,5 +1,8 @@
 package com.twjitm;
 
+import com.twjitm.core.common.entity.chat.ChatMessage;
+import com.twjitm.core.common.enums.MessageComm;
+import com.twjitm.core.common.proto.BaseMessageProto;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -25,24 +28,21 @@ public class TestClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("into handleradded");
-        String context = "helloworld";
-       /* BaseMessageProto.BaseMessageProBuf.Builder builder = BaseMessageProto.BaseMessageProBuf.newBuilder();
-        builder.setCommid(MessageComm.PRIVATE_CHAT_MESSAGE.commId);
-        builder.setLength(context.length());
-        builder.setUId(1l);
-        builder.setSessionId(111l);
-        builder.setTimeStamp(System.currentTimeMillis());
-        BaseMessageProto.ChatMessageProBuf.Builder chatMessageProBuf = BaseMessageProto.ChatMessageProBuf.newBuilder();
-        ///builder.mergeFrom(chatMessageProBuf);
-        chatMessageProBuf.setChatType(0);
-        chatMessageProBuf.setContext("hello");
-        chatMessageProBuf.setRead(false);
-        chatMessageProBuf.setReceiveHaldUrl("http://img");
-        chatMessageProBuf.setReceiveNickName("twjitm");
-        chatMessageProBuf.setReceiveSession("ggg");
-        chatMessageProBuf.setReceiveUId(1);
-        chatMessageProBuf.setBaseMessageBuf(builder);*/
-        ctx.writeAndFlush(context);
+      System.out.println("into channelActive");
+        ChatMessage chatMessage=new ChatMessage();
+        chatMessage.setChatType(1);
+        chatMessage.setContext("twjitm");
+        chatMessage.setReceiveHaldUrl("url");
+        chatMessage.setRead(true);
+        chatMessage.setReceiveNickName("haha");
+        chatMessage.setReceiveSession("gaga");
+        chatMessage.setReceiveUId(11);
+        ctx.writeAndFlush(chatMessage);
+    }
+
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        super.channelRead(ctx, msg);
+        System.out.println(msg.toString());
     }
 }

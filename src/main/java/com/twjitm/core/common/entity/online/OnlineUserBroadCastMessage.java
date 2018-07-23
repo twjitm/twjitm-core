@@ -13,7 +13,6 @@ public class OnlineUserBroadCastMessage extends AbstractNettyNetProtoBufMessage 
     private long messageTime;//时间
 
     public OnlineUserBroadCastMessage() {
-        super(null);
     }
 
     public void release() throws CodecException {
@@ -28,22 +27,9 @@ public class OnlineUserBroadCastMessage extends AbstractNettyNetProtoBufMessage 
 
     }
 
-    public OnlineUserBroadCastMessage(String json) {
 
-        super(json);
-        OnlineUserBroadCastMessage broadCastMessage = (OnlineUserBroadCastMessage) JSON.parse(json);
-        this.messageTime = broadCastMessage.getMessageTime();
-      //  this.user = broadCastMessage.getUser();
-        this.outOrInType = broadCastMessage.getOutOrInType();
-    }
 
-    public void decoderNetJsonMessageBody(String json) {
 
-    }
-
-    public void encodeNetJsonMessageBody(String json) {
-
-    }
 
     public void decodeBody(Object in) {
 
