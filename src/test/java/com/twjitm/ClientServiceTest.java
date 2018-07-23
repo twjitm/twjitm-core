@@ -18,7 +18,7 @@ import java.security.MessageDigest;
  */
 public class ClientServiceTest {
     static String ip = "127.0.0.1";
-    static int port = 9090;
+    static int port = 9099;
 
     public static void main(String[] args) {
         TestSpring.initSpring();
@@ -36,7 +36,7 @@ public class ClientServiceTest {
         bootstrap.handler(new TestChannelInitializer());
 // 发起异步连接操作
         try {
-            ChannelFuture future = bootstrap.connect(ip,port).sync();
+            ChannelFuture future = bootstrap.connect(ip, port).sync();
             future.channel().closeFuture().sync();
 
         } catch (InterruptedException e) {
@@ -49,7 +49,7 @@ public class ClientServiceTest {
      *
      * @return
      */
-    public static  boolean md5() {
+    public static boolean md5() {
 
         File file = new File("E:\\结果2018-05-34.txt");
         if (!file.isFile()) {

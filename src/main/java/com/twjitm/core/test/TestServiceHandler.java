@@ -49,4 +49,7 @@ public class TestServiceHandler extends ChannelInboundHandlerAdapter {
         ctx.flush();
 
     }
+    public void test(){
+
+    }
 }
