@@ -1,6 +1,7 @@
-package com.twjitm.core.common.netstack.coder.encode;
+package com.twjitm.core.common.netstack.coder.encode.http;
 
 
+import com.twjitm.core.common.netstack.coder.encode.http.INettyNetProtoBufHttpMessageEncoderFactory;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.netstack.entity.NettyNetMessageBody;
 import com.twjitm.core.common.netstack.entity.http.NettyNetHttpMessageHead;

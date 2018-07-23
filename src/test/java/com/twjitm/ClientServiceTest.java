@@ -18,7 +18,7 @@ import java.security.MessageDigest;
  */
 public class ClientServiceTest {
     static String ip = "127.0.0.1";
-    static int port = 9099;
+    static int port = 9090;
 
     public static void main(String[] args) {
         TestSpring.initSpring();

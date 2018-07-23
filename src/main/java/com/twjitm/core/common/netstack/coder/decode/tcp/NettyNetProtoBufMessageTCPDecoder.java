@@ -1,4 +1,4 @@
-package com.twjitm.core.common.netstack.coder.decode;
+package com.twjitm.core.common.netstack.coder.decode.tcp;
 
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.utils.logs.LoggerUtils;
@@ -42,7 +42,7 @@ public class NettyNetProtoBufMessageTCPDecoder extends MessageToMessageDecoder<B
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf msg, List<Object> out) throws Exception {
         if (iNettyNetProtoBuffTCPToMessageDecoerFactory == null) {
-            System.out.println("iNettyNetProtoBuffTCPToMessageDecoerFactory  is null ");
+            logger.error("iNettyNetProtoBuffTCPToMessageDecoerFactory  is null ");
         } else {
             out.add(iNettyNetProtoBuffTCPToMessageDecoerFactory.praseMessage(msg));
 

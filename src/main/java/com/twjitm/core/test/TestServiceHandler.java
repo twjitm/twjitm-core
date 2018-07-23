@@ -1,6 +1,5 @@
 package com.twjitm.core.test;
 
-import com.twjitm.core.common.dispatcher.Dispatcher;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.spring.SpringLoadManager;
 import com.twjitm.core.spring.SpringServiceManager;
@@ -37,7 +36,7 @@ public class TestServiceHandler extends ChannelInboundHandlerAdapter {
         map.put(ctx.channel().id().asLongText(), ctx.channel());
         System.out.println("hahahahah");
         System.out.println(ctx.channel().remoteAddress() + "->Server :" + msg.toString());
-        System.out.println(ctx.channel().id());
+        System.out.println( ctx.channel().id());
         springLoadManager.getTestService().say();
         springLoadManager.getDispatcherService().dispatcher((AbstractNettyNetProtoBufMessage) msg);
 

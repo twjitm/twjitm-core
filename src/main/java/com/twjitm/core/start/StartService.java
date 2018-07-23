@@ -1,6 +1,6 @@
 package com.twjitm.core.start;
 
-import com.twjitm.core.initalizer.WebsocketChatServerInitializer;
+import com.twjitm.core.initalizer.NettyTcpMessageServerInitializer;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.utils.logs.LoggerUtils;
 import io.netty.bootstrap.ServerBootstrap;
@@ -42,7 +42,7 @@ public class StartService implements IStartService {
         ServerBootstrap b = new ServerBootstrap();
         b.group(listenIntoGroup, progressGroup)
                 .channel(NioServerSocketChannel.class)
-                .childHandler(new WebsocketChatServerInitializer())
+                .childHandler(new NettyTcpMessageServerInitializer())
                 .option(ChannelOption.SO_BACKLOG, 128)
                 .childOption(ChannelOption.SO_KEEPALIVE, true);
         ChannelFuture f;

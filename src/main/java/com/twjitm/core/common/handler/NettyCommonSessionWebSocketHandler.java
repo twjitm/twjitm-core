@@ -1,10 +1,8 @@
 package com.twjitm.core.common.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.twjitm.core.common.dispatcher.Dispatcher;
 import com.twjitm.core.common.entity.online.OnlineUserBroadCastMessage;
 import com.twjitm.core.common.entity.online.OnlineUserPo;
-import com.twjitm.core.common.manager.LocalManager;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
@@ -43,15 +41,8 @@ public class NettyCommonSessionWebSocketHandler extends SimpleChannelInboundHand
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         ByteBuf buff = msg.copy().content();
-
         Channel incoming = ctx.channel();
         String json = msg.text();
-        //新分发器
-        Dispatcher dispatcher = LocalManager.getInstance().getDispatcher();
-        dispatcher.dispatchAction(incoming, msg);
-
-        //老的分发器（即将废弃）
-        //  dispatcherNetty(incoming, msg.text());
     }
 
     private void sendMessagetoClient(Channel channel, AbstractNettyNetProtoBufMessage message) {

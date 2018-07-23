@@ -1,5 +1,6 @@
-package com.twjitm.core.common.netstack.coder.encode;
+package com.twjitm.core.common.netstack.coder.encode.tcp;
 
+import com.twjitm.core.common.netstack.coder.encode.tcp.INettyNetProtoBufTcpMessageEncoderFactory;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.spring.SpringServiceManager;
 import io.netty.buffer.ByteBuf;

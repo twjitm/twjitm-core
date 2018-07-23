@@ -1,10 +1,10 @@
 package com.twjitm.core.spring;
 
 import com.twjitm.core.common.factory.MessageRegistryFactory;
-import com.twjitm.core.common.netstack.coder.decode.INettyNetProtoBuffHttpToMessageDecoderFactory;
-import com.twjitm.core.common.netstack.coder.decode.INettyNetProtoBuffTCPToMessageDecoderFactory;
-import com.twjitm.core.common.netstack.coder.encode.INettyNetProtoBufHttpMessageEncoderFactory;
-import com.twjitm.core.common.netstack.coder.encode.INettyNetProtoBufTcpMessageEncoderFactory;
+import com.twjitm.core.common.netstack.coder.decode.http.INettyNetProtoBuffHttpToMessageDecoderFactory;
+import com.twjitm.core.common.netstack.coder.decode.tcp.INettyNetProtoBuffTCPToMessageDecoderFactory;
+import com.twjitm.core.common.netstack.coder.encode.http.INettyNetProtoBufHttpMessageEncoderFactory;
+import com.twjitm.core.common.netstack.coder.encode.tcp.INettyNetProtoBufTcpMessageEncoderFactory;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.service.test.TestService;
 import com.twjitm.core.service.user.UserService;
