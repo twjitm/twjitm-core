@@ -19,7 +19,7 @@ import java.util.List;
 public class NettyNetProtoBufMessageTCPDecoder extends MessageToMessageDecoder<ByteBuf> {
     Logger logger=LoggerUtils.getLogger(NettyNetProtoBufMessageTCPDecoder.class);
     private final Charset charset;
-    private INettyNetProtoBuffTCPToMessageDecoderFactory iNettyNetProtoBuffTCPToMessageDecoerFactory;
+    private INettyNetProtoBuffTCPToMessageDecoderFactory iNettyNetProtoBuffTCPToMessageDecoderFactory;
 
     public NettyNetProtoBufMessageTCPDecoder() {
         this(CharsetUtil.UTF_8);
@@ -28,7 +28,7 @@ public class NettyNetProtoBufMessageTCPDecoder extends MessageToMessageDecoder<B
     public NettyNetProtoBufMessageTCPDecoder(Class<? extends ByteBuf> inboundMessageType, Charset charset, INettyNetProtoBuffTCPToMessageDecoderFactory iNettyNetProtoBuffTCPToMessageDecoerFactory) {
         super(inboundMessageType);
         this.charset = charset;
-        this.iNettyNetProtoBuffTCPToMessageDecoerFactory = iNettyNetProtoBuffTCPToMessageDecoerFactory;
+        this.iNettyNetProtoBuffTCPToMessageDecoderFactory = iNettyNetProtoBuffTCPToMessageDecoerFactory;
     }
 
     public NettyNetProtoBufMessageTCPDecoder(Charset charset) {
@@ -36,15 +36,15 @@ public class NettyNetProtoBufMessageTCPDecoder extends MessageToMessageDecoder<B
             throw new NullPointerException("charset");
         }
         this.charset = charset;
-        iNettyNetProtoBuffTCPToMessageDecoerFactory = SpringServiceManager.springLoadManager.getNettyNetProtoBuffTCPToMessageDecoderFactory();
+        iNettyNetProtoBuffTCPToMessageDecoderFactory = SpringServiceManager.springLoadManager.getNettyNetProtoBuffTCPToMessageDecoderFactory();
     }
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf msg, List<Object> out) throws Exception {
-        if (iNettyNetProtoBuffTCPToMessageDecoerFactory == null) {
-            logger.error("iNettyNetProtoBuffTCPToMessageDecoerFactory  is null ");
+        if (iNettyNetProtoBuffTCPToMessageDecoderFactory == null) {
+            logger.error("iNettyNetProtoBuffTCPToMessageDecoderFactory  is null ");
         } else {
-            out.add(iNettyNetProtoBuffTCPToMessageDecoerFactory.praseMessage(msg));
+            out.add(iNettyNetProtoBuffTCPToMessageDecoderFactory.praseMessage(msg));
 
         }
     }

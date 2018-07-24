@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class NettyNetProtoBufTcpMessageEncoderFactory implements INettyNetProtoBufTcpMessageEncoderFactory {
 
+    @Override
     public ByteBuf createByteBuf(AbstractNettyNetProtoBufMessage netMessage) throws Exception {
         ByteBuf byteBuf = Unpooled.buffer(256);
         //编写head

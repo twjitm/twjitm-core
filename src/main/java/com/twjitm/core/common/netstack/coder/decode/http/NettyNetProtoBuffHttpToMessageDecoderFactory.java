@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class NettyNetProtoBuffHttpToMessageDecoderFactory implements INettyNetProtoBuffHttpToMessageDecoderFactory {
+    @Override
     public AbstractNettyNetProtoBufMessage praseMessage(ByteBuf byteBuf) {
         return null;
     }

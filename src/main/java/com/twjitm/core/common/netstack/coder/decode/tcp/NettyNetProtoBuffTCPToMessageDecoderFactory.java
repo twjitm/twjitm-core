@@ -1,8 +1,6 @@
 package com.twjitm.core.common.netstack.coder.decode.tcp;
 
 import com.twjitm.core.common.factory.MessageRegistryFactory;
-import com.twjitm.core.common.manager.LocalManager;
-import com.twjitm.core.common.netstack.coder.decode.tcp.INettyNetProtoBuffTCPToMessageDecoderFactory;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.netstack.entity.NettyNetMessageBody;
 import com.twjitm.core.common.netstack.entity.NettyNetMessageHead;
@@ -19,6 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class NettyNetProtoBuffTCPToMessageDecoderFactory implements INettyNetProtoBuffTCPToMessageDecoderFactory {
 
+    @Override
     public AbstractNettyNetProtoBufMessage praseMessage(ByteBuf byteBuf) {
         NettyNetMessageHead netMessageHead=new NettyUDPMessageHead();
         byteBuf.skipBytes(2);
@@ -29,7 +28,7 @@ public class NettyNetProtoBuffTCPToMessageDecoderFactory implements INettyNetPro
         short cmd = byteBuf.readShort();
         netMessageHead.setCmd(cmd);
         netMessageHead.setSerial(byteBuf.readInt());
-        MessageRegistryFactory registryFactory =SpringServiceManager.springLoadManager.getMessageRegistryFactory(); //LocalManager.getInstance().getRegistryFactory();
+        MessageRegistryFactory registryFactory =SpringServiceManager.springLoadManager.getMessageRegistryFactory();
         AbstractNettyNetProtoBufMessage nettyMessage = registryFactory.get(cmd);
         nettyMessage.setNettyNetMessageHead(netMessageHead);
         NettyNetMessageBody nettyNetMessageBody=new NettyNetMessageBody();

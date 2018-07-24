@@ -7,6 +7,7 @@ import com.twjitm.core.common.factory.classload.DynamicGameClassLoader;
 import com.twjitm.core.common.factory.classload.FileClassLoader;
 import com.twjitm.core.common.logic.handler.AbstractBaseHandler;
 import com.twjitm.core.common.logic.handler.BaseHandler;
+import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.utils.PackageScaner;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
@@ -39,7 +40,8 @@ public class DispatcherServiceImpl implements IDispatcherService {
     public String[] filesName;
 
 
-    public AbstractNettyNetProtoBufMessage dispatcher(AbstractNettyNetProtoBufMessage message) {
+    @Override
+    public AbstractNettyNetProtoBufMessage dispatcher(AbstractNettyNetMessage message) {
         int commId = message.getNetMessageHead().getCmd();
         BaseHandler baseHandler = handlerMap.get(commId);
        if (baseHandler == null) {
@@ -63,6 +65,7 @@ public class DispatcherServiceImpl implements IDispatcherService {
         return null;
     }
 
+    @Override
     public String getMessage(String message) {
         testService.say();
         System.out.println(message);
