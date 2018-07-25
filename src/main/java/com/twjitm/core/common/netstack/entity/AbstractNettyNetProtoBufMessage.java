@@ -3,8 +3,7 @@ package com.twjitm.core.common.netstack.entity;
 import com.alibaba.fastjson.JSON;
 import com.twjitm.core.common.annotation.MessageCommandAnntation;
 import io.netty.handler.codec.CodecException;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+
 
 /**
  * Created by 文江 on 2017/11/15.
@@ -45,9 +44,7 @@ public abstract class AbstractNettyNetProtoBufMessage extends AbstractNettyNetMe
     }
 
 
-    public String toAllInfoString(){
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE).replaceAll("\n", "");
-    }
+
 
 
 }

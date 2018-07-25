@@ -89,19 +89,19 @@ public class DispatcherServiceImpl implements IDispatcherService {
             filesName = PackageScaner.scanNamespaceFiles(namespace, suffix, false, true);
         }
         DynamicGameClassLoader classLoader = new DynamicGameClassLoader();
-        URL url = ClassLoader.getSystemClassLoader().getResource("");
-        System.out.println(url.getPath());
+
+       // URL url = ClassLoader.getSystemClassLoader().getResource("twjitm");
         for (int i = 0; i < filesName.length; i++) {
             String realClass = namespace
                     + "."
                     + filesName[i].subSequence(0, filesName[i].length()
                     - (suffix.length()));
             Class messageClass = null;
-            File classFile = new File(url.getPath());
+         //   File classFile = new File(url.getPath());
             try {
-                FileClassLoader fileClassLoader = new FileClassLoader(classFile);
-                byte[] classFileDate = fileClassLoader.getClassData(realClass);
-                messageClass = classLoader.findClass(realClass, classFileDate);
+               // FileClassLoader fileClassLoader = new FileClassLoader(classFile);
+               // byte[] classFileDate = fileClassLoader.getClassData(realClass);
+                messageClass =  Class.forName(realClass);;//classLoader.findClass(realClass, classFileDate);
                 System.out.println("handler load:" + messageClass.toString());
                 BaseHandler baseHandler = getBaseHandler(messageClass);
                 AbstractBaseHandler abstractBaseHandler = (AbstractBaseHandler) baseHandler;
