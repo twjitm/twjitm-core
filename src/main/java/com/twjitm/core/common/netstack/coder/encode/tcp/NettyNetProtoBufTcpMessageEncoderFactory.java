@@ -23,10 +23,11 @@ public class NettyNetProtoBufTcpMessageEncoderFactory implements INettyNetProtoB
         byteBuf.writeInt(netMessageHead.getLength());
         //设置内容
         byteBuf.writeByte(netMessageHead.getVersion());
+        //设置消息id
         byteBuf.writeShort(netMessageHead.getCmd());
+        //设置系列号
         byteBuf.writeInt(netMessageHead.getSerial());
         //编写body
-
         netMessage.encodeNetProtoBufMessageBody();
         NettyNetMessageBody netMessageBody = netMessage.getNetMessageBody();
         byteBuf.writeBytes(netMessageBody.getBytes());
