@@ -56,6 +56,8 @@ public class ChatMessage extends AbstractNettyNetProtoBufTcpMessage {
         setReceiveSession(req.getReceiveSession());
         setRead(req.getRead());
         setReceiveNickName(req.getReceiveNickName());
+        setReceiveHaldUrl(req.getReceiveHaldUrl());
+        setContext(getContext());
     }
 
     public ChatMessage() {

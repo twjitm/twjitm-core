@@ -20,7 +20,7 @@ public class NettyNetProtoBufTcpMessageEncoderFactory implements INettyNetProtoB
         NettyNetMessageHead netMessageHead = netMessage.getNetMessageHead();
         byteBuf.writeShort(netMessageHead.getHead());
         //长度
-        byteBuf.writeInt(0);
+        byteBuf.writeInt(netMessageHead.getLength());
         //设置内容
         byteBuf.writeByte(netMessageHead.getVersion());
         byteBuf.writeShort(netMessageHead.getCmd());

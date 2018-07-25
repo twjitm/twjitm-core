@@ -17,7 +17,7 @@ import java.security.MessageDigest;
  * nettyøÕªß∂À≤‚ ‘¿‡
  */
 public class ClientServiceTest {
-    static String ip = "47.93.22.194";
+    static String ip = "127.0.0.1";
     static int port = 9090;
 
     public static void main(String[] args) {

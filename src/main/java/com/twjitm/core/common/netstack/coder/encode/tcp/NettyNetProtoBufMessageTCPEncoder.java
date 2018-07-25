@@ -20,8 +20,7 @@ public class NettyNetProtoBufMessageTCPEncoder extends MessageToMessageEncoder<A
 
     public NettyNetProtoBufMessageTCPEncoder() {
         this(CharsetUtil.UTF_8);
-        INettyNetProtoBufTcpMessageEncoderFactory netProtoBufTcpMessageEncoderFactory = SpringServiceManager.springLoadManager.getNettyNetProtoBufTcpMessageEncoderFactory();
-        this.iNetMessageEncoderFactory = netProtoBufTcpMessageEncoderFactory;
+        this.iNetMessageEncoderFactory = SpringServiceManager.springLoadManager.getNettyNetProtoBufTcpMessageEncoderFactory();
     }
 
     public NettyNetProtoBufMessageTCPEncoder(Charset charset) {

@@ -27,7 +27,7 @@ public class TestServiceHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
         logger.info("有新客户端请求建立");
-      /*  ctx.writeAndFlush("你好，客户端");*/
+        /*  ctx.writeAndFlush("你好，客户端");*/
     }
 
     @Override
@@ -36,19 +36,19 @@ public class TestServiceHandler extends ChannelInboundHandlerAdapter {
         map.put(ctx.channel().id().asLongText(), ctx.channel());
         System.out.println("hahahahah");
         System.out.println(ctx.channel().remoteAddress() + "->Server :" + msg.toString());
-        System.out.println( ctx.channel().id());
+        System.out.println(ctx.channel().id());
         springLoadManager.getTestService().say();
-        springLoadManager.getDispatcherService().dispatcher((AbstractNettyNetProtoBufMessage) msg);
-
+        AbstractNettyNetProtoBufMessage message = springLoadManager.getDispatcherService().dispatcher((AbstractNettyNetProtoBufMessage) msg);
        /* ctx.channel().writeAndFlush("服务器对大家说的话！");
         for (Channel channel : list) {
             channel.writeAndFlush("广播的消息");
         }*/
-        list.add(ctx.channel());
-        ctx.flush();
-
+        /*list.add(ctx.channel());
+        ctx.flush();*/
+        ctx.writeAndFlush(message);
     }
-    public void test(){
+
+    public void test() {
 
     }
 }

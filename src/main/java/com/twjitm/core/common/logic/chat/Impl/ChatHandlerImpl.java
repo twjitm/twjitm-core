@@ -10,8 +10,11 @@ public class ChatHandlerImpl extends ChatHandler {
     public AbstractNettyNetProtoBufMessage chatMessageImpl(ChatMessage chatMessage) {
         // chatMessage.getSendUid();
         System.out.println("注解分离消息机制----------");
-
-        return null;
+        System.out.println(chatMessage.getContext());
+        ChatMessage message=new ChatMessage();
+        message=chatMessage;
+        message.setContext("hello client");
+        return message;
     }
 
 }
