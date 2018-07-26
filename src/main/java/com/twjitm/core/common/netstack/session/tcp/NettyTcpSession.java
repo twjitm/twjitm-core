@@ -66,4 +66,8 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
         processNetMessage(false);
         return false;
     }
+
+    public long getSessionId() {
+        return sessionId;
+    }
 }

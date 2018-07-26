@@ -15,7 +15,10 @@
     <context:component-scan base-package="com.twjitm.core.service.*" use-default-filters="false"/>
 
     <!--协议栈编码解码器工厂扫描-->
-    <context:component-scan base-package="com.twjitm.core.common.netstack.coder.*"/>
+    <context:component-scan base-package="com.twjitm.core.common.netstack.*"/>
+
+    <!--基础服务类-->
+    <context:component-scan base-package="com.twjitm.core.common.service.*"/>
 
 
     <bean id="springLoadManager" class="com.twjitm.core.spring.SpringLoadManager"/>
@@ -25,6 +28,7 @@
     <!--原子id生产器-->
     <bean id="longIdGenerator" class="com.twjitm.core.utils.uuid.LongIdGenerator"/>
     <bean id="nettyNetMessageProcessLogic" class="com.twjitm.core.common.process.NettyNetMessageProcessLogic"/>
+    <bean id="nettyTcpMessageFactory" class="com.twjitm.core.common.factory.NettyTcpMessageFactory"/>
 
 
 

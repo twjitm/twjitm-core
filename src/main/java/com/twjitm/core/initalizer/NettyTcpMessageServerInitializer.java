@@ -1,5 +1,6 @@
 package com.twjitm.core.initalizer;
 
+import com.twjitm.core.common.handler.tcp.NettyNetMessageTcpServerHandler;
 import com.twjitm.core.common.netstack.coder.decode.tcp.NettyNetProtoBufMessageTCPDecoder;
 import com.twjitm.core.common.netstack.coder.encode.tcp.NettyNetProtoBufMessageTCPEncoder;
 import com.twjitm.core.test.TestServiceHandler;
@@ -16,7 +17,7 @@ public class NettyTcpMessageServerInitializer extends ChannelInitializer<Channel
         ch.pipeline().addLast("frame", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 2, 4, 0, 0));
         ch.pipeline().addLast(new NettyNetProtoBufMessageTCPDecoder());
         ch.pipeline().addLast(new NettyNetProtoBufMessageTCPEncoder());
-        ch.pipeline().addLast(new TestServiceHandler());
-
+        //ch.pipeline().addLast(new TestServiceHandler());
+          ch.pipeline().addLast(new NettyNetMessageTcpServerHandler());
     }
 }

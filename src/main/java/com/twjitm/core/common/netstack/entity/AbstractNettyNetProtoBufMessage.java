@@ -15,10 +15,12 @@ public abstract class AbstractNettyNetProtoBufMessage extends AbstractNettyNetMe
         setNettyNetMessageHead(new NettyNetMessageHead());
         setNettyNetMessageBody(new NettyNetMessageBody());
     }
+    @Override
     public NettyNetMessageHead getNetMessageHead() {
         return getNettyNetMessageHead();
     }
 
+    @Override
     public NettyNetMessageBody getNetMessageBody() {
         return getNettyNetMessageBody();
     }

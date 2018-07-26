@@ -1,7 +1,17 @@
 package com.twjitm.core.common.handler.tcp;
 
+import com.twjitm.core.common.netstack.builder.NettyTcpSessionBuilder;
+import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
+import com.twjitm.core.common.netstack.session.tcp.NettyTcpSession;
+import com.twjitm.core.service.dispatcher.IDispatcherService;
+import com.twjitm.core.spring.SpringServiceManager;
+import com.twjitm.core.utils.logs.LoggerUtils;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import org.apache.log4j.Logger;
+
+import javax.annotation.Resource;
 
 /**
  * @author EGLS0807 - [Created on 2018-07-24 21:07]
@@ -9,14 +19,67 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * @jdk java version "1.8.0_77"
  */
 public abstract class AbstractGameNetMessageTcpServerHandler extends ChannelInboundHandlerAdapter {
+    Logger logger = LoggerUtils.getLogger(AbstractGameNetMessageTcpServerHandler.class);
+
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
         ctx.fireChannelRegistered();
-       /* NettyTcpSessionBuilder nettyTcpSessionBuilder = LocalMananger.getInstance().getLocalSpringBeanManager().getNettyTcpSessionBuilder();
-        NettyTcpSession nettyTcpSession = (NettyTcpSession) nettyTcpSessionBuilder.buildSession(ctx.channel());
-        NetTcpSessionLoopUpService netTcpSessionLoopUpService = LocalMananger.getInstance().getLocalSpringServiceManager().getNetTcpSessionLoopUpService();
-        boolean flag = netTcpSessionLoopUpService.addNettySession(nettyTcpSession);*/
+        NettyTcpSession nettyTcpSession = (NettyTcpSession) SpringServiceManager.springLoadManager.getNettyTcpSessionBuilder().buildSession(ctx.channel());
+        boolean can =  SpringServiceManager.springLoadManager.getNetTcpSessionLoopUpService().addNettySession(nettyTcpSession);
+        if (can) {
+            AbstractNettyNetMessage errorMessage =  SpringServiceManager.springLoadManager.getNettyTcpMessageFactory().createCommonErrorResponseMessage(-1, 10500);
+            nettyTcpSession.write(errorMessage);
+            nettyTcpSession.close();
+            ctx.close();
+            return;
+        }
+        addUpdateSession(nettyTcpSession);
+    }
 
+    public abstract void addUpdateSession(NettyTcpSession nettyTcpSession);
 
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        if (cause instanceof java.io.IOException) {
+            return;
+        }
+        //设置下线
+        disconnect(ctx.channel());
+        //销毁上下文
+        ctx.close();
+
+    }
+
+    /**
+     * 下线操作
+     *
+     * @param channel
+     */
+    public void disconnect(Channel channel) {
+        long sessonId = channel.attr(NettyTcpSessionBuilder.sessionId).get();
+        NettyTcpSession nettySession = (NettyTcpSession) SpringServiceManager.springLoadManager.getNetTcpSessionLoopUpService().findNettySession(sessonId);
+        if (nettySession == null) {
+            logger.error("tcp netsession null channelId is:" + channel.id().asLongText());
+            return;
+        }
+        nettySession.close();
+    }
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        ctx.flush();
+    }
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        long sessonId = ctx.channel().attr(NettyTcpSessionBuilder.sessionId).get();
+        NettyTcpSession nettyTcpSession = (NettyTcpSession) SpringServiceManager.springLoadManager.getNetTcpSessionLoopUpService().findNettySession(sessonId);
+        disconnect(ctx.channel());
+        if(nettyTcpSession == null){
+            ctx.fireChannelUnregistered();
+            return;
+        }
+        SpringServiceManager.springLoadManager.getNetTcpSessionLoopUpService().removeNettySession(nettyTcpSession.getSessionId());
+        ctx.fireChannelUnregistered();
     }
 }

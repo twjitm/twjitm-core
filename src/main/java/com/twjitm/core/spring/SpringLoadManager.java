@@ -1,15 +1,19 @@
 package com.twjitm.core.spring;
 
 import com.twjitm.core.common.factory.MessageRegistryFactory;
+import com.twjitm.core.common.factory.NettyTcpMessageFactory;
+import com.twjitm.core.common.netstack.builder.NettyTcpSessionBuilder;
 import com.twjitm.core.common.netstack.coder.decode.http.INettyNetProtoBuffHttpToMessageDecoderFactory;
 import com.twjitm.core.common.netstack.coder.decode.tcp.INettyNetProtoBuffTCPToMessageDecoderFactory;
 import com.twjitm.core.common.netstack.coder.encode.http.INettyNetProtoBufHttpMessageEncoderFactory;
 import com.twjitm.core.common.netstack.coder.encode.tcp.INettyNetProtoBufTcpMessageEncoderFactory;
 import com.twjitm.core.common.process.NettyNetMessageProcessLogic;
+import com.twjitm.core.common.service.Impl.NettyChannleOperationService;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.service.test.TestService;
 import com.twjitm.core.service.user.UserService;
 import com.twjitm.core.utils.uuid.LongIdGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 
@@ -51,6 +55,14 @@ public class SpringLoadManager {
     private NettyNetMessageProcessLogic nettyNetMessageProcessLogic;
 
 
+    @Resource
+    private NettyTcpSessionBuilder nettyTcpSessionBuilder;
+    @Resource
+    private NettyChannleOperationService netTcpSessionLoopUpService;
+    @Resource
+    NettyTcpMessageFactory nettyTcpMessageFactory;
+
+
     public TestService getTestService() {
         return testService;
     }
@@ -90,4 +102,23 @@ public class SpringLoadManager {
     public NettyNetMessageProcessLogic getNettyNetMessageProcessLogic() {
         return nettyNetMessageProcessLogic;
     }
+
+    public NettyTcpSessionBuilder getNettyTcpSessionBuilder() {
+        return nettyTcpSessionBuilder;
+    }
+
+    public NettyChannleOperationService getNetTcpSessionLoopUpService() {
+        return netTcpSessionLoopUpService;
+    }
+
+    public NettyTcpMessageFactory getNettyTcpMessageFactory() {
+        return nettyTcpMessageFactory;
+    }
+   public void init(){
+       try {
+           netTcpSessionLoopUpService.startup();
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+   };
 }

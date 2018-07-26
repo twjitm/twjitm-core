@@ -1,12 +1,15 @@
 package com.twjitm.core.common.service;
 
 /**
- * Created by 文江 on 2017/11/11.
+ * @author twjitm - [Created on 2018-07-26 20:30]
+ * @company http://www.g2us.com/
+ * @jdk java version "1.8.0_77"
  */
-public interface ILocalService {
+public interface IService {
     public String getId();
 
     public void startup() throws Exception;
 
     public void shutdown() throws Exception;
+
 }
