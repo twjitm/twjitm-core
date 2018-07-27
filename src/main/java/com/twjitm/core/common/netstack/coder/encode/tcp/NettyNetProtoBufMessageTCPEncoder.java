@@ -1,6 +1,5 @@
 package com.twjitm.core.common.netstack.coder.encode.tcp;
 
-import com.twjitm.core.common.netstack.coder.encode.tcp.INettyNetProtoBufTcpMessageEncoderFactory;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.spring.SpringServiceManager;
 import io.netty.buffer.ByteBuf;
@@ -20,7 +19,7 @@ public class NettyNetProtoBufMessageTCPEncoder extends MessageToMessageEncoder<A
 
     public NettyNetProtoBufMessageTCPEncoder() {
         this(CharsetUtil.UTF_8);
-        this.iNetMessageEncoderFactory = SpringServiceManager.springLoadManager.getNettyNetProtoBufTcpMessageEncoderFactory();
+        this.iNetMessageEncoderFactory = SpringServiceManager.springLoadService.getNettyNetProtoBufTcpMessageEncoderFactory();
     }
 
     public NettyNetProtoBufMessageTCPEncoder(Charset charset) {

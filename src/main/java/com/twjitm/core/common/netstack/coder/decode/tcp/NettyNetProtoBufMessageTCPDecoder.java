@@ -36,7 +36,7 @@ public class NettyNetProtoBufMessageTCPDecoder extends MessageToMessageDecoder<B
             throw new NullPointerException("charset");
         }
         this.charset = charset;
-        iNettyNetProtoBuffTCPToMessageDecoderFactory = SpringServiceManager.springLoadManager.getNettyNetProtoBuffTCPToMessageDecoderFactory();
+        iNettyNetProtoBuffTCPToMessageDecoderFactory = SpringServiceManager.springLoadService.getNettyNetProtoBuffTCPToMessageDecoderFactory();
     }
 
     @Override

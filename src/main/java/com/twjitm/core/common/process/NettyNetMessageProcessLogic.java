@@ -1,6 +1,5 @@
 package com.twjitm.core.common.process;
 
-import com.google.protobuf.AbstractMessage;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.netstack.session.NettySession;
@@ -13,20 +12,20 @@ import org.apache.log4j.Logger;
  * @author twjitm - [Created on 2018-07-24 20:19]
  * @jdk java version "1.8.0_77"
  * <p>
- * ÏûÏ¢´¦Àí
+ * ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
  */
 public class NettyNetMessageProcessLogic {
       Logger logger = LoggerUtils.getLogger(this.getClass());
 
     /**
-     * ´¦ÀítcpÏûÏ¢
+     * ï¿½ï¿½ï¿½ï¿½tcpï¿½ï¿½Ï¢
      *
      * @param message
      * @param session
      */
     public  void processTcpMessage(AbstractNettyNetMessage message, NettySession session) {
         long begin = System.nanoTime();
-        IDispatcherService dispatcherService = SpringServiceManager.springLoadManager.getDispatcherService();
+        IDispatcherService dispatcherService = SpringServiceManager.springLoadService.getDispatcherService();
         AbstractNettyNetProtoBufMessage respone = dispatcherService.dispatcher(message);
         if (respone != null) {
             respone.getNetMessageHead().setSerial(message.getNettyNetMessageHead().getSerial());

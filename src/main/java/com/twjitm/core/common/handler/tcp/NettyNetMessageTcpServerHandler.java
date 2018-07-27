@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * @company http://www.g2us.com/
  * @jdk java version "1.8.0_77"
  */
-public class NettyNetMessageTcpServerHandler extends AbstractGameNetMessageTcpServerHandler {
+public class NettyNetMessageTcpServerHandler extends AbstractNettyNetMessageTcpServerHandler {
     @Resource
     private IDispatcherService dispatcherService;
 

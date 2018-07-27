@@ -3,7 +3,6 @@ package com.twjitm.core.common.handler.tcp;
 import com.twjitm.core.common.netstack.builder.NettyTcpSessionBuilder;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.session.tcp.NettyTcpSession;
-import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.utils.logs.LoggerUtils;
 import io.netty.channel.Channel;
@@ -11,23 +10,22 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.apache.log4j.Logger;
 
-import javax.annotation.Resource;
 
 /**
  * @author EGLS0807 - [Created on 2018-07-24 21:07]
  * @company http://www.g2us.com/
  * @jdk java version "1.8.0_77"
  */
-public abstract class AbstractGameNetMessageTcpServerHandler extends ChannelInboundHandlerAdapter {
-    Logger logger = LoggerUtils.getLogger(AbstractGameNetMessageTcpServerHandler.class);
+public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInboundHandlerAdapter {
+    Logger logger = LoggerUtils.getLogger(AbstractNettyNetMessageTcpServerHandler.class);
 
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
         ctx.fireChannelRegistered();
-        NettyTcpSession nettyTcpSession = (NettyTcpSession) SpringServiceManager.springLoadManager.getNettyTcpSessionBuilder().buildSession(ctx.channel());
-        boolean can =  SpringServiceManager.springLoadManager.getNetTcpSessionLoopUpService().addNettySession(nettyTcpSession);
+        NettyTcpSession nettyTcpSession = (NettyTcpSession) SpringServiceManager.springLoadService.getNettyTcpSessionBuilder().buildSession(ctx.channel());
+        boolean can =  SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().addNettySession(nettyTcpSession);
         if (can) {
-            AbstractNettyNetMessage errorMessage =  SpringServiceManager.springLoadManager.getNettyTcpMessageFactory().createCommonErrorResponseMessage(-1, 10500);
+            AbstractNettyNetMessage errorMessage =  SpringServiceManager.springLoadService.getNettyTcpMessageFactory().createCommonErrorResponseMessage(-1, 10500);
             nettyTcpSession.write(errorMessage);
             nettyTcpSession.close();
             ctx.close();
@@ -57,7 +55,7 @@ public abstract class AbstractGameNetMessageTcpServerHandler extends ChannelInbo
      */
     public void disconnect(Channel channel) {
         long sessonId = channel.attr(NettyTcpSessionBuilder.sessionId).get();
-        NettyTcpSession nettySession = (NettyTcpSession) SpringServiceManager.springLoadManager.getNetTcpSessionLoopUpService().findNettySession(sessonId);
+        NettyTcpSession nettySession = (NettyTcpSession) SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().findNettySession(sessonId);
         if (nettySession == null) {
             logger.error("tcp netsession null channelId is:" + channel.id().asLongText());
             return;
@@ -73,13 +71,13 @@ public abstract class AbstractGameNetMessageTcpServerHandler extends ChannelInbo
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         long sessonId = ctx.channel().attr(NettyTcpSessionBuilder.sessionId).get();
-        NettyTcpSession nettyTcpSession = (NettyTcpSession) SpringServiceManager.springLoadManager.getNetTcpSessionLoopUpService().findNettySession(sessonId);
+        NettyTcpSession nettyTcpSession = (NettyTcpSession) SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().findNettySession(sessonId);
         disconnect(ctx.channel());
         if(nettyTcpSession == null){
             ctx.fireChannelUnregistered();
             return;
         }
-        SpringServiceManager.springLoadManager.getNetTcpSessionLoopUpService().removeNettySession(nettyTcpSession.getSessionId());
+        SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().removeNettySession(nettyTcpSession.getSessionId());
         ctx.fireChannelUnregistered();
     }
 }

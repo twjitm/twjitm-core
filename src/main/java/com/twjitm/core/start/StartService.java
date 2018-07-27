@@ -37,6 +37,7 @@ public class StartService implements IStartService {
 
     public void start() {
         SpringServiceManager.init();
+        SpringServiceManager.start();
         EventLoopGroup listenIntoGroup = new NioEventLoopGroup();
         EventLoopGroup progressGroup = new NioEventLoopGroup();
         ServerBootstrap b = new ServerBootstrap();

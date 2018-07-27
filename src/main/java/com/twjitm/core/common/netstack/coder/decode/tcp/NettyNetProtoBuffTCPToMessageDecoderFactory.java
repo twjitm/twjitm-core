@@ -28,7 +28,7 @@ public class NettyNetProtoBuffTCPToMessageDecoderFactory implements INettyNetPro
         short cmd = byteBuf.readShort();
         netMessageHead.setCmd(cmd);
         netMessageHead.setSerial(byteBuf.readInt());
-        MessageRegistryFactory registryFactory =SpringServiceManager.springLoadManager.getMessageRegistryFactory();
+        MessageRegistryFactory registryFactory =SpringServiceManager.springLoadService.getMessageRegistryFactory();
         AbstractNettyNetProtoBufMessage nettyMessage = registryFactory.get(cmd);
         nettyMessage.setNettyNetMessageHead(netMessageHead);
         NettyNetMessageBody nettyNetMessageBody=new NettyNetMessageBody();

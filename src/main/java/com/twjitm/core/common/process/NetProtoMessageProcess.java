@@ -4,7 +4,6 @@ import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.netstack.session.NettySession;
 import com.twjitm.core.common.update.IUpdatable;
-import com.twjitm.core.spring.SpringLoadManager;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.utils.logs.LoggerUtils;
 import org.apache.log4j.Logger;
@@ -15,19 +14,19 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 /**
  * @author EGLS0807 - [Created on 2018-07-24 15:49]
  * @jdk java version "1.8.0_77"
- * ÏûÏ¢´¦ÀíÆ÷
+ * ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 public class NetProtoMessageProcess implements INetProtoMessageProcess, IUpdatable {
     protected Logger logger = LoggerUtils.getLogger(NetProtoMessageProcess.class);
     private int processMessageNumber;
     private NettySession nettySession;
     /**
-     * ÏûÏ¢´¦Àí¶ÓÁÐ
+     * ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private Queue<AbstractNettyNetProtoBufMessage> netMessagequeue;
 
     /**
-     * ÖÐ¶ÏÏûÏ¢´¦Àí
+     * ï¿½Ð¶ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
      */
     protected boolean suspendedProcess;
 
@@ -37,7 +36,7 @@ public class NetProtoMessageProcess implements INetProtoMessageProcess, IUpdatab
     }
 
     /**
-     * ÏûÏ¢´¦Àí
+     * ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
      */
     @Override
     public void processNetMessage() {
@@ -45,7 +44,7 @@ public class NetProtoMessageProcess implements INetProtoMessageProcess, IUpdatab
         AbstractNettyNetProtoBufMessage message = netMessagequeue.poll();
         while (isSuspendedProcess() && message != null) {
             processMessageNumber++;
-            NettyNetMessageProcessLogic logic = SpringServiceManager.springLoadManager.getNettyNetMessageProcessLogic();
+            NettyNetMessageProcessLogic logic = SpringServiceManager.springLoadService.getNettyNetMessageProcessLogic();
             logic.processTcpMessage(message, nettySession);
             message = netMessagequeue.poll();
         }

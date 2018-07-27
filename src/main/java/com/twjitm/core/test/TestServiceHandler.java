@@ -1,7 +1,7 @@
 package com.twjitm.core.test;
 
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
-import com.twjitm.core.spring.SpringLoadManager;
+import com.twjitm.core.spring.SpringLoadServiceImpl;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.utils.logs.LoggerUtils;
 import io.netty.channel.Channel;
@@ -21,7 +21,7 @@ public class TestServiceHandler extends ChannelInboundHandlerAdapter {
     Logger logger = LoggerUtils.getLogger(TestServiceHandler.class);
     private Map<String, Channel> map = new HashMap<String, Channel>();
     private List<Channel> list = new ArrayList<Channel>();
-    private SpringLoadManager springLoadManager = SpringServiceManager.springLoadManager;
+    private SpringLoadServiceImpl springLoadManager = SpringServiceManager.springLoadService;
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {

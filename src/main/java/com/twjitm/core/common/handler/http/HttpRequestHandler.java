@@ -1,4 +1,4 @@
-package com.twjitm.core.common.handler;
+package com.twjitm.core.common.handler.http;
 
 import io.netty.channel.*;
 import io.netty.handler.codec.http.*;

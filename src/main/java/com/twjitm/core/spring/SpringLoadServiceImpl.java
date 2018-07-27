@@ -8,20 +8,23 @@ import com.twjitm.core.common.netstack.coder.decode.tcp.INettyNetProtoBuffTCPToM
 import com.twjitm.core.common.netstack.coder.encode.http.INettyNetProtoBufHttpMessageEncoderFactory;
 import com.twjitm.core.common.netstack.coder.encode.tcp.INettyNetProtoBufTcpMessageEncoderFactory;
 import com.twjitm.core.common.process.NettyNetMessageProcessLogic;
-import com.twjitm.core.common.service.Impl.NettyChannleOperationService;
+import com.twjitm.core.common.service.INettyChannleOperationService;
+import com.twjitm.core.common.service.IService;
+import com.twjitm.core.common.service.Impl.NettyChannleOperationServiceImpl;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.service.test.TestService;
 import com.twjitm.core.service.user.UserService;
 import com.twjitm.core.utils.uuid.LongIdGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 
 /**
- * Created by 文江 on 2018/4/16.
+ *
+ * @author 文江
+ * @date 2018/4/16
  * 通过spring bean配置
  */
-public class SpringLoadManager {
+public class SpringLoadServiceImpl implements IService {
     @Resource
     private TestService testService;
     @Resource
@@ -58,7 +61,7 @@ public class SpringLoadManager {
     @Resource
     private NettyTcpSessionBuilder nettyTcpSessionBuilder;
     @Resource
-    private NettyChannleOperationService netTcpSessionLoopUpService;
+    private NettyChannleOperationServiceImpl netTcpSessionLoopUpService;
     @Resource
     NettyTcpMessageFactory nettyTcpMessageFactory;
 
@@ -107,7 +110,7 @@ public class SpringLoadManager {
         return nettyTcpSessionBuilder;
     }
 
-    public NettyChannleOperationService getNetTcpSessionLoopUpService() {
+    public INettyChannleOperationService getNetTcpSessionLoopUpService() {
         return netTcpSessionLoopUpService;
     }
 
@@ -121,4 +124,21 @@ public class SpringLoadManager {
            e.printStackTrace();
        }
    };
+
+
+
+    @Override
+    public String getId() {
+        return "";
+    }
+
+    @Override
+    public void startup() throws Exception {
+        netTcpSessionLoopUpService.startup();
+    }
+
+    @Override
+    public void shutdown() throws Exception {
+        netTcpSessionLoopUpService.shutdown();
+    }
 }

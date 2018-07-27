@@ -16,12 +16,19 @@ public class SpringServiceManager {
         logger.info("load spring start");
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml", "classpath:spring/applicationContext-spring.xml");
         logger.info("load spring end");
-        springLoadManager = (SpringLoadManager) applicationContext.getBean("springLoadManager");
-        springLoadManager.getTestService().say();
-        springLoadManager.getDispatcherService().getMessage("test dispatcher");
-
+        springLoadService = (SpringLoadServiceImpl) applicationContext.getBean("springLoadService");
+        springLoadService.getTestService().say();
+        springLoadService.getDispatcherService().getMessage("test dispatcher");
     }
 
-    public static SpringLoadManager springLoadManager;
+    public static SpringLoadServiceImpl springLoadService;
+
+    public static void start(){
+        try {
+            springLoadService.startup();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

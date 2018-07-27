@@ -1,4 +1,4 @@
-package com.twjitm.core.common.handler;
+package com.twjitm.core.common.handler.socket;
 
 import com.alibaba.fastjson.JSON;
 import com.twjitm.core.common.entity.online.OnlineUserBroadCastMessage;

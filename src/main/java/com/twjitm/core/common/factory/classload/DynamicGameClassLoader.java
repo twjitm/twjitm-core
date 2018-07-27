@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import java.util.Hashtable;
 
 /**
- * @author jwp
  *	动态游戏工厂
  */
 public class DynamicGameClassLoader extends ClassLoader {

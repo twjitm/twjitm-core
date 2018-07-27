@@ -1,7 +1,7 @@
 package com.twjitm.core.initalizer;
 
 
-import com.twjitm.core.common.handler.HttpRequestHandler;
+import com.twjitm.core.common.handler.http.HttpRequestHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -13,7 +13,7 @@ import io.netty.handler.stream.ChunkedWriteHandler;
 /**
  * Created by 文江 on 2017/9/25.
  */
-public class WebSocketChatServerInitializer extends ChannelInitializer<SocketChannel> {
+public class NettyWebSocketServerInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     public void initChannel(SocketChannel ch) throws Exception {//2
         ChannelPipeline pipeline = ch.pipeline();
