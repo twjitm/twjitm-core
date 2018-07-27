@@ -10,11 +10,12 @@ import com.twjitm.core.common.netstack.coder.encode.tcp.INettyNetProtoBufTcpMess
 import com.twjitm.core.common.process.NettyNetMessageProcessLogic;
 import com.twjitm.core.common.service.INettyChannleOperationService;
 import com.twjitm.core.common.service.IService;
-import com.twjitm.core.common.service.Impl.NettyChannleOperationServiceImpl;
+import com.twjitm.core.common.service.Impl.NettyChannelOperationServiceImpl;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.service.test.TestService;
 import com.twjitm.core.service.user.UserService;
 import com.twjitm.core.utils.uuid.LongIdGenerator;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
@@ -24,6 +25,7 @@ import javax.annotation.Resource;
  * @date 2018/4/16
  * Õ®π˝spring bean≈‰÷√
  */
+@Service
 public class SpringLoadServiceImpl implements IService {
     @Resource
     private TestService testService;
@@ -61,9 +63,9 @@ public class SpringLoadServiceImpl implements IService {
     @Resource
     private NettyTcpSessionBuilder nettyTcpSessionBuilder;
     @Resource
-    private NettyChannleOperationServiceImpl netTcpSessionLoopUpService;
+    private NettyChannelOperationServiceImpl netTcpSessionLoopUpService;
     @Resource
-    NettyTcpMessageFactory nettyTcpMessageFactory;
+    private NettyTcpMessageFactory nettyTcpMessageFactory;
 
 
     public TestService getTestService() {
@@ -117,13 +119,6 @@ public class SpringLoadServiceImpl implements IService {
     public NettyTcpMessageFactory getNettyTcpMessageFactory() {
         return nettyTcpMessageFactory;
     }
-   public void init(){
-       try {
-           netTcpSessionLoopUpService.startup();
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
-   };
 
 
 

@@ -21,7 +21,7 @@
     <context:component-scan base-package="com.twjitm.core.common.service.*"/>
 
 
-    <bean id="springLoadManager" class="com.twjitm.core.spring.SpringLoadServiceImpl"/>
+    <bean id="springLoadService" class="com.twjitm.core.spring.SpringLoadServiceImpl"/>
     <bean id="messageRegistryFactory" class="com.twjitm.core.common.factory.MessageRegistryFactory" init-method="init">
         <property name="namespace" value="com.twjitm.core.common.entity.chat"/>
     </bean>

@@ -15,26 +15,29 @@ import java.net.InetAddress;
 
 
 /**
- * Created by 文江 on 2018/4/16.
+ *
+ * @author 文江
+ * @date 2018/4/16
  */
 
-public class StartService implements IStartService {
-    private static Logger logger = LoggerUtils.getLogger(StartService.class);
+public class StartNettyTcpService implements IStartService {
+    private static Logger logger = LoggerUtils.getLogger(StartNettyTcpService.class);
     private int port = 9090;
     private String ip = "127.0.0.1";
-    private static StartService startService;
+    private static StartNettyTcpService startService;
 
-    public static StartService getInstance() {
+    public static StartNettyTcpService getInstance() {
         if (startService == null) {
-            startService = new StartService();
+            startService = new StartNettyTcpService();
         }
         return startService;
     }
 
-    public StartService() {
+    public StartNettyTcpService() {
         // startService = new StartService();
     }
 
+    @Override
     public void start() {
         SpringServiceManager.init();
         SpringServiceManager.start();
@@ -63,20 +66,19 @@ public class StartService implements IStartService {
 
     }
 
+    @Override
     public void start(int port) throws Throwable {
         this.port = port;
         start();
     }
 
+    @Override
     public void start(InetAddress inetAddress) throws Throwable {
         //  inetAddress.getHostName();
     }
 
+    @Override
     public void stop() throws Throwable {
 
-    }
-
-    public static void main(String[] args) {
-        StartService.getInstance().start();
     }
 }

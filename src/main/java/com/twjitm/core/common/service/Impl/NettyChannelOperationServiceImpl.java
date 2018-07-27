@@ -18,8 +18,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @jdk java version "1.8.0_77"
  */
 @Service
-public class NettyChannleOperationServiceImpl implements INettyChannleOperationService, IService {
-    protected static final Logger logger = LoggerUtils.getLogger(NettyChannleOperationServiceImpl.class);
+public class NettyChannelOperationServiceImpl implements INettyChannleOperationService, IService {
+    protected static final Logger logger = LoggerUtils.getLogger(NettyChannelOperationServiceImpl.class);
 
     protected ConcurrentHashMap<Long, NettySession> sessions = new ConcurrentHashMap<Long, NettySession>();
 
