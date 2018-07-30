@@ -7,5 +7,7 @@ public class GlobalConstants {
     public static class ConfigFile {
         //http服务器配置文件
         public static String HTTP_SERVER_CONFIG="bean\\http_service_config.xml";
+
+        public static String SERVICE_TYPE="udp";
     }
 }

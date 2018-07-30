@@ -5,8 +5,10 @@ import com.twjitm.core.common.factory.NettyTcpMessageFactory;
 import com.twjitm.core.common.netstack.builder.NettyTcpSessionBuilder;
 import com.twjitm.core.common.netstack.coder.decode.http.INettyNetProtoBuffHttpToMessageDecoderFactory;
 import com.twjitm.core.common.netstack.coder.decode.tcp.INettyNetProtoBuffTCPToMessageDecoderFactory;
+import com.twjitm.core.common.netstack.coder.decode.udp.INettyNetProtoBuffUDPToMessageDecoderFactory;
 import com.twjitm.core.common.netstack.coder.encode.http.INettyNetProtoBufHttpMessageEncoderFactory;
 import com.twjitm.core.common.netstack.coder.encode.tcp.INettyNetProtoBufTcpMessageEncoderFactory;
+import com.twjitm.core.common.netstack.coder.encode.udp.INettyNetProtoBufUdpMessageEncoderFactory;
 import com.twjitm.core.common.process.NettyNetMessageProcessLogic;
 import com.twjitm.core.common.service.INettyChannleOperationService;
 import com.twjitm.core.common.service.IService;
@@ -52,6 +54,14 @@ public class SpringLoadServiceImpl implements IService {
     /**tcp协议解码器*/
     @Resource
     private INettyNetProtoBuffTCPToMessageDecoderFactory nettyNetProtoBuffTCPToMessageDecoderFactory;
+
+    /**upd协议编码器工厂**/
+    @Resource
+    private INettyNetProtoBufUdpMessageEncoderFactory nettyNetProtoBufUdpMessageEncoderFactory;
+    /**udp协议解码器**/
+    @Resource
+    private INettyNetProtoBuffUDPToMessageDecoderFactory nettyNetProtoBuffUDPToMessageDecoderFactory;
+
     /**原子id生成器**/
     @Resource
     private LongIdGenerator longIdGenerator;
@@ -120,7 +130,12 @@ public class SpringLoadServiceImpl implements IService {
         return nettyTcpMessageFactory;
     }
 
-
+    public INettyNetProtoBufUdpMessageEncoderFactory getNettyNetProtoBufUdpMessageEncoderFactory() {
+        return nettyNetProtoBufUdpMessageEncoderFactory;
+    }
+    public INettyNetProtoBuffUDPToMessageDecoderFactory getNettyNetProtoBuffUDPToMessageDecoderFactory() {
+        return nettyNetProtoBuffUDPToMessageDecoderFactory;
+    }
 
     @Override
     public String getId() {
@@ -136,4 +151,6 @@ public class SpringLoadServiceImpl implements IService {
     public void shutdown() throws Exception {
         netTcpSessionLoopUpService.shutdown();
     }
+
+
 }

@@ -9,6 +9,6 @@ public class TwjThreadFactory implements ThreadFactory {
 
     @Override
     public Thread newThread(Runnable r) {
-        return new Thread();
+        return new Thread(r);
     }
 }

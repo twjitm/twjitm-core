@@ -1,5 +1,8 @@
 package com.twjitm.core.start;
 
+import com.twjitm.core.common.config.global.GlobalConstants;
+import com.twjitm.core.common.factory.thread.TwjThreadFactory;
+
 /**
  * @author EGLS0807 - [Created on 2018-07-27 11:30]
  * @company http://www.g2us.com/
@@ -7,7 +10,33 @@ package com.twjitm.core.start;
  */
 public class GameService {
     public static void main(String[] args) {
-        StartNettyTcpService.getInstance().start();
+        TwjThreadFactory factory = new TwjThreadFactory();
+        switch (GlobalConstants.ConfigFile.SERVICE_TYPE) {
+            case "tcp":
+                Thread tcpThread = factory.newThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        StartNettyTcpService.getInstance().start();
+                    }
+                });
+                tcpThread.start();
+                break;
+            case "udp":
+                Thread udp = factory.newThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            StartNettyUdpService.getInstance().start();
+                        } catch (Throwable throwable) {
+                            throwable.printStackTrace();
+                        }
+                    }
+                });
+                udp.start();
+                break;
+            default:
+                break;
+        }
     }
 
 
