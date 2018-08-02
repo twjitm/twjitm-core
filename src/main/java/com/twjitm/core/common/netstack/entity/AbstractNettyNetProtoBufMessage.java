@@ -6,7 +6,7 @@ import io.netty.handler.codec.CodecException;
 
 
 /**
- * Created by 文江 on 2017/11/15.
+ * Created by twjitm on 2017/11/15.
  * 基础protobuf协议消息
  */
 public abstract class AbstractNettyNetProtoBufMessage extends AbstractNettyNetMessage {

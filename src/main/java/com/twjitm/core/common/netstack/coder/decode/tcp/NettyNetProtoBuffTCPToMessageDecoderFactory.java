@@ -20,26 +20,34 @@ public class NettyNetProtoBuffTCPToMessageDecoderFactory implements INettyNetPro
     @Override
     public AbstractNettyNetProtoBufMessage praseMessage(ByteBuf byteBuf) {
         NettyNetMessageHead netMessageHead=new NettyUDPMessageHead();
+        //跳过2个字节
         byteBuf.skipBytes(2);
+        //消息长度
         netMessageHead.setLength(byteBuf.readInt());
+        //版本号
         netMessageHead.setVersion(byteBuf.readByte());
         //read message context
         //读取内容
         short cmd = byteBuf.readShort();
+        //消息id
         netMessageHead.setCmd(cmd);
+        //序列号
         netMessageHead.setSerial(byteBuf.readInt());
+        //通过spring管理容器
         MessageRegistryFactory registryFactory =SpringServiceManager.springLoadService.getMessageRegistryFactory();
         AbstractNettyNetProtoBufMessage nettyMessage = registryFactory.get(cmd);
         nettyMessage.setNettyNetMessageHead(netMessageHead);
         NettyNetMessageBody nettyNetMessageBody=new NettyNetMessageBody();
-
+       //数据域大小
         int byteLength = byteBuf.readableBytes();
         ByteBuf bodyByteBuffer = Unpooled.buffer(256);
         byte[] bytes = new byte[byteLength];
         bodyByteBuffer = byteBuf.getBytes(byteBuf.readerIndex(), bytes);
+        //保存数据到数据域
         nettyNetMessageBody.setBytes(bytes);
         nettyMessage.setNettyNetMessageBody(nettyNetMessageBody);
         try {
+            //提交给具体的消息解码
             nettyMessage.decoderNetProtoBufMessageBody();
         } catch (Exception e) {
             e.printStackTrace();

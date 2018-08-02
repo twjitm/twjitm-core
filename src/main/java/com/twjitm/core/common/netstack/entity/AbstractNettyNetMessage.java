@@ -1,6 +1,5 @@
 package com.twjitm.core.common.netstack.entity;
 
-import com.alibaba.fastjson.JSON;
 import com.twjitm.core.common.netstack.INettyMessage;
 
 import java.util.concurrent.ConcurrentHashMap;
