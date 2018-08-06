@@ -7,6 +7,7 @@ import com.twjitm.core.common.update.IUpdatable;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.utils.logs.LoggerUtils;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -14,19 +15,20 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 /**
  * @author EGLS0807 - [Created on 2018-07-24 15:49]
  * @jdk java version "1.8.0_77"
- * ��Ϣ������
+ * 消息处理
  */
+@Service
 public class NetProtoMessageProcess implements INetProtoMessageProcess, IUpdatable {
     protected Logger logger = LoggerUtils.getLogger(NetProtoMessageProcess.class);
     private int processMessageNumber;
     private NettySession nettySession;
     /**
-     * ��Ϣ�������
+     * 消息队列
      */
     private Queue<AbstractNettyNetProtoBufMessage> netMessagequeue;
 
     /**
-     * �ж���Ϣ����
+     *
      */
     protected boolean suspendedProcess;
 
@@ -36,7 +38,7 @@ public class NetProtoMessageProcess implements INetProtoMessageProcess, IUpdatab
     }
 
     /**
-     * ��Ϣ����
+     *
      */
     @Override
     public void processNetMessage() {

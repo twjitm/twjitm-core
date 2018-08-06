@@ -35,6 +35,10 @@ public abstract class AbstractNettyNetMessage implements INettyMessage {
     public ConcurrentHashMap<Object, Object> getAttributes() {
         return attributes;
     }
+    public void setAttribute(Object key,Object value){
+        attributes.put(key,value);
+    }
+
     public  Object getAttribute(Object key){
         return attributes.get(key);
     }

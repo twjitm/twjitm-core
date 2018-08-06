@@ -9,7 +9,11 @@ import com.twjitm.core.common.netstack.coder.decode.udp.INettyNetProtoBuffUDPToM
 import com.twjitm.core.common.netstack.coder.encode.http.INettyNetProtoBufHttpMessageEncoderFactory;
 import com.twjitm.core.common.netstack.coder.encode.tcp.INettyNetProtoBufTcpMessageEncoderFactory;
 import com.twjitm.core.common.netstack.coder.encode.udp.INettyNetProtoBufUdpMessageEncoderFactory;
+import com.twjitm.core.common.netstack.pipeline.INettyServerPipeLine;
+import com.twjitm.core.common.netstack.pipeline.NettyTcpServerPipeLineImpl;
+import com.twjitm.core.common.process.INetProtoMessageProcess;
 import com.twjitm.core.common.process.NettyNetMessageProcessLogic;
+import com.twjitm.core.common.process.tcp.NettyTcpMessageQueueExecutorProcessor;
 import com.twjitm.core.common.service.INettyChannleOperationService;
 import com.twjitm.core.common.service.IService;
 import com.twjitm.core.common.service.Impl.NettyChannelOperationServiceImpl;
@@ -68,6 +72,8 @@ public class SpringLoadServiceImpl implements IService {
     /**消息处理bean**/
     @Resource
     private NettyNetMessageProcessLogic nettyNetMessageProcessLogic;
+    @Resource
+    INetProtoMessageProcess netProtoMessageProcess;
 
 
     @Resource
@@ -76,6 +82,11 @@ public class SpringLoadServiceImpl implements IService {
     private NettyChannelOperationServiceImpl netTcpSessionLoopUpService;
     @Resource
     private NettyTcpMessageFactory nettyTcpMessageFactory;
+    @Resource
+    private NettyTcpServerPipeLineImpl nettyTcpServerPipeLine;
+    @Resource
+    NettyTcpMessageQueueExecutorProcessor nettyTcpMessageQueueExecutorProcessor;
+
 
 
     public TestService getTestService() {
@@ -137,6 +148,18 @@ public class SpringLoadServiceImpl implements IService {
         return nettyNetProtoBuffUDPToMessageDecoderFactory;
     }
 
+    public NettyTcpServerPipeLineImpl getNettyTcpServerPipeLine() {
+        return nettyTcpServerPipeLine;
+    }
+
+    public INetProtoMessageProcess getNetProtoMessageProcess() {
+        return netProtoMessageProcess;
+    }
+
+    public NettyTcpMessageQueueExecutorProcessor getNettyTcpMessageQueueExecutorProcessor() {
+        return nettyTcpMessageQueueExecutorProcessor;
+    }
+
     @Override
     public String getId() {
         return "";
@@ -145,11 +168,13 @@ public class SpringLoadServiceImpl implements IService {
     @Override
     public void startup() throws Exception {
         netTcpSessionLoopUpService.startup();
+        nettyTcpMessageQueueExecutorProcessor.start();
     }
 
     @Override
     public void shutdown() throws Exception {
         netTcpSessionLoopUpService.shutdown();
+        nettyTcpMessageQueueExecutorProcessor.stop();
     }
 
 

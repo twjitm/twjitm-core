@@ -1,8 +1,11 @@
 package com.twjitm.core.common.handler.tcp;
 
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
+import com.twjitm.core.common.netstack.pipeline.INettyServerPipeLine;
+import com.twjitm.core.common.netstack.pipeline.NettyTcpServerPipeLineImpl;
 import com.twjitm.core.common.netstack.session.tcp.NettyTcpSession;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
+import com.twjitm.core.spring.SpringServiceManager;
 import io.netty.channel.ChannelHandlerContext;
 
 import javax.annotation.Resource;
@@ -19,7 +22,8 @@ public class NettyNetMessageTcpServerHandler extends AbstractNettyNetMessageTcpS
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         AbstractNettyNetMessage message = (AbstractNettyNetMessage) msg;
-        dispatcherService.dispatcher(message);
+        INettyServerPipeLine nettyTcpServerPipeLine = SpringServiceManager.springLoadService.getNettyTcpServerPipeLine();
+        nettyTcpServerPipeLine.dispatch(ctx.channel(), message);
     }
 
     @Override

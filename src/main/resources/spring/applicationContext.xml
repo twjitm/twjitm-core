@@ -30,6 +30,8 @@
     <bean id="nettyNetMessageProcessLogic" class="com.twjitm.core.common.process.NettyNetMessageProcessLogic"/>
     <bean id="nettyTcpMessageFactory" class="com.twjitm.core.common.factory.NettyTcpMessageFactory"/>
 
+    <!--消息处理队列-->
+   <bean id="nettyTcpMessageQueueExecutorProcessor" class="com.twjitm.core.common.process.tcp.NettyTcpMessageQueueExecutorProcessor"/>
 
 
 </beans>

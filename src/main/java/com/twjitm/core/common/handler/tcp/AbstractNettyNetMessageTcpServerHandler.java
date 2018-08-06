@@ -19,6 +19,11 @@ import org.apache.log4j.Logger;
 public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInboundHandlerAdapter {
     Logger logger = LoggerUtils.getLogger(AbstractNettyNetMessageTcpServerHandler.class);
 
+    /**
+     * channel 注册
+     * @param ctx
+     * @throws Exception
+     */
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
         ctx.fireChannelRegistered();

@@ -7,6 +7,8 @@ import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.entity.tcp.AbstractNettyNetProtoBufTcpMessage;
 import com.twjitm.core.common.netstack.session.ISession;
 import com.twjitm.core.common.netstack.session.tcp.NettyTcpSession;
+import com.twjitm.core.common.process.INetProtoMessageProcess;
+import com.twjitm.core.common.process.NettyNetMessageProcessLogic;
 import com.twjitm.core.common.service.INettyChannleOperationService;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.spring.SpringServiceManager;
@@ -14,12 +16,14 @@ import com.twjitm.core.utils.logs.LoggerUtils;
 import io.netty.channel.Channel;
 import io.netty.util.AttributeKey;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 /**
  * @author EGLS0807 - [Created on 2018-08-02 20:41]
  * @company http://www.g2us.com/
  * @jdk java version "1.8.0_77"
  */
+@Service
 public class NettyTcpServerPipeLineImpl implements INettyServerPipeLine {
 
 private Logger logger=LoggerUtils.getLogger(NettyTcpServerPipeLineImpl.class);
@@ -36,9 +40,9 @@ private Logger logger=LoggerUtils.getLogger(NettyTcpServerPipeLineImpl.class);
             if(nettySession==null){
                 logger.error("netty session is null");
             }
-
-            IDispatcherService dispatch = SpringServiceManager.springLoadService.getDispatcherService();
-            dispatch.dispatcher(protoBufTcpMessage);
+            message.setAttribute(sessionId,nettySession);
+            INetProtoMessageProcess nettyNetMessageProcess = SpringServiceManager.springLoadService.getNetProtoMessageProcess();
+            nettyNetMessageProcess.addNetMessage(message);
         }
 
     }
