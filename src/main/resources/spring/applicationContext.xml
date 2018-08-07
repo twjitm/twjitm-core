@@ -20,7 +20,6 @@
     <!--基础服务类-->
     <context:component-scan base-package="com.twjitm.core.common.service.*"/>
 
-
     <bean id="springLoadService" class="com.twjitm.core.spring.SpringLoadServiceImpl"/>
     <bean id="messageRegistryFactory" class="com.twjitm.core.common.factory.MessageRegistryFactory" init-method="init">
         <property name="namespace" value="com.twjitm.core.common.entity.chat"/>
@@ -32,6 +31,6 @@
 
     <!--消息处理队列-->
    <bean id="nettyTcpMessageQueueExecutorProcessor" class="com.twjitm.core.common.process.tcp.NettyTcpMessageQueueExecutorProcessor"/>
-
+   <bean id="netProtoMessageProcess" class="com.twjitm.core.common.process.NetProtoMessageProcess"/>
 
 </beans>

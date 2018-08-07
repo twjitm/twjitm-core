@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  * @jdk java version "1.8.0_77"
  * 消息处理
  */
-@Service
+
 public class NetProtoMessageProcess implements INetProtoMessageProcess, IUpdatable {
     protected Logger logger = LoggerUtils.getLogger(NetProtoMessageProcess.class);
     private int processMessageNumber;
@@ -31,6 +31,10 @@ public class NetProtoMessageProcess implements INetProtoMessageProcess, IUpdatab
      *
      */
     protected boolean suspendedProcess;
+
+    public NetProtoMessageProcess() {
+
+    }
 
     public NetProtoMessageProcess(NettySession nettySession) {
         this.nettySession = nettySession;

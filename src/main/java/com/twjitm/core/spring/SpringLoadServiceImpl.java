@@ -12,6 +12,7 @@ import com.twjitm.core.common.netstack.coder.encode.udp.INettyNetProtoBufUdpMess
 import com.twjitm.core.common.netstack.pipeline.INettyServerPipeLine;
 import com.twjitm.core.common.netstack.pipeline.NettyTcpServerPipeLineImpl;
 import com.twjitm.core.common.process.INetProtoMessageProcess;
+import com.twjitm.core.common.process.NetProtoMessageProcess;
 import com.twjitm.core.common.process.NettyNetMessageProcessLogic;
 import com.twjitm.core.common.process.tcp.NettyTcpMessageQueueExecutorProcessor;
 import com.twjitm.core.common.service.INettyChannleOperationService;
@@ -73,7 +74,7 @@ public class SpringLoadServiceImpl implements IService {
     @Resource
     private NettyNetMessageProcessLogic nettyNetMessageProcessLogic;
     @Resource
-    INetProtoMessageProcess netProtoMessageProcess;
+    NetProtoMessageProcess netProtoMessageProcess;
 
 
     @Resource
