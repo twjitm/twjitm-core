@@ -3,6 +3,7 @@ package com.twjitm.core.common.process;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.netstack.session.NettySession;
+import com.twjitm.core.common.process.tcp.NettyTcpMessageQueueExecutorProcessor;
 import com.twjitm.core.common.update.IUpdatable;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.utils.logs.LoggerUtils;
@@ -30,7 +31,7 @@ public class NetProtoMessageProcess implements INetProtoMessageProcess, IUpdatab
     /**
      *
      */
-    protected boolean suspendedProcess;
+    protected boolean suspendedProcess=true;
 
     public NetProtoMessageProcess() {
 
@@ -38,7 +39,9 @@ public class NetProtoMessageProcess implements INetProtoMessageProcess, IUpdatab
 
     public NetProtoMessageProcess(NettySession nettySession) {
         this.nettySession = nettySession;
-        netMessagequeue = new ConcurrentLinkedDeque<AbstractNettyNetProtoBufMessage>();
+        if( this.netMessagequeue==null){
+            this.netMessagequeue = new ConcurrentLinkedDeque<AbstractNettyNetProtoBufMessage>();
+        }
     }
 
     /**
@@ -50,8 +53,8 @@ public class NetProtoMessageProcess implements INetProtoMessageProcess, IUpdatab
         AbstractNettyNetProtoBufMessage message = netMessagequeue.poll();
         while (isSuspendedProcess() && message != null) {
             processMessageNumber++;
-            NettyNetMessageProcessLogic logic = SpringServiceManager.springLoadService.getNettyNetMessageProcessLogic();
-            logic.processTcpMessage(message, nettySession);
+            NettyTcpMessageQueueExecutorProcessor logic = SpringServiceManager.springLoadService.getNettyTcpMessageQueueExecutorProcessor();
+            logic.put(message);
             message = netMessagequeue.poll();
         }
 

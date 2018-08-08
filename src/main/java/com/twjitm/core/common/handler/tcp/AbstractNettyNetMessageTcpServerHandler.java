@@ -29,7 +29,7 @@ public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInb
         ctx.fireChannelRegistered();
         NettyTcpSession nettyTcpSession = (NettyTcpSession) SpringServiceManager.springLoadService.getNettyTcpSessionBuilder().buildSession(ctx.channel());
         boolean can =  SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().addNettySession(nettyTcpSession);
-        if (can) {
+        if (!can) {
             AbstractNettyNetMessage errorMessage =  SpringServiceManager.springLoadService.getNettyTcpMessageFactory().createCommonErrorResponseMessage(-1, 10500);
             nettyTcpSession.write(errorMessage);
             nettyTcpSession.close();

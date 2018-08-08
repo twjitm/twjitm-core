@@ -12,18 +12,18 @@ import org.apache.log4j.Logger;
  * @author twjitm - [Created on 2018-07-24 20:19]
  * @jdk java version "1.8.0_77"
  * <p>
- * ��Ϣ����
+ * real message handler process logic
  */
 public class NettyNetMessageProcessLogic {
-      Logger logger = LoggerUtils.getLogger(this.getClass());
+    Logger logger = LoggerUtils.getLogger(this.getClass());
 
     /**
-     * ����tcp��Ϣ
+     * handler tcp message
      *
      * @param message
      * @param session
      */
-    public  void processTcpMessage(AbstractNettyNetMessage message, NettySession session) {
+    public void processTcpMessage(AbstractNettyNetMessage message, NettySession session) {
         long begin = System.nanoTime();
         IDispatcherService dispatcherService = SpringServiceManager.springLoadService.getDispatcherService();
         AbstractNettyNetProtoBufMessage respone = dispatcherService.dispatcher(message);
@@ -37,7 +37,9 @@ public class NettyNetMessageProcessLogic {
             }
         }
         long end = System.nanoTime();
-
+        if (logger.isTraceEnabled()) {
+            logger.info("handler message consume time=" + (end - begin));
+        }
     }
 
 

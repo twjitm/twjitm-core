@@ -55,6 +55,7 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
      */
     public void addNetMessage(AbstractNettyNetMessage abstractNetMessage) {
         this.netProtoMessageProcess.addNetMessage(abstractNetMessage);
+        this.processNetMessage(true);
     }
 
     public void close() {

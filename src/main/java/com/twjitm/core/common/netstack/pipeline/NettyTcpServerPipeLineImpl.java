@@ -1,5 +1,6 @@
 package com.twjitm.core.common.netstack.pipeline;
 
+import com.twjitm.core.common.enums.MessageAttributeEnum;
 import com.twjitm.core.common.enums.MessageComm;
 import com.twjitm.core.common.factory.MessageRegistryFactory;
 import com.twjitm.core.common.netstack.builder.NettyTcpSessionBuilder;
@@ -40,9 +41,8 @@ private Logger logger=LoggerUtils.getLogger(NettyTcpServerPipeLineImpl.class);
             if(nettySession==null){
                 logger.error("netty session is null");
             }
-            message.setAttribute(sessionId,nettySession);
-            INetProtoMessageProcess nettyNetMessageProcess = SpringServiceManager.springLoadService.getNetProtoMessageProcess();
-            nettyNetMessageProcess.addNetMessage(message);
+            message.setAttribute(MessageAttributeEnum.DISPATCH_SESSION,nettySession);
+            nettySession.addNetMessage(message);
         }
 
     }
