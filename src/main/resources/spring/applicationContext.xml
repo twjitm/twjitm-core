@@ -30,7 +30,18 @@
     <bean id="nettyTcpMessageFactory" class="com.twjitm.core.common.factory.NettyTcpMessageFactory"/>
 
     <!--消息处理队列-->
-   <bean id="nettyTcpMessageQueueExecutorProcessor" class="com.twjitm.core.common.process.tcp.NettyTcpMessageQueueExecutorProcessor"/>
-   <bean id="netProtoMessageProcess" class="com.twjitm.core.common.process.NetProtoMessageProcess"/>
+    <bean id="nettyTcpMessageQueueExecutorProcessor"
+          class="com.twjitm.core.common.process.tcp.NettyTcpMessageQueueExecutorProcessor"/>
+
+    <bean id="netProtoMessageProcess" class="com.twjitm.core.common.process.tcp.NettyTcpNetProtoMessageProcess"/>
+
+    <bean id="nettyQueueMessageExecutorProcessor"
+          class="com.twjitm.core.common.process.NettyQueueMessageExecutorProcessor"/>
+
+    <bean id="nettyUdpNetProtoMessageProcessor"
+          class="com.twjitm.core.common.process.udp.NettyUdpNetProtoMessageProcessor">
+        <constructor-arg ref="nettyQueueMessageExecutorProcessor"/>
+    </bean>
+
 
 </beans>

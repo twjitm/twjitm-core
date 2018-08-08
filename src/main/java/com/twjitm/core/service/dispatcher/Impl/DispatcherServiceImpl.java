@@ -73,10 +73,14 @@ public class DispatcherServiceImpl implements IDispatcherService {
         return message;
     }
 
+    /**
+     * TODO 此处需要优化。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
+     */
     @PostConstruct
     public void init() {
         System.out.println("com.twjitm.core.common.logic.chat.Impl@@@@@@@@@@@@@@@@@@@@@@@初始化方法执行了#@@@@@@@@@@@@@@@@@@@@");
         loadPackage("com.twjitm.core.common.logic.chat.Impl",".class");
+        loadPackage("com.twjitm.core.common.logic.online.Impl",".class");
     }
     /**
      * 通过class 文件所在的名称空间，和后缀名加载class上的方法注解
@@ -120,6 +124,7 @@ public class DispatcherServiceImpl implements IDispatcherService {
             }
 
         }
+        filesName=null;
     }
 
     /**

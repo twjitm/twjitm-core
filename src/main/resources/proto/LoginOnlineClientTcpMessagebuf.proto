@@ -1,0 +1,4 @@
+syntax = "proto3";
+message LoginOnlineClientTcpMessage { 
+   int64 player_id = 1; 
+}

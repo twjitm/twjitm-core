@@ -1,4 +1,4 @@
-package com.twjitm.core.common.process;
+package com.twjitm.core.common.process.tcp;
 
 /**
  * @author twjitm - [Created on 2018-07-24 15:46]
@@ -10,7 +10,7 @@ import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 /**
  * 消息处理器
  */
-public interface INetProtoMessageProcess {
+public interface INettyTcpNetProtoMessageProcess {
     public void processNetMessage();
     public void addNetMessage(AbstractNettyNetMessage abstractNettyNetMessage);
     public void close();

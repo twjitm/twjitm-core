@@ -11,9 +11,10 @@ import org.springframework.context.event.ContextRefreshedEvent;
 public class StartupServerListener implements ApplicationListener<ContextRefreshedEvent> {
 
     public void start() {
-       // RealcomTCPServer.getInItStance().startServer();
+        // RealcomTCPServer.getInItStance().startServer();
     }
 
+    @Override
     public void onApplicationEvent(ContextRefreshedEvent evt) {
 //        if (evt.getApplicationContext().getParent() == null) {
 //            ClassLoader classLoader=this.getClass().getClassLoader();

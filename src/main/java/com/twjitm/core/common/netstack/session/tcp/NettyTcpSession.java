@@ -3,7 +3,7 @@ package com.twjitm.core.common.netstack.session.tcp;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.sender.NetTcpMessageSender;
 import com.twjitm.core.common.netstack.session.NettySession;
-import com.twjitm.core.common.process.NetProtoMessageProcess;
+import com.twjitm.core.common.process.tcp.NettyTcpNetProtoMessageProcess;
 import com.twjitm.core.common.update.IUpdatable;
 import com.twjitm.core.spring.SpringServiceManager;
 import io.netty.channel.Channel;
@@ -21,7 +21,7 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
     /**
      * 消息处理
      */
-    private NetProtoMessageProcess netProtoMessageProcess;
+    private NettyTcpNetProtoMessageProcess netProtoMessageProcess;
     /**
      * 消息发送
      */
@@ -33,7 +33,7 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
     public NettyTcpSession(Channel channel) {
         super(channel);
         sessionId = SpringServiceManager.springLoadService.getLongIdGenerator().generateId();
-        netProtoMessageProcess = new NetProtoMessageProcess(this);
+        netProtoMessageProcess = new NettyTcpNetProtoMessageProcess(this);
         netTcpMessageSender = new NetTcpMessageSender(this);
 
 
@@ -70,5 +70,17 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
 
     public long getSessionId() {
         return sessionId;
+    }
+
+    public NettyTcpNetProtoMessageProcess getNetProtoMessageProcess() {
+        return netProtoMessageProcess;
+    }
+
+    public NetTcpMessageSender getNetTcpMessageSender() {
+        return netTcpMessageSender;
+    }
+
+    public boolean isNetMessageProcessSwitch() {
+        return netMessageProcessSwitch;
     }
 }

@@ -1,0 +1,55 @@
+package com.twjitm.core.common.process.udp;
+
+import com.twjitm.core.common.config.global.GlobalConstants;
+import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
+import com.twjitm.core.common.process.IMessageProcessor;
+import com.twjitm.core.utils.logs.LoggerUtils;
+import org.apache.log4j.Logger;
+
+/**
+ * @author EGLS0807 - [Created on 2018-08-08 15:06]
+ * @company http://www.g2us.com/
+ * @jdk java version "1.8.0_77"
+ * udp协议消息处理的一种方式：生产者-----消费者模式
+ */
+public class NettyUdpNetProtoMessageProcessor implements IMessageProcessor {
+    Logger logger = LoggerUtils.getLogger(NettyUdpNetProtoMessageProcessor.class);
+    /**
+     * 消息处理：服务器系统消息
+     */
+    private IMessageProcessor mainMessageProcessor;
+
+
+    public NettyUdpNetProtoMessageProcessor(IMessageProcessor mainMessageProcessor) {
+        this.mainMessageProcessor = mainMessageProcessor;
+    }
+
+    @Override
+    public void start() {
+        this.mainMessageProcessor.start();
+    }
+
+    @Override
+    public void stop() {
+        this.mainMessageProcessor.stop();
+    }
+
+    /**
+     * 服务器消息选择处理，
+     * 玩家消息直接处理
+     *
+     * @param msg
+     */
+    @Override
+    public void put(AbstractNettyNetMessage msg) {
+        if (!GlobalConstants.GameServiceRuntime.IS_OPEN) {
+            return;
+        }
+        this.mainMessageProcessor.put(msg);
+    }
+
+    @Override
+    public boolean isFull() {
+        return this.mainMessageProcessor.isFull();
+    }
+}

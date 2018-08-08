@@ -29,6 +29,7 @@ public abstract class AbstractBaseHandler implements BaseHandler {
 
     }
 
+    @Override
     public Method getMethod(int commid) {
         return handlerMethods.get(commid);
     }

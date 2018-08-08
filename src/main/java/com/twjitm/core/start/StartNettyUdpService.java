@@ -54,10 +54,12 @@ public class StartNettyUdpService implements IStartService {
                     .option(ChannelOption.ALLOCATOR, new PooledByteBufAllocator(false))  // heap buf 's better
                     .handler(new LoggingHandler(LogLevel.DEBUG))
                     .handler(new NettyUdpMessageServerInitializer());
-            ChannelFuture serverChannelFuture = b.bind(port).sync();
+            ChannelFuture serverChannelFuture = b.bind(ip,port).sync();
 
             serverChannelFuture.channel().closeFuture().addListener(ChannelFutureListener.CLOSE);
-            logger.info("Udp服务器启动成功,ip="+ip+"监听端口:"+port);
+            logger.info("---------------------Udp service start is successful  ,ip=["
+                    +ip+"Listener port number is :"+port
+                    +"]");
 
         }catch (Exception e){
         }

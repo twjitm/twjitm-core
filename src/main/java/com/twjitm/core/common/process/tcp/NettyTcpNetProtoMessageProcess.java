@@ -1,14 +1,12 @@
-package com.twjitm.core.common.process;
+package com.twjitm.core.common.process.tcp;
 
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.netstack.session.NettySession;
-import com.twjitm.core.common.process.tcp.NettyTcpMessageQueueExecutorProcessor;
 import com.twjitm.core.common.update.IUpdatable;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.utils.logs.LoggerUtils;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Service;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -19,8 +17,8 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  * 消息处理
  */
 
-public class NetProtoMessageProcess implements INetProtoMessageProcess, IUpdatable {
-    protected Logger logger = LoggerUtils.getLogger(NetProtoMessageProcess.class);
+public class NettyTcpNetProtoMessageProcess implements INettyTcpNetProtoMessageProcess, IUpdatable {
+    protected Logger logger = LoggerUtils.getLogger(NettyTcpNetProtoMessageProcess.class);
     private int processMessageNumber;
     private NettySession nettySession;
     /**
@@ -33,11 +31,11 @@ public class NetProtoMessageProcess implements INetProtoMessageProcess, IUpdatab
      */
     protected boolean suspendedProcess=true;
 
-    public NetProtoMessageProcess() {
+    public NettyTcpNetProtoMessageProcess() {
 
     }
 
-    public NetProtoMessageProcess(NettySession nettySession) {
+    public NettyTcpNetProtoMessageProcess(NettySession nettySession) {
         this.nettySession = nettySession;
         if( this.netMessagequeue==null){
             this.netMessagequeue = new ConcurrentLinkedDeque<AbstractNettyNetProtoBufMessage>();
