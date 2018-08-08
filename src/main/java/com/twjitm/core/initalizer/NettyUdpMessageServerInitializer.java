@@ -11,7 +11,7 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 /**
- * udp协议初始化器
+ * udp鍗忚鍒濆鍖栧櫒
  */
 public class NettyUdpMessageServerInitializer extends ChannelInitializer<NioDatagramChannel> {
     @Override
