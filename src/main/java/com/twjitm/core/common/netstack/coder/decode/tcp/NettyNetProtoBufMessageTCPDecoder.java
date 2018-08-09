@@ -5,8 +5,8 @@ import com.twjitm.core.utils.logs.LoggerUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
+import io.netty.util.CharsetUtil;
 import org.apache.log4j.Logger;
-import org.jboss.netty.util.CharsetUtil;
 
 import java.nio.charset.Charset;
 import java.util.List;

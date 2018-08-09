@@ -29,6 +29,6 @@ public class LoginOnLineHandlerImpl extends LoginOnLineHandler {
         GameNettyPlayer gameNettyPlayer=new GameNettyPlayer(playerId,token,session.getNetTcpMessageSender());
         NettyGamePlayerFindServiceImpl nettyGamePlayerLoopUpService = SpringServiceManager.springLoadService.getNettyGamePlayerLoopUpService();
         nettyGamePlayerLoopUpService.addT(gameNettyPlayer);
-        return null;
+        return message;
     }
 }

@@ -13,23 +13,15 @@ public class GameService {
         TwjThreadFactory factory = new TwjThreadFactory();
         switch (GlobalConstants.ConfigFile.SERVICE_TYPE) {
             case "tcp":
-                Thread tcpThread = factory.newThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        StartNettyTcpService.getInstance().start();
-                    }
-                });
+                Thread tcpThread = factory.newThread(() -> StartNettyTcpService.getInstance().start());
                 tcpThread.start();
                 break;
             case "udp":
-                Thread udp = factory.newThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            StartNettyUdpService.getInstance().start();
-                        } catch (Throwable throwable) {
-                            throwable.printStackTrace();
-                        }
+                Thread udp = factory.newThread(() -> {
+                    try {
+                        StartNettyUdpService.getInstance().start();
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
                     }
                 });
                 udp.start();

@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * spring Æô¶¯Èë¿Ú
+ * spring service manager
  *
  * @author twjtim
  */

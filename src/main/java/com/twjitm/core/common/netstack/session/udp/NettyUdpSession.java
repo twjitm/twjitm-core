@@ -1,5 +1,7 @@
 package com.twjitm.core.common.netstack.session.udp;
 
+import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
+import com.twjitm.core.common.netstack.sender.NettyNetUdpMessageSender;
 import com.twjitm.core.common.netstack.session.NettySession;
 import io.netty.channel.Channel;
 
@@ -9,7 +11,16 @@ import io.netty.channel.Channel;
  * @jdk java version "1.8.0_77"
  */
 public class NettyUdpSession extends NettySession {
+    private NettyNetUdpMessageSender udpMessageSender;
     public NettyUdpSession(Channel channel) {
         super(channel);
+        this.udpMessageSender=new NettyNetUdpMessageSender(this);
+    }
+
+    @Override
+    public void write(AbstractNettyNetMessage msg) throws Exception {
+       if(msg!=null){
+           channel.writeAndFlush(msg);
+       }
     }
 }

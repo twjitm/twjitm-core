@@ -1,7 +1,7 @@
 package com.twjitm.core.common.netstack.session.tcp;
 
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
-import com.twjitm.core.common.netstack.sender.NetTcpMessageSender;
+import com.twjitm.core.common.netstack.sender.NettyNetTcpMessageSender;
 import com.twjitm.core.common.netstack.session.NettySession;
 import com.twjitm.core.common.process.tcp.NettyTcpNetProtoMessageProcess;
 import com.twjitm.core.common.update.IUpdatable;
@@ -11,7 +11,7 @@ import io.netty.channel.Channel;
 /**
  * @author twjitm - [Created on 2018-07-24 15:59]
  * @jdk java version "1.8.0_77"
- * tcpÐ­Òé»á»°¹ÜÀí
+ * tcp session
  */
 public class NettyTcpSession extends NettySession implements IUpdatable {
     /**
@@ -19,13 +19,13 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
      */
     private long sessionId;
     /**
-     * ÏûÏ¢´¦Àí
+     * ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
      */
     private NettyTcpNetProtoMessageProcess netProtoMessageProcess;
     /**
-     * ÏûÏ¢·¢ËÍ
+     * ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
      */
-    private NetTcpMessageSender netTcpMessageSender;
+    private NettyNetTcpMessageSender netTcpMessageSender;
 
     boolean netMessageProcessSwitch=true;
 
@@ -34,12 +34,12 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
         super(channel);
         sessionId = SpringServiceManager.springLoadService.getLongIdGenerator().generateId();
         netProtoMessageProcess = new NettyTcpNetProtoMessageProcess(this);
-        netTcpMessageSender = new NetTcpMessageSender(this);
+        netTcpMessageSender = new NettyNetTcpMessageSender(this);
 
 
     }
     /**
-     * Ôö¼ÓÏûÏ¢´¦ÀíÇÐ»»¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½
      * @param switchFlag
      */
     public void processNetMessage(boolean switchFlag){
@@ -49,7 +49,7 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
     }
 
     /**
-     * Ìí¼ÓÒ»¸öÏûÏ¢´¦Àí
+     * ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
      *
      * @param abstractNetMessage
      */
@@ -76,7 +76,7 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
         return netProtoMessageProcess;
     }
 
-    public NetTcpMessageSender getNetTcpMessageSender() {
+    public NettyNetTcpMessageSender getNetTcpMessageSender() {
         return netTcpMessageSender;
     }
 

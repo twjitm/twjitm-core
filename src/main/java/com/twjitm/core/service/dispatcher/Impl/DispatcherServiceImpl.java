@@ -24,8 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by ÎÄ½­ on 2018/4/27.
- * ×¢½â·Ö·¢Æ÷
+ * Created by twjitm on 2018/4/27.
+ * åˆ†å‘å™¨
  */
 @Service
 public class DispatcherServiceImpl implements IDispatcherService {
@@ -74,16 +74,16 @@ public class DispatcherServiceImpl implements IDispatcherService {
     }
 
     /**
-     * TODO ´Ë´¦ĞèÒªÓÅ»¯¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£
+     * TODO
      */
     @PostConstruct
     public void init() {
-        System.out.println("com.twjitm.core.common.logic.chat.Impl@@@@@@@@@@@@@@@@@@@@@@@³õÊ¼»¯·½·¨Ö´ĞĞÁË#@@@@@@@@@@@@@@@@@@@@");
+        System.out.println("com.twjitm.core.common.logic.chat.Impl@@@@@@@@@@@@@@@@@@@@@@@ init class #@@@@@@@@@@@@@@@@@@@@");
         loadPackage("com.twjitm.core.common.logic.chat.Impl",".class");
         loadPackage("com.twjitm.core.common.logic.online.Impl",".class");
     }
     /**
-     * Í¨¹ıclass ÎÄ¼şËùÔÚµÄÃû³Æ¿Õ¼ä£¬ºÍºó×ºÃû¼ÓÔØclassÉÏµÄ·½·¨×¢½â
+     *
      *
      * @param namespace
      * @param suffix
@@ -128,7 +128,7 @@ public class DispatcherServiceImpl implements IDispatcherService {
     }
 
     /**
-     * ±£´æhandler
+     * ï¿½ï¿½ï¿½ï¿½handler
      *
      * @param commId
      * @param handler
@@ -139,7 +139,7 @@ public class DispatcherServiceImpl implements IDispatcherService {
     }
 
     /**
-     * Í¨¹ıclass¶ÔÏó»ñÈ¡·´ÉäµÄÀà
+     * Í¨ï¿½ï¿½classï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
      * @param classes
      * @return

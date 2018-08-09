@@ -278,8 +278,9 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>4.1.15.Final</version>
+            <version>4.1.6.Final</version>
         </dependency>
+
         <!--jstl-->
         <!-- <dependency>
              <groupId>javax.servlet</groupId>
@@ -334,6 +335,12 @@
             <artifactId>zookeeper</artifactId>
             <version>3.4.9</version>
 
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

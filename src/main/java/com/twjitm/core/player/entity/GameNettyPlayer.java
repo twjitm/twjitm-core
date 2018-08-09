@@ -1,6 +1,6 @@
 package com.twjitm.core.player.entity;
 
-import com.twjitm.core.common.netstack.sender.NetTcpMessageSender;
+import com.twjitm.core.common.netstack.sender.NettyNetTcpMessageSender;
 import com.twjitm.core.common.service.ILongId;
 
 /**
@@ -15,9 +15,9 @@ public class GameNettyPlayer implements IGameNettyPlayer, ILongId {
     //玩家的udp token
     private int udpToken;
 
-    private NetTcpMessageSender netTcpMessageSender;
+    private NettyNetTcpMessageSender netTcpMessageSender;
 
-    public GameNettyPlayer(long playerId, int udpToken, NetTcpMessageSender netTcpMessageSender) {
+    public GameNettyPlayer(long playerId, int udpToken, NettyNetTcpMessageSender netTcpMessageSender) {
         this.playerId = playerId;
         this.udpToken = udpToken;
         this.netTcpMessageSender = netTcpMessageSender;
@@ -39,11 +39,11 @@ public class GameNettyPlayer implements IGameNettyPlayer, ILongId {
     }
 
     @Override
-    public NetTcpMessageSender getNetTcpMessageSender() {
+    public NettyNetTcpMessageSender getNetTcpMessageSender() {
         return this.netTcpMessageSender;
     }
 
-    public void setNetTcpMessageSender(NetTcpMessageSender netTcpMessageSender) {
+    public void setNetTcpMessageSender(NettyNetTcpMessageSender netTcpMessageSender) {
         this.netTcpMessageSender = netTcpMessageSender;
     }
 }

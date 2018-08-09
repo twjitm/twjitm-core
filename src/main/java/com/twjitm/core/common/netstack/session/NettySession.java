@@ -6,7 +6,7 @@ import io.netty.channel.Channel;
 /**
  * @author EGLS0807 - [Created on 2018-07-24 15:56]
  * @jdk java version "1.8.0_77"
- * 公共session抽象类
+ * 鑷畾涔塻ession
  */
 public abstract class NettySession implements ISession {
     public volatile Channel channel;

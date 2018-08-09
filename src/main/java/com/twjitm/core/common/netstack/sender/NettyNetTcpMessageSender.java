@@ -9,13 +9,13 @@ import org.apache.log4j.Logger;
 /**
  * @author EGLS0807 - [Created on 2018-07-24 16:32]
  * @jdk java version "1.8.0_77"
- * TCPÏûÏ¢·¢ËÍÆ÷
+ * TCPæ¶ˆæ¯å‘é€å™¨
  */
-public class NetTcpMessageSender implements INetMessageSender {
+public class NettyNetTcpMessageSender implements INetMessageSender {
     private final NettySession nettySession;
     private Logger logger = LoggerUtils.getLogger(this.getClass());
 
-    public NetTcpMessageSender(NettySession nettySession) {
+    public NettyNetTcpMessageSender(NettySession nettySession) {
         this.nettySession = nettySession;
     }
 

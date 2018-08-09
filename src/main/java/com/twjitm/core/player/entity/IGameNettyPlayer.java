@@ -1,6 +1,6 @@
 package com.twjitm.core.player.entity;
 
-import com.twjitm.core.common.netstack.sender.NetTcpMessageSender;
+import com.twjitm.core.common.netstack.sender.NettyNetTcpMessageSender;
 
 /**
  * @author EGLS0807 - [Created on 2018-08-08 13:55]
@@ -10,6 +10,6 @@ import com.twjitm.core.common.netstack.sender.NetTcpMessageSender;
 public interface IGameNettyPlayer {
     public long getPlayerId();
     public int getPlayerUdpToken();
-    public NetTcpMessageSender getNetTcpMessageSender();
+    public NettyNetTcpMessageSender getNetTcpMessageSender();
 
 }
