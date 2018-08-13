@@ -1,6 +1,7 @@
 package com.twjitm;
 
 import com.twjitm.core.common.entity.chat.ChatMessage;
+import com.twjitm.core.common.entity.online.LoginOnlineClientTcpMessage;
 import com.twjitm.core.common.enums.MessageComm;
 import com.twjitm.core.common.proto.BaseMessageProto;
 import io.netty.channel.ChannelHandlerContext;
@@ -28,7 +29,7 @@ public class TestClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-      System.out.println("into channelActive");
+     /* System.out.println("into channelActive");
         ChatMessage chatMessage=new ChatMessage();
         chatMessage.setChatType(1);
         chatMessage.setContext("twjitm");
@@ -37,7 +38,11 @@ public class TestClientHandler extends ChannelInboundHandlerAdapter {
         chatMessage.setReceiveNickName("haha");
         chatMessage.setReceiveSession("gaga");
         chatMessage.setReceiveUId(11);
-        ctx.writeAndFlush(chatMessage);
+        ctx.writeAndFlush(chatMessage);*/
+        LoginOnlineClientTcpMessage login=new LoginOnlineClientTcpMessage();
+        login.setPlayerId(Long.valueOf(10086));
+        ctx.writeAndFlush(login);
+
     }
 
     @Override

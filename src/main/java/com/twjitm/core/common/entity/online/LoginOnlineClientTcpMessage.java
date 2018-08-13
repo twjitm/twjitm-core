@@ -25,6 +25,8 @@ public class LoginOnlineClientTcpMessage extends AbstractNettyNetProtoBufTcpMess
     public void encodeNetProtoBufMessageBody() throws CodecException, Exception {
         LoginOnlineClientTcpMessagebuf.LoginOnlineClientTcpMessage.Builder builder = LoginOnlineClientTcpMessagebuf.LoginOnlineClientTcpMessage.newBuilder();
         builder.setPlayerId(playerId);
+        byte[] bytes=builder.build().toByteArray();
+        this.getNetMessageBody().setBytes(bytes);
     }
 
     @Override

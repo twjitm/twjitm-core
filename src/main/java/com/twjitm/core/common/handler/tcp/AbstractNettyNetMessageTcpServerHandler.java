@@ -44,8 +44,12 @@ public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInb
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         if (cause instanceof java.io.IOException) {
+            logger.error(cause.getMessage());
             return;
         }
+      //  if(logger.isTraceEnabled()){
+            logger.error(cause.getMessage(),cause);
+     //   }
         //设置下线
         disconnect(ctx.channel());
         //销毁上下文

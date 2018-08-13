@@ -13,6 +13,7 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
  * TCP协议初始化器
  */
 public class NettyTcpMessageServerInitializer extends ChannelInitializer<Channel> {
+    @Override
     protected void initChannel(Channel ch) throws Exception {
         ch.pipeline().addLast("frame", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 2, 4, 0, 0));
         ch.pipeline().addLast(new NettyNetProtoBufMessageTCPDecoder());

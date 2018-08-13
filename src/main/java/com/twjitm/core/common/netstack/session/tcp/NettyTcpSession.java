@@ -19,11 +19,11 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
      */
     private long sessionId;
     /**
-     * ��Ϣ����
+     * 消息处理器
      */
     private NettyTcpNetProtoMessageProcess netProtoMessageProcess;
     /**
-     * ��Ϣ����
+     * 消息发送器
      */
     private NettyNetTcpMessageSender netTcpMessageSender;
 
@@ -39,7 +39,7 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
 
     }
     /**
-     * ������Ϣ�����л���
+     *
      * @param switchFlag
      */
     public void processNetMessage(boolean switchFlag){
@@ -49,7 +49,7 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
     }
 
     /**
-     * ���һ����Ϣ����
+     *
      *
      * @param abstractNetMessage
      */

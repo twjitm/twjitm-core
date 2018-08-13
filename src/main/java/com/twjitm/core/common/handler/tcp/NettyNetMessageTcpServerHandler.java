@@ -16,8 +16,6 @@ import javax.annotation.Resource;
  * @jdk java version "1.8.0_77"
  */
 public class NettyNetMessageTcpServerHandler extends AbstractNettyNetMessageTcpServerHandler {
-    @Resource
-    private IDispatcherService dispatcherService;
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {

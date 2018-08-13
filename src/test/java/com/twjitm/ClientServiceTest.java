@@ -13,12 +13,12 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 
 /**
- * Created by ÎÄ½­ on 2018/5/14.
- * netty¿Í»§¶Ë²âÊÔÀà
+ * Created by twjitm on 2018/5/14.
+ * nettyå®¢æˆ·ç«¯
  */
 public class ClientServiceTest {
     static String ip = "127.0.0.1";
-    static int port = 9099;
+    static int port = 9090;
 
     public static void main(String[] args) {
         TestSpring.initSpring();
@@ -34,7 +34,6 @@ public class ClientServiceTest {
         bootstrap.channel(NioSocketChannel.class);
         bootstrap.option(ChannelOption.TCP_NODELAY, true);
         bootstrap.handler(new TestChannelInitializer());
-// ·¢ÆðÒì²½Á¬½Ó²Ù×÷
         try {
             ChannelFuture future = bootstrap.connect(ip, port).sync();
             future.channel().closeFuture().sync();
@@ -45,13 +44,13 @@ public class ClientServiceTest {
     }
 
     /**
-     * md5Ð£ÑéÎÄ¼þ
+     * md5Ð£ï¿½ï¿½ï¿½Ä¼ï¿½
      *
      * @return
      */
     public static boolean md5() {
 
-        File file = new File("E:\\½á¹û2018-05-34.txt");
+        File file = new File("E:\\ï¿½ï¿½ï¿½2018-05-34.txt");
         if (!file.isFile()) {
             return false;
         }
