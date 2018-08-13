@@ -7,6 +7,7 @@ import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.utils.PackageScaner;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -62,7 +63,7 @@ public class MessageRegistryFactory {
     }
 
     public void loadPackage(String namespace, String suffix) {
-        String[] fileNames = PackageScaner.scanNamespaceFiles(namespace, suffix, false, true);
+       /* String[] fileNames = PackageScaner.scanNamespaceFiles(namespace, suffix, false, true);
 
         // 加载class,获取协议命令
         for (String fileName : fileNames) {
@@ -82,6 +83,15 @@ public class MessageRegistryFactory {
                 putMessages(annotation.messagecmd().commId, messageClass);
             }
         }
+        */
+        List<Class> list = PackageScaner.getSubClasses(AbstractNettyNetProtoBufMessage.class, "com.twjitm.core.*.*");
+       for(Class messageClass:list){
+           MessageCommandAnntation annotation = (MessageCommandAnntation) messageClass
+                   .getAnnotation(MessageCommandAnntation.class);
+           if (annotation != null && annotation.messagecmd() != null) {
+               putMessages(annotation.messagecmd().commId, messageClass);
+           }
+       }
 
     }
 

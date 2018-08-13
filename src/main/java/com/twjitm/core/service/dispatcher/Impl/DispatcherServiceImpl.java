@@ -4,7 +4,6 @@ package com.twjitm.core.service.dispatcher.Impl;
 import com.twjitm.core.common.annotation.MessageCommandAnntation;
 import com.twjitm.core.common.factory.MessageRegistryFactory;
 import com.twjitm.core.common.factory.classload.DynamicGameClassLoader;
-import com.twjitm.core.common.factory.classload.FileClassLoader;
 import com.twjitm.core.common.logic.handler.AbstractBaseHandler;
 import com.twjitm.core.common.logic.handler.BaseHandler;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
@@ -16,10 +15,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -78,7 +75,7 @@ public class DispatcherServiceImpl implements IDispatcherService {
      */
     @PostConstruct
     public void init() {
-        System.out.println("com.twjitm.core.common.logic.chat.Impl@@@@@@@@@@@@@@@@@@@@@@@ init class #@@@@@@@@@@@@@@@@@@@@");
+        System.out.println("message ser @@@@@@@@@@@@@@@@@@@@@@@ init class #@@@@@@@@@@@@@@@@@@@@");
         loadPackage("com.twjitm.core.common.logic.chat.Impl",".class");
         loadPackage("com.twjitm.core.common.logic.online.Impl",".class");
     }
