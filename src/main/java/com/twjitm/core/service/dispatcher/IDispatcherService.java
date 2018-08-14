@@ -10,6 +10,4 @@ import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
  */
 public interface IDispatcherService {
     public AbstractNettyNetProtoBufMessage dispatcher(AbstractNettyNetMessage message);
-    public String getMessage(String message);
-
 }

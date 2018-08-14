@@ -162,7 +162,6 @@ public class SpringLoadServiceImpl implements IService {
     private NettyUdpServerPipeLineImpl nettyUdpServerPipeLine;
 
 
-
     public TestService getTestService() {
         return testService;
     }

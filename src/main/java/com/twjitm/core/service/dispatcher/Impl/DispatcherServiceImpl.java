@@ -11,6 +11,8 @@ import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.utils.PackageScaner;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.service.test.TestService;
+import com.twjitm.core.utils.logs.LoggerUtils;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -18,14 +20,22 @@ import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
- * Created by twjitm on 2018/4/27.
- * 分发器
+ * @author twjitm
+ * @date 2018/4/27
+ * 分发器 ,消息在上层通过消息队列，获取消息，然后进行处理
+ * <p>
+ * ------------------------------
+ * msg1,mes2,msg3,msg4,msg5......
+ * ------------------------------
+ * head                      last
  */
 @Service
 public class DispatcherServiceImpl implements IDispatcherService {
+    private Logger logger = LoggerUtils.getLogger(DispatcherServiceImpl.class);
 
     @Resource
     private TestService testService;
@@ -41,7 +51,7 @@ public class DispatcherServiceImpl implements IDispatcherService {
     public AbstractNettyNetProtoBufMessage dispatcher(AbstractNettyNetMessage message) {
         int commId = message.getNetMessageHead().getCmd();
         BaseHandler baseHandler = handlerMap.get(commId);
-       if (baseHandler == null) {
+        if (baseHandler == null) {
             return null;
         }
         Method method = baseHandler.getMethod(commId);
@@ -62,48 +72,24 @@ public class DispatcherServiceImpl implements IDispatcherService {
         return null;
     }
 
-    @Override
-    public String getMessage(String message) {
-        testService.say();
-        System.out.println(message);
-        messageRegistryFactory.getMessageComm(1001);
-        return message;
-    }
 
     /**
      * TODO
      */
     @PostConstruct
     public void init() {
-        System.out.println("---------------------message handler:init logic handler iml start-----------------");
-        loadPackage("com.twjitm.core.common.logic.chat.Impl",".class");
-        loadPackage("com.twjitm.core.common.logic.online.Impl",".class");
+        logger.info("---------------------message handler:init logic handler iml start-----------------");
+        loadPackage("com.twjitm.core.*.*");
     }
-    /**
-     *
-     *
-     * @param namespace
-     * @param suffix
-     */
-    public void loadPackage(String namespace, String suffix) {
-        if (filesName == null) {
-            filesName = PackageScaner.scanNamespaceFiles(namespace, suffix, false, true);
-        }
-        DynamicGameClassLoader classLoader = new DynamicGameClassLoader();
 
-       // URL url = ClassLoader.getSystemClassLoader().getResource("twjitm");
-        for (int i = 0; i < filesName.length; i++) {
-            String realClass = namespace
-                    + "."
-                    + filesName[i].subSequence(0, filesName[i].length()
-                    - (suffix.length()));
-            Class messageClass = null;
-         //   File classFile = new File(url.getPath());
+    /**
+     * @param namespace
+     */
+    public void loadPackage(String namespace) {
+        List<Class> list = PackageScaner.getSubClasses(AbstractBaseHandler.class, namespace);
+        for (Class messageClass : list) {
             try {
-               // FileClassLoader fileClassLoader = new FileClassLoader(classFile);
-               // byte[] classFileDate = fileClassLoader.getClassData(realClass);
-                messageClass =  Class.forName(realClass);;//classLoader.findClass(realClass, classFileDate);
-                System.out.println("handler load:" + messageClass.toString());
+                logger.info("handler load:" + messageClass.toString());
                 BaseHandler baseHandler = getBaseHandler(messageClass);
                 AbstractBaseHandler abstractBaseHandler = (AbstractBaseHandler) baseHandler;
                 abstractBaseHandler.init();
@@ -119,13 +105,11 @@ public class DispatcherServiceImpl implements IDispatcherService {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
-        filesName=null;
     }
 
     /**
-     * ����handler
+     * add handler
      *
      * @param commId
      * @param handler
@@ -136,8 +120,6 @@ public class DispatcherServiceImpl implements IDispatcherService {
     }
 
     /**
-     * ͨ��class�����ȡ�������
-     *
      * @param classes
      * @return
      */
@@ -150,11 +132,19 @@ public class DispatcherServiceImpl implements IDispatcherService {
                     .newInstance();
             return messageHandler;
         } catch (Exception e) {
-            System.err.println("getBaseHandler - classes=" + classes.getName() + "," + e);
+            logger.info("getBaseHandler - classes=" + classes.getName() + "," + e);
         }
         return null;
 
     }
 
+    public static void main(String[] args) {
+        List<Class> list = PackageScaner.getSubClasses(AbstractBaseHandler.class, "com.twjitm.core.*.*");
+        for (Class clzz : list) {
+
+        }
+
+
+    }
 
 }
