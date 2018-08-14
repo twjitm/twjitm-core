@@ -9,5 +9,10 @@ import io.netty.buffer.ByteBuf;
  * proto基础消息工厂
  */
 public interface INettyNetProtoBuffToMessageDecoderFactory {
-    public AbstractNettyNetProtoBufMessage praseMessage(ByteBuf byteBuf);
+    /**
+     * chulixiaoxi
+     * @param byteBuf
+     * @return
+     */
+    public AbstractNettyNetProtoBufMessage parseMessage(ByteBuf byteBuf);
 }

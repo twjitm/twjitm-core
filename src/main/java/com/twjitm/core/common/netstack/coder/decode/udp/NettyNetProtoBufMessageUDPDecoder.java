@@ -33,7 +33,7 @@ public class NettyNetProtoBufMessageUDPDecoder extends MessageToMessageDecoder<D
 
     @Override
     protected void decode(ChannelHandlerContext ctx, DatagramPacket msg, List<Object> out) throws Exception {
-        AbstractNettyNetProtoBufUdpMessage abstractNettyNetProtoBufUdpMessage = (AbstractNettyNetProtoBufUdpMessage) nettyNetProtoBuffUDPToMessageDecoderFactory.praseMessage(msg.content());
+        AbstractNettyNetProtoBufUdpMessage abstractNettyNetProtoBufUdpMessage = (AbstractNettyNetProtoBufUdpMessage) nettyNetProtoBuffUDPToMessageDecoderFactory.parseMessage(msg.content());
         abstractNettyNetProtoBufUdpMessage.setSend(msg.sender());
         out.add(abstractNettyNetProtoBufUdpMessage);
     }

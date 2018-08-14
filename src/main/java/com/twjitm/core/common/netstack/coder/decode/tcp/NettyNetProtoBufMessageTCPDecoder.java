@@ -44,7 +44,7 @@ public class NettyNetProtoBufMessageTCPDecoder extends MessageToMessageDecoder<B
         if (iNettyNetProtoBuffTCPToMessageDecoderFactory == null) {
             logger.error("iNettyNetProtoBuffTCPToMessageDecoderFactory  is null ");
         } else {
-            out.add(iNettyNetProtoBuffTCPToMessageDecoderFactory.praseMessage(msg));
+            out.add(iNettyNetProtoBuffTCPToMessageDecoderFactory.parseMessage(msg));
 
         }
     }

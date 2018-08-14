@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class NettyNetProtoBuffUDPToMessageDecoderFactory implements INettyNetProtoBuffUDPToMessageDecoderFactory {
     @Override
-    public AbstractNettyNetProtoBufMessage praseMessage(ByteBuf byteBuf) {
+    public AbstractNettyNetProtoBufMessage parseMessage(ByteBuf byteBuf) {
 
         //读取head
         NettyUDPMessageHead netMessageHead = new NettyUDPMessageHead();

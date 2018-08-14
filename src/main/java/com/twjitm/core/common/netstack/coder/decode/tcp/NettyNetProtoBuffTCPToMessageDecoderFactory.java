@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class NettyNetProtoBuffTCPToMessageDecoderFactory implements INettyNetProtoBuffTCPToMessageDecoderFactory {
 
     @Override
-    public AbstractNettyNetProtoBufMessage praseMessage(ByteBuf byteBuf) {
+    public AbstractNettyNetProtoBufMessage parseMessage(ByteBuf byteBuf) {
         NettyNetMessageHead netMessageHead=new NettyUDPMessageHead();
         //跳过2个字节
         byteBuf.skipBytes(2);
