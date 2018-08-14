@@ -34,8 +34,6 @@ public class StartNettyUdpService implements IStartService {
     }
     @Override
     public void start() throws Throwable {
-        SpringServiceManager.init();
-        SpringServiceManager.start();
          start(port);
     }
 
@@ -57,11 +55,15 @@ public class StartNettyUdpService implements IStartService {
             ChannelFuture serverChannelFuture = b.bind(ip,port).sync();
 
             serverChannelFuture.channel().closeFuture().addListener(ChannelFutureListener.CLOSE);
-            logger.info("---------------------Udp service start is successful  ,ip=["
-                    +ip+"Listener port number is :"+port
+            logger.info("---------------------UDP SERVICE START IS SUCCESSFUL  ,IP=["
+                    +ip+"LISTENER PORT NUMBER IS :"+port
                     +"]");
 
         }catch (Exception e){
+            if(logger.isDebugEnabled()){
+                logger.error("UDP SERVER START HAVE ERROR ",e.getCause());
+            }
+            SpringServiceManager.shutdown();
         }
 
     }

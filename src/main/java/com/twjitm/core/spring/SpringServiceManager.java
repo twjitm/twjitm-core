@@ -13,12 +13,10 @@ public class SpringServiceManager {
     static Logger logger = Logger.getLogger(SpringServiceManager.class);
 
     public static void init() {
-        logger.info("load spring start");
+        logger.info("--------------------load spring start----------------");
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml", "classpath:spring/applicationContext-spring.xml");
-        logger.info("load spring end");
+        logger.info("--------------------load spring end------------------");
         springLoadService = (SpringLoadServiceImpl) applicationContext.getBean("springLoadService");
-        springLoadService.getTestService().say();
-        springLoadService.getDispatcherService().getMessage("test dispatcher");
     }
 
     public static SpringLoadServiceImpl springLoadService;
@@ -29,6 +27,21 @@ public class SpringServiceManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public static  void shutdown(){
+        try {
+            logger.info("shutdown local server begin");
+            springLoadService.shutdown();
+            logger.info("shutdown local server success");
+        } catch (Exception e) {
+            if(logger.isDebugEnabled()){
+                logger.error("shutdown local server error",e.getCause());
+            }
+            e.printStackTrace();
+        }
+    }
+    public static SpringLoadServiceImpl getSpringLoadService(){
+       return springLoadService;
     }
 
 }

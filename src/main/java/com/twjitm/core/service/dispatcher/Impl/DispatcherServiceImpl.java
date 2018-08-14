@@ -75,7 +75,7 @@ public class DispatcherServiceImpl implements IDispatcherService {
      */
     @PostConstruct
     public void init() {
-        System.out.println("message ser @@@@@@@@@@@@@@@@@@@@@@@ init class #@@@@@@@@@@@@@@@@@@@@");
+        System.out.println("---------------------message handler:init logic handler iml start-----------------");
         loadPackage("com.twjitm.core.common.logic.chat.Impl",".class");
         loadPackage("com.twjitm.core.common.logic.online.Impl",".class");
     }

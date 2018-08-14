@@ -40,8 +40,6 @@ public class StartNettyTcpService implements IStartService {
     @Override
     public void start() {
         fozhu();
-        SpringServiceManager.init();
-        SpringServiceManager.start();
         EventLoopGroup listenIntoGroup = new NioEventLoopGroup();
         EventLoopGroup progressGroup = new NioEventLoopGroup();
         ServerBootstrap b = new ServerBootstrap();
@@ -53,16 +51,17 @@ public class StartNettyTcpService implements IStartService {
         ChannelFuture f;
         try {
             f = b.bind(ip, port).sync();
-            logger.info("服务器启动成功,监听端口" + port);
+            logger.info("[---------------------TCP SERVICE START IS SUCCESSFUL IP="+ip +"port number is :"+ port+"------------]");
             f.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            logger.error("服务器启动失败");
+            logger.error("TCP START HAVE ERROR ,WILL STOP");
+            SpringServiceManager.shutdown();
             e.printStackTrace();
             logger.error(e);
         } finally {
             listenIntoGroup.shutdownGracefully();
             progressGroup.shutdownGracefully();
-            System.out.println("WebsocketChatServer 关闭了");
+            logger.info("SERVER WORLD STOP");
         }
     }
 

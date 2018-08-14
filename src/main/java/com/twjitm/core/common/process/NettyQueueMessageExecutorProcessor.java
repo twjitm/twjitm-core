@@ -78,7 +78,7 @@ public class NettyQueueMessageExecutorProcessor implements IMessageProcessor {
         for (int i = 0; i < this.excecutorCoreSize; i++) {
             this.executorService.execute(new Worker());
         }
-        logger.info("Message processor executorService started ["
+        logger.info("NettyQueueMessageExecutorProcessor Message processor executorService started ["
                 + this.executorService + " with " + this.excecutorCoreSize
                 + " threads ]");
     }

@@ -59,7 +59,7 @@ public class MessageRegistryFactory {
     //TODO 需优化
     public void init() {
         loadPackage(namespace, ".class");
-        loadPackage("com.twjitm.core.common.entity.online",".class");
+       // loadPackage("com.twjitm.core.common.entity.online",".class");
     }
 
     public void loadPackage(String namespace, String suffix) {

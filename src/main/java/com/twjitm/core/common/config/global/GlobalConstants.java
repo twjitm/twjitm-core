@@ -10,7 +10,7 @@ public class GlobalConstants {
         //http服务器配置文件
         public static String HTTP_SERVER_CONFIG="bean\\http_service_config.xml";
 
-        public static String SERVICE_TYPE="tcp";
+        public static String SERVICE_TYPE="udp";
     }
 
     public static  class Thread{

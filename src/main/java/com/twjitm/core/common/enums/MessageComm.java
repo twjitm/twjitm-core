@@ -16,7 +16,8 @@ public enum MessageComm {
 
 
     //udp协议
-    UDP_TEST_COMM(30001)
+    UDP_TEST_COMM(30001),
+    UDP_ONLINE_HEART_MESSAGE(30002)
     ,;
 
 

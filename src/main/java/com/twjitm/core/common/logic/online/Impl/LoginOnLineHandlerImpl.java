@@ -22,13 +22,14 @@ public class LoginOnLineHandlerImpl extends LoginOnLineHandler {
         //登录游戏简单
 
         long id = SpringServiceManager.springLoadService.getLongIdGenerator().generateId();
-        long playerId = 520 + id;
+        long playerId = 10086 ;
         int token = 10086;
         NettyTcpSession session = (NettyTcpSession) message.getAttribute(MessageAttributeEnum.DISPATCH_SESSION);
         session.setPlayerId(playerId);
         GameNettyPlayer gameNettyPlayer=new GameNettyPlayer(playerId,token,session.getNetTcpMessageSender());
         NettyGamePlayerFindServiceImpl nettyGamePlayerLoopUpService = SpringServiceManager.springLoadService.getNettyGamePlayerLoopUpService();
         nettyGamePlayerLoopUpService.addT(gameNettyPlayer);
-        return message;
+        AbstractNettyNetMessage responseMessage = SpringServiceManager.springLoadService.getNettyTcpMessageFactory().createCommonResponseMessage((int) session.getSessionId());
+        return responseMessage;
     }
 }

@@ -37,7 +37,7 @@ public abstract class AbstractNettyNetProtoBufUdpMessage extends AbstractNettyNe
         this.receive = receive;
     }
 
-    public AbstractNettyNetProtoBufUdpMessage(String json){
+    public AbstractNettyNetProtoBufUdpMessage(){
         setNettyNetMessageHead(new NettyUDPMessageHead());
         setNettyNetMessageBody(new NettyNetProtoBufMessageBody());
         initHeadCommId();

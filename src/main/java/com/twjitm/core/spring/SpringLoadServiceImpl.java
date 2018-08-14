@@ -261,6 +261,7 @@ public class SpringLoadServiceImpl implements IService {
     public void startup() throws Exception {
         netTcpSessionLoopUpService.startup();
         nettyTcpMessageQueueExecutorProcessor.start();
+        nettyQueueMessageExecutorProcessor.start();
     }
 
     @Override
