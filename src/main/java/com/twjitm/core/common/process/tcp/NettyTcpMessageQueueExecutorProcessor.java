@@ -116,9 +116,9 @@ public class NettyTcpMessageQueueExecutorProcessor implements ITcpMessageProcess
             queue.put(msg);
         } catch (InterruptedException e) {
             e.printStackTrace();
-            logger.error(msg);
+            logger.error("Message execution thread interrupted..",e.getCause());
         } finally {
-            logger.info("消息执行线程被中断。。。。");
+            logger.info("message successful put queue.");
         }
     }
 
@@ -168,7 +168,7 @@ public class NettyTcpMessageQueueExecutorProcessor implements ITcpMessageProcess
             AbstractNettyNetProtoBufMessage abstractNetProtoBufMessage = (AbstractNettyNetProtoBufMessage) msg;
             NettySession clientSession = (NettySession) abstractNetProtoBufMessage.getAttribute(MessageAttributeEnum.DISPATCH_SESSION);
             if (logger.isDebugEnabled()) {
-                logger.debug("processor session" + clientSession.getPlayerId() + " process message" + abstractNetProtoBufMessage.toString());
+                logger.debug("PROCESSOR SESSION" + clientSession.getPlayerId() + " PROCESS MESSAGE" + abstractNetProtoBufMessage.toString());
             }
 
             NettyNetMessageProcessLogic netMessageProcessLogic = SpringServiceManager.springLoadService.getNettyNetMessageProcessLogic();
@@ -182,9 +182,9 @@ public class NettyTcpMessageQueueExecutorProcessor implements ITcpMessageProcess
                 // 特例，统计时间跨度
                 long time = (System.nanoTime() - begin) / (1000 * 1000);
                 if (time > 1) {
-                    logger.info("#CORE.MSG.PROCESS.DISPATCH_STATICS disptach Message id:"
-                            + msg.getNetMessageHead().getCmd() + " Time:"
-                            + time + "ms" + " Total:"
+                    logger.info("#CORE.MSG.PROCESS.DISPATCH_STATICS DISPTACH MESSAGE ID:"
+                            + msg.getNetMessageHead().getCmd() + " TIME:"
+                            + time + "MS" + " TOTAL:"
                             + this.statisticsMessageCount);
                 }
             }
