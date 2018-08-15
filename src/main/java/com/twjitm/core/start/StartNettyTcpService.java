@@ -15,7 +15,6 @@ import java.net.InetAddress;
 
 
 /**
- *
  * @author ÎÄ½­
  * @date 2018/4/16
  */
@@ -50,7 +49,7 @@ public class StartNettyTcpService implements IStartService {
         ChannelFuture f;
         try {
             f = b.bind(ip, port).sync();
-            logger.info("[---------------------TCP SERVICE START IS SUCCESSFUL IP="+ip +"port number is :"+ port+"------------]");
+            logger.info("[---------------------TCP SERVICE START IS SUCCESSFUL IP=" + ip + "port number is :" + port + "------------]");
             f.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             logger.error("TCP START HAVE ERROR ,WILL STOP");

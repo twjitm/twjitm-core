@@ -21,7 +21,7 @@ public class NettyNetMessageHttpServerHandler extends AbstractNettyNetMessageHtt
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
 
-        if (msg instanceof HttpRequest) {
+      /*  if (msg instanceof HttpRequest) {
             request= (HttpRequest) msg;
             boolean isKeepAlive = HttpUtil.isKeepAlive(request);
            if(request.getMethod()!=HttpMethod.POST){
@@ -73,6 +73,6 @@ public class NettyNetMessageHttpServerHandler extends AbstractNettyNetMessageHtt
                     appendDecoderResult(log, request);
                 }
             }
-        }
+        }*/
     }
 }

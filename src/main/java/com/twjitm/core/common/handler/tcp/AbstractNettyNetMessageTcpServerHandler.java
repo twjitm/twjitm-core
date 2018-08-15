@@ -8,6 +8,7 @@ import com.twjitm.core.utils.logs.LoggerUtils;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.timeout.IdleStateEvent;
 import org.apache.log4j.Logger;
 
 
@@ -21,6 +22,7 @@ public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInb
 
     /**
      * channel 注册
+     *
      * @param ctx
      * @throws Exception
      */
@@ -28,9 +30,9 @@ public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInb
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
         ctx.fireChannelRegistered();
         NettyTcpSession nettyTcpSession = (NettyTcpSession) SpringServiceManager.springLoadService.getNettyTcpSessionBuilder().buildSession(ctx.channel());
-        boolean can =  SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().addNettySession(nettyTcpSession);
+        boolean can = SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().addNettySession(nettyTcpSession);
         if (!can) {
-            AbstractNettyNetMessage errorMessage =  SpringServiceManager.springLoadService.getNettyTcpMessageFactory().createCommonErrorResponseMessage(-1, 10500);
+            AbstractNettyNetMessage errorMessage = SpringServiceManager.springLoadService.getNettyTcpMessageFactory().createCommonErrorResponseMessage(-1, 10500);
             nettyTcpSession.write(errorMessage);
             nettyTcpSession.close();
             ctx.close();
@@ -41,15 +43,21 @@ public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInb
 
     public abstract void addUpdateSession(NettyTcpSession nettyTcpSession);
 
+    /**
+     * have error in project
+     * @param ctx
+     * @param cause
+     * @throws Exception
+     */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         if (cause instanceof java.io.IOException) {
             logger.error(cause.getMessage());
             return;
         }
-      //  if(logger.isTraceEnabled()){
-            logger.error(cause.getMessage(),cause);
-     //   }
+        //  if(logger.isTraceEnabled()){
+        logger.error(cause.getMessage(), cause);
+        //   }
         //设置下线
         disconnect(ctx.channel());
         //销毁上下文
@@ -63,15 +71,20 @@ public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInb
      * @param channel
      */
     public void disconnect(Channel channel) {
-        long sessonId = channel.attr(NettyTcpSessionBuilder.sessionId).get();
-        NettyTcpSession nettySession = (NettyTcpSession) SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().findNettySession(sessonId);
+        long sessionId = channel.attr(NettyTcpSessionBuilder.sessionId).get();
+        NettyTcpSession nettySession = (NettyTcpSession) SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().findNettySession(sessionId);
         if (nettySession == null) {
-            logger.error("tcp netsession null channelId is:" + channel.id().asLongText());
+            logger.error("TCP NET SESSION NULL CHANNEL ID IS:" + channel.id().asLongText());
             return;
         }
         nettySession.close();
     }
 
+    /**
+     * disconnect; interrupt
+     * @param ctx
+     * @throws Exception
+     */
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         ctx.flush();
@@ -79,13 +92,29 @@ public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInb
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        long sessonId = ctx.channel().attr(NettyTcpSessionBuilder.sessionId).get();
-        NettyTcpSession nettyTcpSession = (NettyTcpSession) SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().findNettySession(sessonId);
+        IdleStateEvent event = (IdleStateEvent) evt;
+        long sessionId = ctx.channel().attr(NettyTcpSessionBuilder.sessionId).get();
+        switch (event.state()) {
+            case ALL_IDLE:
+                logger.info("session id =" + sessionId + " is all idle");
+                break;
+            case READER_IDLE:
+                logger.info("session id =" + sessionId + " is reader idle");
+                break;
+            case WRITER_IDLE:
+                logger.info("session id =" + sessionId + " is reader idle");
+                break;
+            default:
+                break;
+        }
+
+        NettyTcpSession nettyTcpSession = (NettyTcpSession) SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().findNettySession(sessionId);
         disconnect(ctx.channel());
-        if(nettyTcpSession == null){
+        if (nettyTcpSession == null) {
             ctx.fireChannelUnregistered();
             return;
         }
+        // remove session
         SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().removeNettySession(nettyTcpSession.getSessionId());
         ctx.fireChannelUnregistered();
     }
