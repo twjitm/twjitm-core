@@ -3,9 +3,14 @@ package com.twjitm.core.common.factory;
 
 import com.twjitm.core.common.annotation.MessageCommandAnntation;
 import com.twjitm.core.common.enums.MessageComm;
+import com.twjitm.core.common.logic.handler.AbstractBaseHandler;
+import com.twjitm.core.common.logic.handler.BaseHandler;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.utils.PackageScaner;
+import com.twjitm.core.utils.logs.LoggerUtils;
+import org.apache.log4j.Logger;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 原理：利用class类加载器加载编译好的消息字节码加载到内存中
  */
 public class MessageRegistryFactory {
+    Logger logger = LoggerUtils.getLogger(MessageRegistryFactory.class);
     private PackageScaner packageScaner = new PackageScaner();
 
     private Map<Integer, MessageComm> messageCommMap = new ConcurrentHashMap<Integer, MessageComm>();
@@ -27,6 +33,10 @@ public class MessageRegistryFactory {
     private Map<Integer, Class<? extends AbstractNettyNetProtoBufMessage>> messages = new HashMap<Integer, Class<? extends AbstractNettyNetProtoBufMessage>>();
 
     private String namespace;
+    /**
+     * logic handler map
+     */
+    private Map<Integer, BaseHandler> logicHandlerMap = new ConcurrentHashMap<>();
 
     public void setNamespace(String namespace) {
         this.namespace = namespace;
@@ -58,8 +68,13 @@ public class MessageRegistryFactory {
 
     //TODO 需优化
     public void init() {
+        //load message
         loadPackage(namespace, ".class");
-       // loadPackage("com.twjitm.core.common.entity.online",".class");
+        //load handler
+        loadPackage("com.twjitm.core.*.*");
+        //load message enum
+        loadMessageCommId();
+        // loadPackage("com.twjitm.core.common.entity.online",".class");
     }
 
     public void loadPackage(String namespace, String suffix) {
@@ -85,13 +100,13 @@ public class MessageRegistryFactory {
         }
         */
         List<Class> list = PackageScaner.getSubClasses(AbstractNettyNetProtoBufMessage.class, "com.twjitm.core.*.*");
-       for(Class messageClass:list){
-           MessageCommandAnntation annotation = (MessageCommandAnntation) messageClass
-                   .getAnnotation(MessageCommandAnntation.class);
-           if (annotation != null && annotation.messagecmd() != null) {
-               putMessages(annotation.messagecmd().commId, messageClass);
-           }
-       }
+        for (Class messageClass : list) {
+            MessageCommandAnntation annotation = (MessageCommandAnntation) messageClass
+                    .getAnnotation(MessageCommandAnntation.class);
+            if (annotation != null && annotation.messagecmd() != null) {
+                putMessages(annotation.messagecmd().commId, messageClass);
+            }
+        }
 
     }
 
@@ -102,8 +117,72 @@ public class MessageRegistryFactory {
     private void loadMessageCommId() {
         MessageComm[] comms = MessageComm.values();
         for (MessageComm comm : comms) {
-
+            messageCommMap.put(comm.commId, comm);
         }
     }
+
+    //-----------------------handler
+
+    /**
+     * @param namespace
+     */
+    private void loadPackage(String namespace) {
+        List<Class> list = PackageScaner.getSubClasses(AbstractBaseHandler.class, namespace);
+        for (Class messageClass : list) {
+            try {
+                logger.info("handler load:" + messageClass.toString());
+                BaseHandler baseHandler = getBaseHandler(messageClass);
+                AbstractBaseHandler abstractBaseHandler = (AbstractBaseHandler) baseHandler;
+                abstractBaseHandler.init();
+                Method[] methods = messageClass.getMethods();
+                for (Method method : methods) {
+                    if (method.isAnnotationPresent(MessageCommandAnntation.class)) {
+                        MessageCommandAnntation messageCommandAnnotation = (MessageCommandAnntation) method.getAnnotation(MessageCommandAnntation.class);
+                        if (messageCommandAnnotation != null && messageCommandAnnotation.messagecmd() != null) {
+                            addHandler(messageCommandAnnotation.messagecmd().commId, baseHandler);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    /**
+     * add handler
+     *
+     * @param commId
+     * @param handler
+     */
+    private void addHandler(int commId, BaseHandler handler) {
+        logicHandlerMap.put(commId, handler);
+
+    }
+
+    /**
+     * @param classes
+     * @return
+     */
+    private BaseHandler getBaseHandler(Class<?> classes) {
+        try {
+            if (classes == null) {
+                return null;
+            }
+            BaseHandler messageHandler = (BaseHandler) classes
+                    .newInstance();
+            return messageHandler;
+        } catch (Exception e) {
+            logger.info("getBaseHandler - classes=" + classes.getName() + "," + e);
+        }
+        return null;
+
+    }
+
+    public BaseHandler getHandler(int commId) {
+        return logicHandlerMap.get(commId);
+    }
+
 
 }
