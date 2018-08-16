@@ -25,19 +25,19 @@ public class NettyTcpServerPipeLineImpl implements INettyServerPipeLine {
 private Logger logger=LoggerUtils.getLogger(NettyTcpServerPipeLineImpl.class);
     @Override
     public void dispatch(Channel channel, AbstractNettyNetMessage message) {
-        int commid = message.getNettyNetMessageHead().getCmd();
+        int commId = message.getNettyNetMessageHead().getCmd();
         MessageRegistryFactory messageRegistryFactory = SpringServiceManager.springLoadService.getMessageRegistryFactory();
-        MessageComm messageComm = messageRegistryFactory.getMessageComm(commid);
+        MessageComm messageComm = messageRegistryFactory.getMessageComm(commId);
         if (message instanceof AbstractNettyNetProtoBufTcpMessage) {
             AbstractNettyNetProtoBufTcpMessage protoBufTcpMessage = (AbstractNettyNetProtoBufTcpMessage) message;
             INettyChannleOperationService netTcpSessionLoopUpService = SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService();
             long sessionId = channel.attr(NettyTcpSessionBuilder.sessionId).get();
             NettyTcpSession nettySession = (NettyTcpSession) netTcpSessionLoopUpService.findNettySession(sessionId);
             if(nettySession==null){
-                logger.error("netty session is null");
+                logger.error("NETTY SESSION IS NULL");
             }
             message.setAttribute(MessageAttributeEnum.DISPATCH_SESSION,nettySession);
-            nettySession.addNetMessage(message);
+            nettySession.addNettyNetMessage(message);
         }
 
     }

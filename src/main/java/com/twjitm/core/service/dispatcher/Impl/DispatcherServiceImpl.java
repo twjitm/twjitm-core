@@ -22,6 +22,9 @@ import java.lang.reflect.Method;
  * msg1,mes2,msg3,msg4,msg5......
  * ------------------------------
  * head                      last
+ *
+ * Object object = method.invoke(baseHandler,message);
+ * use proxy pattern progress message :tcp.udp stream in the dispatcher handler
  */
 @Service
 public class DispatcherServiceImpl implements IDispatcherService {
@@ -32,7 +35,7 @@ public class DispatcherServiceImpl implements IDispatcherService {
     public AbstractNettyNetProtoBufMessage dispatcher(AbstractNettyNetMessage message) {
         int commId = message.getNetMessageHead().getCmd();
         BaseHandler baseHandler = SpringServiceManager.getSpringLoadService().getMessageRegistryFactory()
-                .getHandler(commId);//handlerMap.get(commId);
+                .getHandler(commId);
         if (baseHandler == null) {
             return null;
         }
@@ -44,15 +47,15 @@ public class DispatcherServiceImpl implements IDispatcherService {
             AbstractNettyNetProtoBufMessage baseMessage = null;
             if (object != null) {
                 baseMessage = (AbstractNettyNetProtoBufMessage) object;
+            }else {
+                baseMessage= (AbstractNettyNetProtoBufMessage) SpringServiceManager.getSpringLoadService().getNettyTcpMessageFactory().createCommonErrorResponseMessage(1,1);
             }
 
             if(logger.isDebugEnabled()){
-                logger.info("invoke message successful message comm id is:"+commId);
+                logger.info("INVOKE MESSAGE SUCCESSFUL MESSAGE COMM ID IS:"+commId);
             }
             return baseMessage;
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return null;

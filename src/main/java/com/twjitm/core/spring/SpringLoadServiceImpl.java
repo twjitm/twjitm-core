@@ -21,6 +21,7 @@ import com.twjitm.core.common.service.INettyChannleOperationService;
 import com.twjitm.core.common.service.IService;
 import com.twjitm.core.common.service.Impl.NettyChannelOperationServiceImpl;
 import com.twjitm.core.common.service.Impl.NettyGamePlayerFindServiceImpl;
+import com.twjitm.core.common.service.http.AsyncNettyHttpHandlerService;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.service.test.TestService;
 import com.twjitm.core.service.user.UserService;
@@ -160,6 +161,12 @@ public class SpringLoadServiceImpl implements IService {
      */
     @Resource
     private NettyUdpServerPipeLineImpl nettyUdpServerPipeLine;
+    //-------------------------------------------------------------------------------------------
+    @Resource
+    private AsyncNettyHttpHandlerService asyncNettyHttpHandlerService;
+
+
+
 
 
     public TestService getTestService() {
@@ -251,6 +258,10 @@ public class SpringLoadServiceImpl implements IService {
         return nettyUdpNetProtoMessageProcessor;
     }
 
+    public AsyncNettyHttpHandlerService getAsyncNettyHttpHandlerService() {
+        return asyncNettyHttpHandlerService;
+    }
+
     @Override
     public String getId() {
         return "";
@@ -261,12 +272,14 @@ public class SpringLoadServiceImpl implements IService {
         netTcpSessionLoopUpService.startup();
         nettyTcpMessageQueueExecutorProcessor.start();
         nettyQueueMessageExecutorProcessor.start();
+        asyncNettyHttpHandlerService.startup();
     }
 
     @Override
     public void shutdown() throws Exception {
         netTcpSessionLoopUpService.shutdown();
         nettyTcpMessageQueueExecutorProcessor.stop();
+        asyncNettyHttpHandlerService.shutdown();
     }
 
 

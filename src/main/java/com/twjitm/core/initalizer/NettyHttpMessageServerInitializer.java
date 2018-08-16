@@ -1,6 +1,8 @@
 package com.twjitm.core.initalizer;
 
 import com.twjitm.core.common.handler.http.NettyNetMessageHttpServerHandler;
+import com.twjitm.core.common.service.http.AsyncNettyHttpHandlerService;
+import com.twjitm.core.spring.SpringServiceManager;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -12,10 +14,11 @@ public class NettyHttpMessageServerInitializer extends ChannelInitializer<Socket
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline channelPipLine = socketChannel.pipeline();
-        //netty 自帶編解碼
+        //use netty self encoder and decoder
         channelPipLine.addLast("encoder", new HttpResponseEncoder());
         channelPipLine.addLast("decoder", new HttpRequestDecoder());
-        channelPipLine.addLast(new NettyNetMessageHttpServerHandler());
+        AsyncNettyHttpHandlerService asyncNettyHttpHandlerService = SpringServiceManager.getSpringLoadService().getAsyncNettyHttpHandlerService();
+        channelPipLine.addLast(asyncNettyHttpHandlerService.getDefaultEventExecutorGroup(),new NettyNetMessageHttpServerHandler());
 
     }
 }

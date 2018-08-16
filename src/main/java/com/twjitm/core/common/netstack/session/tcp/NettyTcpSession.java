@@ -53,7 +53,7 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
      *
      * @param abstractNetMessage
      */
-    public void addNetMessage(AbstractNettyNetMessage abstractNetMessage) {
+    public void addNettyNetMessage(AbstractNettyNetMessage abstractNetMessage) {
         this.netProtoMessageProcess.addNetMessage(abstractNetMessage);
         this.processNetMessage(true);
     }

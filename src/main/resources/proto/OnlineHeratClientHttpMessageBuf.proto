@@ -1,0 +1,6 @@
+syntax = "proto3";
+message OnlineClientHttpMessage { 
+   int64 player_id = 1; 
+   string player_name=2;
+   
+}

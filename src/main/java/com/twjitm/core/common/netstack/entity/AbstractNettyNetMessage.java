@@ -1,7 +1,5 @@
 package com.twjitm.core.common.netstack.entity;
 
-import com.twjitm.core.common.netstack.INettyMessage;
-
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -32,9 +30,6 @@ public abstract class AbstractNettyNetMessage implements INettyMessage {
         this.nettyNetMessageBody = nettyNetMessageBody;
     }
 
-    public ConcurrentHashMap<Object, Object> getAttributes() {
-        return attributes;
-    }
     public void setAttribute(Object key,Object value){
         attributes.put(key,value);
     }

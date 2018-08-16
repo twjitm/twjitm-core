@@ -38,6 +38,7 @@ public abstract class AbstractNettyNetProtoBufUdpMessage extends AbstractNettyNe
     }
 
     public AbstractNettyNetProtoBufUdpMessage(){
+        super();
         setNettyNetMessageHead(new NettyUDPMessageHead());
         setNettyNetMessageBody(new NettyNetProtoBufMessageBody());
         initHeadCommId();

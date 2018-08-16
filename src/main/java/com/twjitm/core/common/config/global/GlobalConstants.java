@@ -45,5 +45,31 @@ public class GlobalConstants {
          * 心跳读写时间超时(单位秒)
          */
         public static final int SESSION_HEART_ALL_TIMEOUT = HEART_BASE_SIZE * 60;
+
+        public static final int NETTY_NET_HTTP_MESSAGE_THREAD_CORE_NUMBER = 5;
+
     }
+
+    public static class NettyNetServerConfig {
+        public static class TCP {
+            public static final int SERVER_PORT = 9090;
+            public static final String SERVER_IP = "127.0.0.1";
+            public static final String BOSS_THREAD_NAME="tcp_boss_thread_name";
+            public static final String WORKER_THREAD_NAME="tcp_worker_thread_name";
+
+        }
+        public static class UDP{
+            public static final int SERVER_PORT = 9099;
+            public static final String SERVER_IP = "127.0.0.1";
+            public static final String EVENT_THREAD_NAME="udp_event_thread_name";
+        }
+        public static  class  HTTP{
+            public static final int SERVER_PORT = 8080;
+            public static final String SERVER_IP = "127.0.0.1";
+            public static final String BOSS_THREAD_NAME="http_boss_thread_name";
+            public static final String WORKER_THREAD_NAME="http_worker_thread_name";
+        }
+    }
+
+
 }

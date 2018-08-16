@@ -1,7 +1,6 @@
 package com.twjitm.core.common.netstack.coder.decode.http;
 
 import com.twjitm.core.common.factory.MessageRegistryFactory;
-import com.twjitm.core.common.netstack.coder.decode.http.INettyNetProtoBuffHttpToMessageDecoderFactory;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.netstack.entity.NettyNetProtoBufMessageBody;
 import com.twjitm.core.common.netstack.entity.http.NettyNetHttpMessageHead;
@@ -39,7 +38,7 @@ public class NettyNetProtoBuffHttpToMessageDecoderFactory implements INettyNetPr
         short tokenLength = byteBuf.readShort();
         byte[] tokenBytes = new byte[tokenLength];
         ByteBuf tokenBuf = byteBuf.readBytes(tokenBytes);
-        netMessageHead.setTocken(tokenBuf.toString());
+        netMessageHead.setToken(tokenBuf.toString());
 
         MessageRegistryFactory messageRegistry = SpringServiceManager.springLoadService.getMessageRegistryFactory();
         AbstractNettyNetProtoBufMessage netMessage = messageRegistry.get(cmd);
@@ -56,10 +55,10 @@ public class NettyNetProtoBuffHttpToMessageDecoderFactory implements INettyNetPr
             netMessage.decoderNetProtoBufMessageBody();
             netMessage.releaseMessageBody();
         } catch (Exception e) {
-            throw new CodecException("message cmd " + cmd + "decoder error", e);
+            throw new CodecException("MESSAGE CMD " + cmd + "DECODER ERROR", e);
         }
         if (logger.isDebugEnabled()) {
-            logger.debug("revise net message");
+            logger.debug("REVISE NET MESSAGE");
         }
         return netMessage;
     }

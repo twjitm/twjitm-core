@@ -41,7 +41,7 @@ public class NettyTcpMessageQueueExecutorProcessor implements ITcpMessageProcess
     /**
      * 线程池的线程个数
      */
-    private int excecutorCoreSize;
+    private int executorCoreSize;
 
     /**
      * 是否停止
@@ -54,10 +54,10 @@ public class NettyTcpMessageQueueExecutorProcessor implements ITcpMessageProcess
         this(false, 1);
     }
 
-    public NettyTcpMessageQueueExecutorProcessor(boolean inLastQueue, int excecutorCoreSize) {
-        this.excecutorCoreSize = excecutorCoreSize;
+    public NettyTcpMessageQueueExecutorProcessor(boolean inLastQueue, int executorCoreSize) {
+        this.executorCoreSize = executorCoreSize;
         this.inLastQueue = inLastQueue;
-        queue = new LinkedBlockingQueue<>(excecutorCoreSize);
+        queue = new LinkedBlockingQueue<>(executorCoreSize);
     }
 
     @Override
@@ -74,26 +74,26 @@ public class NettyTcpMessageQueueExecutorProcessor implements ITcpMessageProcess
         stop = false;
         ThreadNameFactory factory = new ThreadNameFactory(GlobalConstants.Thread.MESSAGE_QUEUE_EXECUTOR);
         this.executorService = Executors
-                .newFixedThreadPool(this.excecutorCoreSize, factory);
-        for (int i = 0; i < this.excecutorCoreSize; i++) {
+                .newFixedThreadPool(this.executorCoreSize, factory);
+        for (int i = 0; i < this.executorCoreSize; i++) {
             this.executorService.execute(new Processor());
         }
-        logger.info("NettyTcpMessageQueueExecutorProcessor  message handler executorService begin ["
-                + this.executorService + " with " + this.excecutorCoreSize
-                + " threads ]");
+        logger.info("nettytcpmessagequeueexecutorprocessor  message handler executorservice begin ["
+                + this.executorService + " WITH " + this.executorCoreSize
+                + " THREADS ]");
 
     }
 
     @Override
     public void stop() {
-        logger.info("消息处理器开始停止： " + this);
+        logger.info("MESSAGE STOPPING " + this);
         this.stop = true;
         if (this.executorService != null) {
             ExecutorUtil.shutdownAndAwaitTermination(this.executorService, 50,
                     TimeUnit.MILLISECONDS);
             this.executorService = null;
         }
-        logger.info("消息处理执行器处理完毕" + this);
+        logger.info("MESSAGE HANDLER STOP EXECUTOR IS OVER" + this);
         if (this.inLastQueue) {
             // 将未处理的消息放入到leftQueue中,以备后续处理
             this.lastQueue = new LinkedList<AbstractNettyNetMessage>();
@@ -116,9 +116,9 @@ public class NettyTcpMessageQueueExecutorProcessor implements ITcpMessageProcess
             queue.put(msg);
         } catch (InterruptedException e) {
             e.printStackTrace();
-            logger.error("Message execution thread interrupted..",e.getCause());
+            logger.error("MESSAGE EXECUTION THREAD INTERRUPTED..",e.getCause());
         } finally {
-            logger.info("message successful put queue.");
+            logger.info("MESSAGE SUCCESSFUL PUT QUEUE.");
         }
     }
 
@@ -135,12 +135,12 @@ public class NettyTcpMessageQueueExecutorProcessor implements ITcpMessageProcess
                 try {
                     process(queue.take());
                     if (logger.isDebugEnabled()) {
-                        logger.debug("run queue size:" + queue.size());
+                        logger.debug("RUN QUEUE SIZE:" + queue.size());
                     }
                 } catch (InterruptedException e) {
                     if (logger.isTraceEnabled()) {
                         logger
-                                .warn("[#CORE.QueueMessageExecutorProcessor.run] [Stop process]");
+                                .warn("[#CORE.QUEUEMESSAGEEXECUTORPROCESSOR.RUN] [STOP PROCESS]");
                     }
                     Thread.currentThread().interrupt();
                     break;
@@ -155,7 +155,7 @@ public class NettyTcpMessageQueueExecutorProcessor implements ITcpMessageProcess
     public void process(AbstractNettyNetMessage msg) {
         if (msg == null) {
             if (logger.isTraceEnabled()) {
-                logger.warn("[#CORE.QueueMessageExecutorProcessor.process]");
+                logger.warn("[#CORE.QUEUEMESSAGEEXECUTORPROCESSOR.PROCESS]");
             }
             return;
         }

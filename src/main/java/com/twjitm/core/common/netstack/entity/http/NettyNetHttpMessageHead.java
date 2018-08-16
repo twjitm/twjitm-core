@@ -9,7 +9,7 @@ import com.twjitm.core.common.netstack.entity.NettyNetMessageHead;
  */
 public class NettyNetHttpMessageHead extends NettyNetMessageHead {
     private long playerId;
-    private String tocken="";
+    private String token = "";
 
     public long getPlayerId() {
         return playerId;
@@ -19,11 +19,11 @@ public class NettyNetHttpMessageHead extends NettyNetMessageHead {
         this.playerId = playerId;
     }
 
-    public String getTocken() {
-        return tocken;
+    public String getToken() {
+        return token;
     }
 
-    public void setTocken(String tocken) {
-        this.tocken = tocken;
+    public void setToken(String token) {
+        this.token = token;
     }
 }

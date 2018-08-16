@@ -4,7 +4,7 @@ import com.twjitm.core.service.manager.ILocalManager;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by нд╫╜ on 2018/4/27.
+ * Created by twjitm on 2018/4/27.
  */
 @Service
 public class LocalManagerImpl implements ILocalManager {

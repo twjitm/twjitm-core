@@ -10,7 +10,7 @@ import io.netty.buffer.ByteBuf;
  */
 public interface INettyNetProtoBuffToMessageDecoderFactory {
     /**
-     * chulixiaoxi
+     * handler netty net message
      * @param byteBuf
      * @return
      */

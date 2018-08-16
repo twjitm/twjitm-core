@@ -30,6 +30,6 @@ public class NettyNetUdpMessageSender implements INetMessageSender {
 
     @Override
     public void close() {
-
+        nettySession.channel.close();
     }
 }

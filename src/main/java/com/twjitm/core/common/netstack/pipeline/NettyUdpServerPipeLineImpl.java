@@ -33,7 +33,7 @@ public class NettyUdpServerPipeLineImpl implements INettyServerPipeLine {
         MessageComm messageComm = messageRegistryFactory.getMessageComm(messageCmdId);
         AbstractNettyNetProtoBufUdpMessage udpMessage = (AbstractNettyNetProtoBufUdpMessage) message;
         if (logger.isTraceEnabled()) {
-            logger.info("DISPATCH　UDP MESSAGE ID" + messageComm.commId + "class is :" + udpMessage.getClass().getSimpleName());
+            logger.info("DISPATCH　UDP MESSAGE ID" + messageComm.commId + "CLASS IS :" + udpMessage.getClass().getSimpleName());
         }
         //rpc暂时不出了
 

@@ -1,7 +1,6 @@
 package com.twjitm.core.common.netstack.coder.encode.http;
 
 
-import com.twjitm.core.common.netstack.coder.encode.http.INettyNetProtoBufHttpMessageEncoderFactory;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.netstack.entity.NettyNetMessageBody;
 import com.twjitm.core.common.netstack.entity.http.NettyNetHttpMessageHead;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class NetProtoBufHttpMessageEncoderFactory implements INettyNetProtoBufHttpMessageEncoderFactory {
+public class NettyNetProtoBufHttpMessageEncoderFactory implements INettyNetProtoBufHttpMessageEncoderFactory {
 
     @Override
     public ByteBuf createByteBuf(AbstractNettyNetProtoBufMessage netMessage) throws Exception {
@@ -29,7 +28,7 @@ public class NetProtoBufHttpMessageEncoderFactory implements INettyNetProtoBufHt
         byteBuf.writeInt(netMessageHead.getSerial());
         //设置tocken
         byteBuf.writeLong(netMessageHead.getPlayerId());
-        byte[] bytes = netMessageHead.getTocken().getBytes();
+        byte[] bytes = netMessageHead.getToken().getBytes();
         byteBuf.writeShort(bytes.length);
         byteBuf.writeBytes(bytes);
 

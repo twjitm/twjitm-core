@@ -43,36 +43,4 @@ public class ClientServiceTest {
         }
     }
 
-    /**
-     * md5У���ļ�
-     *
-     * @return
-     */
-    public static boolean md5() {
-
-        File file = new File("E:\\���2018-05-34.txt");
-        if (!file.isFile()) {
-            return false;
-        }
-        MessageDigest digest = null;
-        FileInputStream in = null;
-        byte buffer[] = new byte[1024];
-        int len;
-        try {
-            digest = MessageDigest.getInstance("MD5");
-            in = new FileInputStream(file);
-            while ((len = in.read(buffer, 0, 1024)) != -1) {
-                digest.update(buffer, 0, len);
-            }
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        BigInteger bigInt = new BigInteger(1, digest.digest());
-
-        System.out.println(bigInt.toString(16));
-        return true;
-    }
-
 }

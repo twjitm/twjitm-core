@@ -69,7 +69,7 @@ public class NettyQueueMessageExecutorProcessor implements IMessageProcessor {
     public void start() {
         if (this.executorService != null) {
             throw new IllegalStateException(
-                    "The executorService has not been stopped.");
+                    "THE EXECUTORSERVICE HAS NOT BEEN STOPPED.");
         }
         stop = false;
         ThreadNameFactory factory = new ThreadNameFactory(GlobalConstants.Thread.GAME_MESSAGE_QUEUE_EXCUTE);
@@ -78,14 +78,14 @@ public class NettyQueueMessageExecutorProcessor implements IMessageProcessor {
         for (int i = 0; i < this.excecutorCoreSize; i++) {
             this.executorService.execute(new Worker());
         }
-        logger.info("NettyQueueMessageExecutorProcessor Message processor executorService started ["
+        logger.info("NETTYQUEUEMESSAGEEXECUTORPROCESSOR MESSAGE PROCESSOR EXECUTORSERVICE STARTED ["
                 + this.executorService + " with " + this.excecutorCoreSize
                 + " threads ]");
     }
 
     @Override
     public void stop() {
-        logger.info("Message processor executor " + this + " stopping ...");
+        logger.info("MESSAGE PROCESSOR EXECUTOR " + this + " STOPPING ...");
         this.stop = true;
         if (this.executorService != null) {
             //停止线程
@@ -93,7 +93,7 @@ public class NettyQueueMessageExecutorProcessor implements IMessageProcessor {
                     TimeUnit.MILLISECONDS);
             this.executorService = null;
         }
-        logger.info("Message processor executor " + this + " stopped");
+        logger.info("MESSAGE PROCESSOR EXECUTOR " + this + " STOPPED");
         if (this.processLeft) {
             // 将未处理的消息放入到leftQueue中,以备后续处理
             this.leftQueue = new LinkedList<AbstractNettyNetMessage>();
@@ -114,7 +114,7 @@ public class NettyQueueMessageExecutorProcessor implements IMessageProcessor {
         try {
             queue.put(msg);
             if (logger.isDebugEnabled()) {
-                logger.debug("put queue size:" + queue.size());
+                logger.debug("PUT QUEUE SIZE:" + queue.size());
             }
         } catch (InterruptedException e) {
             if (logger.isTraceEnabled()) {
@@ -135,12 +135,12 @@ public class NettyQueueMessageExecutorProcessor implements IMessageProcessor {
                 try {
                     process(queue.take());
                     if (logger.isDebugEnabled()) {
-                        logger.debug("run queue size:" + queue.size());
-                        logger.debug("run queue size:" + queue.size());
+                        logger.debug("RUN QUEUE SIZE:" + queue.size());
+                        logger.debug("RUN QUEUE SIZE:" + queue.size());
                     }
                 } catch (InterruptedException e) {
                     if (logger.isTraceEnabled()) {
-                        logger.warn("[#CORE.QueueMessageExecutorProcessor.run] [Stop process]");
+                        logger.warn("[#CORE.QUEUEMESSAGEEXECUTORPROCESSOR.RUN] [STOP PROCESS]");
                     }
                     Thread.currentThread().interrupt();
                     break;
@@ -149,14 +149,14 @@ public class NettyQueueMessageExecutorProcessor implements IMessageProcessor {
                     logger.error(e);
                 }
             }
-            logger.debug("work is stop" + queue.size());
+            logger.debug("WORK IS STOP" + queue.size());
         }
     }
 
     private void process(AbstractNettyNetMessage msg) {
         if (msg == null) {
             if (logger.isTraceEnabled()) {
-                logger.warn("[#CORE.QueueMessageExecutorProcessor.process] [" + "msg is null" + "]");
+                logger.warn("[#CORE.QUEUEMESSAGEEXECUTORPROCESSOR.PROCESS] [" + "MSG IS NULL" + "]");
             }
             return;
         }
@@ -167,18 +167,18 @@ public class NettyQueueMessageExecutorProcessor implements IMessageProcessor {
         this.statisticsMessageCount++;
         try {
             AbstractNettyNetProtoBufMessage abstractNetProtoBufMessage = (AbstractNettyNetProtoBufMessage) msg;
-            NettyUdpSession clientSesion = (NettyUdpSession) abstractNetProtoBufMessage.getAttribute(MessageAttributeEnum.DISPATCH_SESSION);
+            NettyUdpSession clientSession = (NettyUdpSession) abstractNetProtoBufMessage.getAttribute(MessageAttributeEnum.DISPATCH_SESSION);
             //所有的session已经强制绑定了，这里不需要再判定空了
             if (logger.isDebugEnabled()) {
-                logger.debug("processor session" + clientSesion.getPlayerId() + " process message" + abstractNetProtoBufMessage.toString());
+                logger.debug("PROCESSOR SESSION" + clientSession.getPlayerId() + " PROCESS MESSAGE" + abstractNetProtoBufMessage.toString());
             }
 
             NettyNetMessageProcessLogic netMessageProcessLogic = SpringServiceManager.springLoadService.getNettyNetMessageProcessLogic();
-            netMessageProcessLogic.processTcpMessage(msg, clientSesion);
+            netMessageProcessLogic.processTcpMessage(msg, clientSession);
 
         } catch (Exception e) {
             if (logger.isTraceEnabled()) {
-                logger.error("Error#.QueueMessageExecutorProcessor.process");
+                logger.error("ERROR#.QUEUEMESSAGEEXECUTORPROCESSOR.PROCESS");
                 logger.error(e);
             }
 

@@ -149,7 +149,7 @@ public class PackageScaner {
         for (final BeanDefinition component : components) {
             @SuppressWarnings("unchecked") final Class cls;
             try {
-                cls = (Class) Class.forName(component
+                cls = Class.forName(component
                         .getBeanClassName());
                 if (Modifier.isAbstract(cls.getModifiers())) {
                     continue;

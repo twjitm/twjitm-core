@@ -19,12 +19,12 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class NettyTcpNetProtoMessageProcess implements INettyTcpNetProtoMessageProcess, IUpdatable {
     protected Logger logger = LoggerUtils.getLogger(NettyTcpNetProtoMessageProcess.class);
-    private int processMessageNumber;
+    private long processMessageNumber;
     private NettySession nettySession;
     /**
      * 消息队列
      */
-    private Queue<AbstractNettyNetProtoBufMessage> netMessagequeue;
+    private Queue<AbstractNettyNetProtoBufMessage> nettyNetMessageQueue;
 
     /**
      *
@@ -37,35 +37,35 @@ public class NettyTcpNetProtoMessageProcess implements INettyTcpNetProtoMessageP
 
     public NettyTcpNetProtoMessageProcess(NettySession nettySession) {
         this.nettySession = nettySession;
-        if( this.netMessagequeue==null){
-            this.netMessagequeue = new ConcurrentLinkedDeque<AbstractNettyNetProtoBufMessage>();
+        if( this.nettyNetMessageQueue==null){
+            this.nettyNetMessageQueue = new ConcurrentLinkedDeque<AbstractNettyNetProtoBufMessage>();
         }
     }
 
     /**
-     *
+     *TODO have bug
      */
     @Override
     public void processNetMessage() {
         nettySession.getPlayerId();
-        AbstractNettyNetProtoBufMessage message = netMessagequeue.poll();
+        AbstractNettyNetProtoBufMessage message = nettyNetMessageQueue.poll();
         while (isSuspendedProcess() && message != null) {
             processMessageNumber++;
             NettyTcpMessageQueueExecutorProcessor logic = SpringServiceManager.springLoadService.getNettyTcpMessageQueueExecutorProcessor();
             logic.put(message);
-            message = netMessagequeue.poll();
+            message = nettyNetMessageQueue.poll();
         }
-
+       logger.info("HANDLER OVER MESSAGE NUMBER="+processMessageNumber);
     }
 
     @Override
     public void addNetMessage(AbstractNettyNetMessage abstractNettyNetMessage) {
-        netMessagequeue.add((AbstractNettyNetProtoBufMessage) abstractNettyNetMessage);
+        nettyNetMessageQueue.add((AbstractNettyNetProtoBufMessage) abstractNettyNetMessage);
     }
 
     @Override
     public void close() {
-        netMessagequeue.clear();
+        nettyNetMessageQueue.clear();
         setSuspendedProcess(true);
     }
 

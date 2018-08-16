@@ -33,7 +33,7 @@ public class NettyNetProtoBuffUDPToMessageDecoderFactory implements INettyNetPro
         netMessageHead.setCmd(cmd);
         netMessageHead.setSerial(byteBuf.readInt());
 
-        //读取tocken
+        //读取token
         netMessageHead.setPlayerId(byteBuf.readLong());
         netMessageHead.setTocken(byteBuf.readInt());
 
@@ -52,7 +52,7 @@ public class NettyNetProtoBuffUDPToMessageDecoderFactory implements INettyNetPro
             netMessage.decoderNetProtoBufMessageBody();
             netMessage.releaseMessageBody();
         }catch (Exception e){
-            throw new CodecException("message cmd " + cmd + "decoder error", e);
+            throw new CodecException("MESSAGE UDP CMD " + cmd + "DECODER ERROR", e);
         }
         return netMessage;
     }

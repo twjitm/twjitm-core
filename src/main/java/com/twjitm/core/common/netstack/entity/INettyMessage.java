@@ -1,4 +1,4 @@
-package com.twjitm.core.common.netstack;
+package com.twjitm.core.common.netstack.entity;
 
 
 import com.twjitm.core.common.netstack.entity.NettyNetMessageBody;
