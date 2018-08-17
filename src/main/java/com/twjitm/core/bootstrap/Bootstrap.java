@@ -19,8 +19,8 @@ import org.apache.log4j.Logger;
  * @jdk java version "1.8.0_77"
  *服务器启动入口
  */
-public class GameService {
-    static Logger logger = LoggerUtils.getLogger(GameService.class);
+public class Bootstrap {
+    static Logger logger = LoggerUtils.getLogger(Bootstrap.class);
 
     public static void main(String[] args) {
         getBuddha();
