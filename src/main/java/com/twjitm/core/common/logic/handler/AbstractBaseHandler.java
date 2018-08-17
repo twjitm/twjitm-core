@@ -16,7 +16,7 @@ public abstract class AbstractBaseHandler implements BaseHandler {
     }
 
     public void init() {
-        handlerMethods = new HashMap<Integer, Method>();
+        handlerMethods = new HashMap<>();
         Method[] methods = this.getClass().getMethods();
         for (Method method : methods) {
             if (method.isAnnotationPresent(MessageCommandAnntation.class)) {
@@ -30,8 +30,8 @@ public abstract class AbstractBaseHandler implements BaseHandler {
     }
 
     @Override
-    public Method getMethod(int commid) {
-        return handlerMethods.get(commid);
+    public Method getMethod(int commId) {
+        return handlerMethods.get(commId);
     }
 
 }

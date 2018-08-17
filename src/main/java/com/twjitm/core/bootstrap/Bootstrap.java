@@ -7,7 +7,7 @@ import com.twjitm.core.initalizer.NettyHttpMessageServerInitializer;
 import com.twjitm.core.initalizer.NettyTcpMessageServerInitializer;
 import com.twjitm.core.initalizer.NettyUdpMessageServerInitializer;
 import com.twjitm.core.spring.SpringServiceManager;
-import com.twjitm.core.bootstrap.http.NettyGameBootstraptHttpService;
+import com.twjitm.core.bootstrap.http.NettyGameBootstrapHttpService;
 import com.twjitm.core.bootstrap.tcp.NettyGameBootstrapTcpService;
 import com.twjitm.core.bootstrap.udp.NettyGameBootstrapUdpService;
 import com.twjitm.core.utils.logs.LoggerUtils;
@@ -46,7 +46,7 @@ public class Bootstrap {
         Thread udp = factory.newThread(udpService::startServer);
         udp.start();
 
-        NettyGameBootstraptHttpService httpService=new NettyGameBootstraptHttpService(
+        NettyGameBootstrapHttpService httpService=new NettyGameBootstrapHttpService(
                 GlobalConstants.NettyNetServerConfig.HTTP.SERVER_PORT,
                 GlobalConstants.NettyNetServerConfig.HTTP.SERVER_IP,
                 GlobalConstants.NettyNetServerConfig.HTTP.BOSS_THREAD_NAME,

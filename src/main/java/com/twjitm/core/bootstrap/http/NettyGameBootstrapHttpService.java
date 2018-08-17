@@ -7,10 +7,10 @@ import io.netty.channel.ChannelInitializer;
  * @company http://www.g2us.com/
  * @jdk java version "1.8.0_77"
  */
-public class NettyGameBootstraptHttpService extends AbstractNettyGameBootstraptHttpService {
+public class NettyGameBootstrapHttpService extends AbstractNettyGameBootstraptHttpService {
 
 
-    public NettyGameBootstraptHttpService(int serverPort, String serverIp, String bossThreadName, String workThreadName, ChannelInitializer channelInitializer) {
+    public NettyGameBootstrapHttpService(int serverPort, String serverIp, String bossThreadName, String workThreadName, ChannelInitializer channelInitializer) {
         super(serverPort, serverIp, bossThreadName, workThreadName, channelInitializer);
     }
 }
