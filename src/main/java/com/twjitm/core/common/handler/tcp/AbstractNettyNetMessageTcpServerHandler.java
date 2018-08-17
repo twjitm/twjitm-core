@@ -1,5 +1,6 @@
 package com.twjitm.core.common.handler.tcp;
 
+import com.twjitm.core.common.config.global.GlobalConstants;
 import com.twjitm.core.common.netstack.builder.NettyTcpSessionBuilder;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.session.tcp.NettyTcpSession;
@@ -19,6 +20,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInboundHandlerAdapter {
     Logger logger = LoggerUtils.getLogger(AbstractNettyNetMessageTcpServerHandler.class);
+    private int lossContextNumber = 0;
 
     /**
      * channel 注册
@@ -45,15 +47,17 @@ public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInb
 
     /**
      * have error in project
+     *
      * @param ctx
      * @param cause
      * @throws Exception
      */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        logger.error(cause.getMessage(), cause);
         if (cause instanceof java.io.IOException) {
             logger.error(cause.getMessage());
-            return;
+            //return;
         }
         //  if(logger.isTraceEnabled()){
         logger.error(cause.getMessage(), cause);
@@ -82,6 +86,7 @@ public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInb
 
     /**
      * disconnect; interrupt
+     *
      * @param ctx
      * @throws Exception
      */
@@ -90,32 +95,50 @@ public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInb
         ctx.flush();
     }
 
+    /**
+     * heart loop check
+     * @param ctx
+     * @param evt
+     * @throws Exception
+     */
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        IdleStateEvent event = (IdleStateEvent) evt;
         long sessionId = ctx.channel().attr(NettyTcpSessionBuilder.sessionId).get();
-        switch (event.state()) {
-            case ALL_IDLE:
-                logger.info("session id =" + sessionId + " is all idle");
-                break;
-            case READER_IDLE:
-                logger.info("session id =" + sessionId + " is reader idle");
-                break;
-            case WRITER_IDLE:
-                logger.info("session id =" + sessionId + " is reader idle");
-                break;
-            default:
-                break;
+        if (evt instanceof IdleStateEvent) {
+            IdleStateEvent event = (IdleStateEvent) evt;
+            switch (event.state()) {
+                case ALL_IDLE:
+                    logger.info("SESSION ID =" + sessionId + " IS ALL IDLE");
+                    break;
+                case READER_IDLE:
+                    logger.info("SESSION ID =" + sessionId + " IS READER IDLE");
+                    lossContextNumber++;
+                    logger.info(lossContextNumber);
+                    break;
+                case WRITER_IDLE:
+                    logger.info("SESSION ID =" + sessionId + " IS READER IDLE");
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            super.userEventTriggered(ctx, evt);
         }
-
-        NettyTcpSession nettyTcpSession = (NettyTcpSession) SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().findNettySession(sessionId);
-        disconnect(ctx.channel());
-        if (nettyTcpSession == null) {
+        if (lossContextNumber > GlobalConstants.NettyNet.SESSION_HEART_CHECK_NUMBER) {
+            NettyTcpSession nettyTcpSession = (NettyTcpSession) SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().findNettySession(sessionId);
+            disconnect(ctx.channel());
+            if (nettyTcpSession == null) {
+                ctx.fireChannelUnregistered();
+                return;
+            }
+            // remove session
+            SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().removeNettySession(nettyTcpSession.getSessionId());
             ctx.fireChannelUnregistered();
-            return;
         }
-        // remove session
-        SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().removeNettySession(nettyTcpSession.getSessionId());
-        ctx.fireChannelUnregistered();
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        super.channelInactive(ctx);
     }
 }

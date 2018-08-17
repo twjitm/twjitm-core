@@ -27,7 +27,7 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
      */
     private NettyNetTcpMessageSender netTcpMessageSender;
 
-    boolean netMessageProcessSwitch=true;
+    boolean netMessageProcessSwitch = true;
 
 
     public NettyTcpSession(Channel channel) {
@@ -38,19 +38,17 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
 
 
     }
+
     /**
-     *
      * @param switchFlag
      */
-    public void processNetMessage(boolean switchFlag){
-        if(netMessageProcessSwitch || switchFlag){
+    public void processNetMessage(boolean switchFlag) {
+        if (netMessageProcessSwitch || switchFlag) {
             netProtoMessageProcess.update();
         }
     }
 
     /**
-     *
-     *
      * @param abstractNetMessage
      */
     public void addNettyNetMessage(AbstractNettyNetMessage abstractNetMessage) {
@@ -59,7 +57,8 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
     }
 
     public void close() {
-
+        this.netProtoMessageProcess.close();
+        this.netTcpMessageSender.close();
     }
 
     @Override

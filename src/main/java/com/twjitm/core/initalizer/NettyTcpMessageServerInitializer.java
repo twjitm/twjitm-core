@@ -23,8 +23,8 @@ public class NettyTcpMessageServerInitializer extends ChannelInitializer<Channel
         ch.pipeline().addLast(new NettyNetProtoBufMessageTCPDecoder());
         ch.pipeline().addLast(new NettyNetProtoBufMessageTCPEncoder());
         //添加心跳檢測
-        int readerIdleTimeSeconds = GlobalConstants.NettyNet.SESSION_HEART_ALL_TIMEOUT;
-        int writerIdleTimeSeconds = GlobalConstants.NettyNet.SESSION_HEART_ALL_TIMEOUT;
+        int readerIdleTimeSeconds = GlobalConstants.NettyNet.SESSION_HEART_READ_TIMEOUT;
+        int writerIdleTimeSeconds = GlobalConstants.NettyNet.SESSION_HEART_WRITE_TIMEOUT;
         int allIdleTimeSeconds = GlobalConstants.NettyNet.SESSION_HEART_ALL_TIMEOUT;
         ch.pipeline().addLast("idleStateHandler", new IdleStateHandler(readerIdleTimeSeconds, writerIdleTimeSeconds, allIdleTimeSeconds));
 

@@ -46,6 +46,11 @@ public class GlobalConstants {
          */
         public static final int SESSION_HEART_ALL_TIMEOUT = HEART_BASE_SIZE * 60;
 
+        /**
+         * 心跳檢測次數
+         */
+        public static final  int SESSION_HEART_CHECK_NUMBER=HEART_BASE_SIZE*5;
+
         public static final int NETTY_NET_HTTP_MESSAGE_THREAD_CORE_NUMBER = 5;
 
     }

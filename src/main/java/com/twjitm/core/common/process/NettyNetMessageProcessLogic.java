@@ -47,8 +47,8 @@ public class NettyNetMessageProcessLogic {
             }
         }
         long end = System.nanoTime();
-        if (logger.isDebugEnabled()) {
-            logger.info("handler message consume time=" + (end - begin));
+        if (logger.isInfoEnabled()) {
+            logger.info("HANDLER MESSAGE CONSUME TIME=" + (end - begin));
         }
     }
 
