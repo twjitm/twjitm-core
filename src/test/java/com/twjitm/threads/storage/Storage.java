@@ -9,27 +9,27 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Created by ÎÄ½­ on 2018/5/22
- * .²ÉÓÃwait/notify»úÖÆÊµÏÖÉú²úÕßºÍÏû·ÑÕßÄ£Ê½
+ * Created by ï¿½Ä½ï¿½ on 2018/5/22
+ * .ï¿½ï¿½ï¿½ï¿½wait/notifyï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
  */
 public class Storage {
     private static int maz_size = 100;
     private  final  LinkedList <Object> list = new LinkedList<>();
 
-    //---------------------------------------------------------------------------µÚÒ»ÖÐ·½Ê½
+    //---------------------------------------------------------------------------ï¿½ï¿½Ò»ï¿½Ð·ï¿½Ê½
     public void produceofwn(int num) {
         synchronized (list) {
             while ((list.size() + num) > maz_size) {
-                System.out.println("Éú²úÏß¡£¡£ÈÝÁ¿²»×ã£¬µÈ´ýÖÐ¡£¡£¡£¡£¡£");
+                System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ß¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½È´ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
                 try {
                     list.wait();
-                    System.out.println("produce±»»½ÐÑ£¬Çë¼ÌÐø¡£¡£¡£¡£");
+                    System.out.println("produceï¿½ï¿½ï¿½ï¿½ï¿½Ñ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
             for (int i = 0; i < num; i++) {
-                System.out.println("ÈÝÁ¿" + list.size() + "¿ÉÓÃ¡£ÕýÔÚÉú²ú");
+                System.out.println("ï¿½ï¿½ï¿½ï¿½" + list.size() + "ï¿½ï¿½ï¿½Ã¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
                 list.add(new Object());
                 list.notifyAll();
             }
@@ -40,10 +40,10 @@ public class Storage {
     public void consumeofwn(int num) {
         synchronized (list) {
             while (list.size() < num) {
-                System.out.println("Ïû·ÑÏß" + list.size() + "²»¹»ËùÐè¡£¡£¡£µÈ´ýÖÐ");
+                System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + list.size() + "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¡£ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½");
                 try {
                     list.wait();
-                    System.out.println("concum±»»½ÐÑ£¬Çë¼ÌÐø¡£¡£¡£¡£");
+                    System.out.println("concumï¿½ï¿½ï¿½ï¿½ï¿½Ñ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -51,13 +51,13 @@ public class Storage {
 
             for (int i = 0; i < num; i++) {
                 list.remove();
-                System.out.println("Ïû·ÑÁËµÚ" + i + "¸ö");
+                System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½" + i + "ï¿½ï¿½");
             }
             list.notifyAll();
         }
     }
 
-    //---------------------------------------------------------------------------------µÚ¶þÖÖ·½Ê½
+    //---------------------------------------------------------------------------------ï¿½Ú¶ï¿½ï¿½Ö·ï¿½Ê½
     private Lock lock = new ReentrantLock();
     private Condition full = lock.newCondition();
     private Condition empty = lock.newCondition();
@@ -65,7 +65,7 @@ public class Storage {
     public void produceOfLock(int num) {
         lock.lock();
         while ((list.size() + num) > maz_size) {
-            System.out.println("²Ö¿âÈÝÁ¿²»¹»£¬ÎÞ·¨Éú³É£¬µÈ´ýÖÐ¡£¡£¡£" + list.size());
+            System.out.println("ï¿½Ö¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½ï¿½ï¿½ï¿½É£ï¿½ï¿½È´ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½" + list.size());
             try {
                 full.await();
             } catch (InterruptedException e) {
@@ -74,7 +74,7 @@ public class Storage {
         }
         for (int i = 0; i <= num; i++) {
             list.add(new Object());
-            System.out.println("Éú²úÁËÕâÃ´¶à"+i);
+            System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½"+i);
         }
         full.signal();
         empty.signal();
@@ -84,7 +84,7 @@ public class Storage {
     public void consumeOfLock(int num) {
         lock.lock();
         while (list.size() < num) {
-            System.out.println("ËùÐèÏû·Ñ²»×ã" + list.size());
+            System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ²ï¿½ï¿½ï¿½" + list.size());
             try {
                 empty.await();
             } catch (InterruptedException e) {
@@ -93,7 +93,7 @@ public class Storage {
         }
 
         for (int i = 0; i < num ; i++) {
-            System.out.println("Ïû·ÑÁË" + i);
+            System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + i);
             list.remove();
         }
         full.signal();
@@ -101,16 +101,16 @@ public class Storage {
         lock.unlock();
 
     }
-    //----------------------------------------------------µÚÈýÖÖ
+    //----------------------------------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private LinkedBlockingQueue<Object> linkedBlockingQueue=new LinkedBlockingQueue<>(100);
 
     public void produceOfBlock(int num){
         if(linkedBlockingQueue.size()==maz_size){
-            System.out.println("²Ö¿âÈÝÁ¿ÒÑÂú");
+            System.out.println("ï¿½Ö¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         }
         for(int i=0;i<num;i++){
             try {
-                System.out.println("Éú³ÉÁË²úÆ·"+i);
+                System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ë²ï¿½Æ·"+i);
                 linkedBlockingQueue.put(new Object());
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -120,7 +120,7 @@ public class Storage {
 
     public void consumeOfBlock(int num){
         if(linkedBlockingQueue.size()==0){
-            System.out.println("ÈÝÁ¿Îª0");
+            System.out.println("ï¿½ï¿½ï¿½ï¿½Îª0");
         }
 
         for(int i=0;i<num;i++){
@@ -141,11 +141,11 @@ public class Storage {
         Product produce2 = new Product(storage, 30);
         Consume consume = new Consume(storage, 20);
         Consume consume1 = new Consume(storage, 10);
-        produce.start();
-        produce1.start();
-        produce2.start();
-        consume.start();
-        consume1.start();*/
+        produce.bootstrap();
+        produce1.bootstrap();
+        produce2.bootstrap();
+        consume.bootstrap();
+        consume1.bootstrap();*/
         ExecutorService executorService= Executors.newFixedThreadPool(2);
         executorService.execute(() -> {
             try {

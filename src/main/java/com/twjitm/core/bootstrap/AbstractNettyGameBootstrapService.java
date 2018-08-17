@@ -1,4 +1,4 @@
-package com.twjitm.core.start;
+package com.twjitm.core.bootstrap;
 
 import java.net.InetSocketAddress;
 
@@ -8,11 +8,11 @@ import java.net.InetSocketAddress;
  * @jdk java version "1.8.0_77"
  *
  */
-public abstract class AbstractNettyGameStartService implements INettyStartService {
+public abstract class AbstractNettyGameBootstrapService implements INettyBootstrapService {
     protected int serverPort;
     protected InetSocketAddress serverAddress;
 
-    public AbstractNettyGameStartService(int serverPort, InetSocketAddress serverAddress) {
+    public AbstractNettyGameBootstrapService(int serverPort, InetSocketAddress serverAddress) {
         this.serverPort = serverPort;
         this.serverAddress = serverAddress;
     }

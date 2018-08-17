@@ -12,5 +12,5 @@ Class-Path: dom4j-1.6.1.jar httpcore-4.4.4.jar log4j-api-2.8.2.jar net
  8.2.jar spring-test-4.3.9.RELEASE.jar netty-3.10.5.Final.jar zookeepe
  r-3.4.9.jar xml-apis-1.0.b2.jar spring-aop-4.3.9.RELEASE.jar spring-j
  dbc-4.3.9.RELEASE.jar javax.mail-api-1.5.5.jar
-Main-Class: com.twjitm.core.start.StartService
+Main-Class: com.twjitm.core.bootstrap.StartService
 

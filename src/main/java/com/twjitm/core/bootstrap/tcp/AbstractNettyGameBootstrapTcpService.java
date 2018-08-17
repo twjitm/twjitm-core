@@ -1,8 +1,8 @@
-package com.twjitm.core.start.tcp;
+package com.twjitm.core.bootstrap.tcp;
 
 import com.twjitm.core.common.factory.thread.ThreadNameFactory;
 import com.twjitm.core.spring.SpringServiceManager;
-import com.twjitm.core.start.AbstractNettyGameStartService;
+import com.twjitm.core.bootstrap.AbstractNettyGameBootstrapService;
 import com.twjitm.core.utils.logs.LoggerUtils;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -21,8 +21,8 @@ import java.net.InetSocketAddress;
  * @date 2018/4/16
  */
 
-public abstract class AbstractNettyGameStartTcpService extends AbstractNettyGameStartService {
-    private static Logger logger = LoggerUtils.getLogger(AbstractNettyGameStartTcpService.class);
+public abstract class AbstractNettyGameBootstrapTcpService extends AbstractNettyGameBootstrapService {
+    private static Logger logger = LoggerUtils.getLogger(AbstractNettyGameBootstrapTcpService.class);
     private int serverPort;
     private String serverIp;
 
@@ -33,7 +33,7 @@ public abstract class AbstractNettyGameStartTcpService extends AbstractNettyGame
     private EventLoopGroup listenIntoGroup;
     private EventLoopGroup progressGroup;
 
-    public AbstractNettyGameStartTcpService(int serverPort, String serverIp, String bossTreadName, String workerTreadName, ChannelInitializer channelInitializer) {
+    public AbstractNettyGameBootstrapTcpService(int serverPort, String serverIp, String bossTreadName, String workerTreadName, ChannelInitializer channelInitializer) {
         super(serverPort, new InetSocketAddress(serverIp, serverPort));
         this.serverIp = serverIp;
         this.serverPort = serverPort;

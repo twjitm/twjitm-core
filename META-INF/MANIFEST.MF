@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: com.twjitm.core.start.StartService
+Main-Class: com.twjitm.core.bootstrap.StartService
 

@@ -22,9 +22,9 @@ public class StartupServerListener implements ApplicationListener<ContextRefresh
 //            TwjThreadFactory factory = new TwjThreadFactory();
 //            factory.newThread(new Runnable() {
 //                public void run() {
-//                    start();
+//                    bootstrap();
 //                }
-//            }).start();
+//            }).bootstrap();
 //        }
     }
 }

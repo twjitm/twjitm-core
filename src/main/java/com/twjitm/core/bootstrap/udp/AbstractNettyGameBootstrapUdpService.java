@@ -1,8 +1,8 @@
-package com.twjitm.core.start.udp;
+package com.twjitm.core.bootstrap.udp;
 
 import com.twjitm.core.common.factory.thread.ThreadNameFactory;
 import com.twjitm.core.spring.SpringServiceManager;
-import com.twjitm.core.start.AbstractNettyGameStartService;
+import com.twjitm.core.bootstrap.AbstractNettyGameBootstrapService;
 import com.twjitm.core.utils.logs.LoggerUtils;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
@@ -19,8 +19,8 @@ import java.net.InetSocketAddress;
  * @author twjitm - [Created on 2018-07-27 11:29]
  * @jdk java version "1.8.0_77"
  */
-public class AbstractNettyGameStartUdpService extends AbstractNettyGameStartService {
-    Logger logger = LoggerUtils.getLogger(AbstractNettyGameStartUdpService.class);
+public class AbstractNettyGameBootstrapUdpService extends AbstractNettyGameBootstrapService {
+    Logger logger = LoggerUtils.getLogger(AbstractNettyGameBootstrapUdpService.class);
 
     private int serverPort;
     private String serverIp;
@@ -31,7 +31,7 @@ public class AbstractNettyGameStartUdpService extends AbstractNettyGameStartServ
     private ThreadNameFactory eventThreadNameFactory;
     private ChannelInitializer channelInitializer;
 
-    public AbstractNettyGameStartUdpService(int serverPort, String serverIp, String threadName, ChannelInitializer channelInitializer) {
+    public AbstractNettyGameBootstrapUdpService(int serverPort, String serverIp, String threadName, ChannelInitializer channelInitializer) {
         super(serverPort, new InetSocketAddress(serverIp, serverPort));
         this.serverPort = serverPort;
         this.serverIp = serverIp;

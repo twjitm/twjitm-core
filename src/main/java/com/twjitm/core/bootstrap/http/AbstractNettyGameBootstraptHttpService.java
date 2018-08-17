@@ -1,7 +1,7 @@
-package com.twjitm.core.start.http;
+package com.twjitm.core.bootstrap.http;
 
 import com.twjitm.core.common.factory.thread.ThreadNameFactory;
-import com.twjitm.core.start.AbstractNettyGameStartService;
+import com.twjitm.core.bootstrap.AbstractNettyGameBootstrapService;
 import com.twjitm.core.utils.logs.LoggerUtils;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
@@ -19,8 +19,8 @@ import java.net.InetSocketAddress;
  * @company http://www.g2us.com/
  * @jdk java version "1.8.0_77"
  */
-public class AbstractNettyGameStartHttpService extends AbstractNettyGameStartService {
-    Logger logger = LoggerUtils.getLogger(AbstractNettyGameStartHttpService.class);
+public class AbstractNettyGameBootstraptHttpService extends AbstractNettyGameBootstrapService {
+    Logger logger = LoggerUtils.getLogger(AbstractNettyGameBootstraptHttpService.class);
     String serverIp;
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
@@ -33,7 +33,7 @@ public class AbstractNettyGameStartHttpService extends AbstractNettyGameStartSer
 
     private  boolean startFag=false;
 
-    public AbstractNettyGameStartHttpService(int serverPort, String serverIp, String bossThreadName, String workThreadName, ChannelInitializer channelInitializer) {
+    public AbstractNettyGameBootstraptHttpService(int serverPort, String serverIp, String bossThreadName, String workThreadName, ChannelInitializer channelInitializer) {
         super(serverPort, new InetSocketAddress(serverIp,serverPort));
         this.serverIp=serverIp;
         this.bossThreadNameFactory = new ThreadNameFactory(bossThreadName);

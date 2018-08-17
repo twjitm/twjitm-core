@@ -13,7 +13,7 @@ public class SpringServiceManager {
     static Logger logger = Logger.getLogger(SpringServiceManager.class);
 
     public static void init() {
-        logger.info("--------------------load spring start----------------");
+        logger.info("--------------------load spring bootstrap----------------");
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml", "classpath:spring/applicationContext-spring.xml");
         logger.info("--------------------load spring end------------------");
         springLoadService = (SpringLoadServiceImpl) applicationContext.getBean("springLoadService");
