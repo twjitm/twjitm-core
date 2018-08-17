@@ -2,6 +2,7 @@ package com.twjitm.core.start;
 
 import com.twjitm.core.common.config.global.GlobalConstants;
 import com.twjitm.core.common.factory.thread.TwjThreadFactory;
+import com.twjitm.core.common.system.SystemService;
 import com.twjitm.core.initalizer.NettyHttpMessageServerInitializer;
 import com.twjitm.core.initalizer.NettyTcpMessageServerInitializer;
 import com.twjitm.core.initalizer.NettyUdpMessageServerInitializer;
@@ -23,6 +24,7 @@ public class GameService {
 
     public static void main(String[] args) {
         getBuddha();
+        SystemService.getSystem();
         TwjThreadFactory factory = new TwjThreadFactory();
         SpringServiceManager.init();
         SpringServiceManager.start();

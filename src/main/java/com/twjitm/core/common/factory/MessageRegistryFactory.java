@@ -104,6 +104,9 @@ public class MessageRegistryFactory {
             MessageCommandAnntation annotation = (MessageCommandAnntation) messageClass
                     .getAnnotation(MessageCommandAnntation.class);
             if (annotation != null && annotation.messagecmd() != null) {
+                if(logger.isInfoEnabled()){
+                    logger.info("REGISTER MESSAGE SUCCESSFUL COMM ID IS= "+annotation.messagecmd().commId+" ON CLASS "+messageClass);
+                }
                 putMessages(annotation.messagecmd().commId, messageClass);
             }
         }
@@ -130,7 +133,7 @@ public class MessageRegistryFactory {
         List<Class> list = PackageScaner.getSubClasses(AbstractBaseHandler.class, namespace);
         for (Class messageClass : list) {
             try {
-                logger.info("handler load:" + messageClass.toString());
+                logger.info("HANDLER LOAD:" + messageClass.toString());
                 BaseHandler baseHandler = getBaseHandler(messageClass);
                 AbstractBaseHandler abstractBaseHandler = (AbstractBaseHandler) baseHandler;
                 abstractBaseHandler.init();
@@ -139,6 +142,10 @@ public class MessageRegistryFactory {
                     if (method.isAnnotationPresent(MessageCommandAnntation.class)) {
                         MessageCommandAnntation messageCommandAnnotation = (MessageCommandAnntation) method.getAnnotation(MessageCommandAnntation.class);
                         if (messageCommandAnnotation != null && messageCommandAnnotation.messagecmd() != null) {
+                            if(logger.isInfoEnabled()){
+                                logger.info("REGISTER HANDLER SUCCESSFUL COMM ID= "+messageCommandAnnotation.messagecmd().commId+" ON CLASS  "+messageClass+
+                                        "  AND HANDLER IS"+baseHandler);
+                            }
                             addHandler(messageCommandAnnotation.messagecmd().commId, baseHandler);
                         }
                     }
@@ -174,7 +181,7 @@ public class MessageRegistryFactory {
                     .newInstance();
             return messageHandler;
         } catch (Exception e) {
-            logger.info("getBaseHandler - classes=" + classes.getName() + "," + e);
+            logger.info("GETBASEHANDLER - CLASSES=" + classes.getName() + "," + e);
         }
         return null;
 
