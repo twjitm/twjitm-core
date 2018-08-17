@@ -72,7 +72,7 @@ public class NettyQueueMessageExecutorProcessor implements IMessageProcessor {
                     "THE EXECUTORSERVICE HAS NOT BEEN STOPPED.");
         }
         stop = false;
-        ThreadNameFactory factory = new ThreadNameFactory(GlobalConstants.Thread.GAME_MESSAGE_QUEUE_EXCUTE);
+        ThreadNameFactory factory = new ThreadNameFactory(GlobalConstants.Thread.GAME_MESSAGE_QUEUE_EXECUTOR);
         this.executorService = Executors.newFixedThreadPool(this.excecutorCoreSize, factory);
 
         for (int i = 0; i < this.excecutorCoreSize; i++) {
