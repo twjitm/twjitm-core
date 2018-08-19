@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 public class NettyGameServiceConfig {
     /**rpc服务的包名字*/
     private String rpcServicePackageName;
+    //开启rpc
+    private boolean rpcOpen = false;
 
     public void setRpcServicePackageName(String rpcServicePackageName) {
         this.rpcServicePackageName = rpcServicePackageName;
@@ -19,4 +21,7 @@ public class NettyGameServiceConfig {
     public String getRpcServicePackageName() {
         return rpcServicePackageName;
     }
+
+
+
 }

@@ -1,15 +1,17 @@
 package com.twjitm.core.bootstrap;
 
+import com.twjitm.core.bootstrap.http.NettyGameBootstrapHttpService;
+import com.twjitm.core.bootstrap.rpc.NettyGameBootstrapRpcService;
+import com.twjitm.core.bootstrap.tcp.NettyGameBootstrapTcpService;
+import com.twjitm.core.bootstrap.udp.NettyGameBootstrapUdpService;
 import com.twjitm.core.common.config.global.GlobalConstants;
 import com.twjitm.core.common.factory.thread.TwjThreadFactory;
 import com.twjitm.core.common.system.SystemService;
 import com.twjitm.core.initalizer.NettyHttpMessageServerInitializer;
+import com.twjitm.core.initalizer.NettyRpcMessageServerInitializer;
 import com.twjitm.core.initalizer.NettyTcpMessageServerInitializer;
 import com.twjitm.core.initalizer.NettyUdpMessageServerInitializer;
 import com.twjitm.core.spring.SpringServiceManager;
-import com.twjitm.core.bootstrap.http.NettyGameBootstrapHttpService;
-import com.twjitm.core.bootstrap.tcp.NettyGameBootstrapTcpService;
-import com.twjitm.core.bootstrap.udp.NettyGameBootstrapUdpService;
 import com.twjitm.core.utils.logs.LoggerUtils;
 import org.apache.log4j.Logger;
 
@@ -17,7 +19,7 @@ import org.apache.log4j.Logger;
  * @author EGLS0807 - [Created on 2018-07-27 11:30]
  * @company http://www.g2us.com/
  * @jdk java version "1.8.0_77"
- *服务器启动入口
+ * 服务器启动入口
  */
 public class Bootstrap {
     static Logger logger = LoggerUtils.getLogger(Bootstrap.class);
@@ -38,7 +40,7 @@ public class Bootstrap {
         Thread tcpThread = factory.newThread(tcpService::startServer);
         tcpThread.start();
 
-        NettyGameBootstrapUdpService udpService=new NettyGameBootstrapUdpService(
+        NettyGameBootstrapUdpService udpService = new NettyGameBootstrapUdpService(
                 GlobalConstants.NettyNetServerConfig.UDP.SERVER_PORT,
                 GlobalConstants.NettyNetServerConfig.UDP.SERVER_IP,
                 GlobalConstants.NettyNetServerConfig.UDP.EVENT_THREAD_NAME,
@@ -46,15 +48,26 @@ public class Bootstrap {
         Thread udp = factory.newThread(udpService::startServer);
         udp.start();
 
-        NettyGameBootstrapHttpService httpService=new NettyGameBootstrapHttpService(
+        NettyGameBootstrapHttpService httpService = new NettyGameBootstrapHttpService(
                 GlobalConstants.NettyNetServerConfig.HTTP.SERVER_PORT,
                 GlobalConstants.NettyNetServerConfig.HTTP.SERVER_IP,
                 GlobalConstants.NettyNetServerConfig.HTTP.BOSS_THREAD_NAME,
                 GlobalConstants.NettyNetServerConfig.HTTP.WORKER_THREAD_NAME,
                 new NettyHttpMessageServerInitializer()
         );
-        Thread http= factory.newThread(httpService::startServer);
+        Thread http = factory.newThread(httpService::startServer);
+
+
         http.start();
+        NettyGameBootstrapRpcService rpcService = new NettyGameBootstrapRpcService(
+                GlobalConstants.NettyNetServerConfig.RPC.SERVER_PORT,
+                GlobalConstants.NettyNetServerConfig.RPC.SERVER_IP,
+                GlobalConstants.NettyNetServerConfig.RPC.BOSS_THREAD_NAME,
+                GlobalConstants.NettyNetServerConfig.RPC.WORKER_THREAD_NAME,
+                new NettyRpcMessageServerInitializer());
+        Thread rpc = factory.newThread(rpcService::startServer);
+        rpc.start();
+
         //successful();
     }
 
@@ -82,7 +95,8 @@ public class Bootstrap {
                 "//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        //\n" +
                 "//           Buddha bless the never down never BUG               //\n");
     }
-    public static void successful(){
+
+    public static void successful() {
         //http://patorjk.com/software/taag
         logger.info("\n" +
                 "                                                                                                                                                                              \n" +

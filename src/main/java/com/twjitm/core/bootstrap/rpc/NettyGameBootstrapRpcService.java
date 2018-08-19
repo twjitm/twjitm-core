@@ -8,9 +8,9 @@ import io.netty.channel.ChannelInitializer;
  * User: 文江 Date: 2018/8/19  Time: 10:03
  * https://blog.csdn.net/baidu_23086307
  */
-public class NettyGameBootrapRpcService extends AbstractNettyGameBootstrapTcpService {
+public class NettyGameBootstrapRpcService extends AbstractNettyGameBootstrapTcpService {
 
-    public NettyGameBootrapRpcService(int serverPort, String serverIp, String bossTreadName, String workerTreadName, ChannelInitializer channelInitializer) {
+    public NettyGameBootstrapRpcService(int serverPort, String serverIp, String bossTreadName, String workerTreadName, ChannelInitializer channelInitializer) {
         super(serverPort, serverIp, bossTreadName, workerTreadName, channelInitializer);
     }
 
