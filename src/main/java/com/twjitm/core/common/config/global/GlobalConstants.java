@@ -11,12 +11,15 @@ public class GlobalConstants {
         public static String HTTP_SERVER_CONFIG = "bean\\http_service_config.xml";
 
         public static String SERVICE_TYPE = "udp";
+        public  static String NETTY_FILE_EXT=".class";
     }
 
     public static class Thread {
         public static final String MESSAGE_QUEUE_EXECUTOR = "message_queue_executor";
 
         public static final String GAME_MESSAGE_QUEUE_EXECUTOR = "game_message_queue_executor";
+
+        public static final String RPC_HANDLER="game_message_rpc_handler";
     }
 
     public static class UDPServiceConfig {
@@ -74,6 +77,12 @@ public class GlobalConstants {
             public static final String BOSS_THREAD_NAME="http_boss_thread_name_";
             public static final String WORKER_THREAD_NAME="http_worker_thread_name_";
         }
+        public static  class RPC{
+            public static  final  boolean   IS_OPEN_RPC=true;
+            public  static final  int RPC_THREAD_POOL_SIZE=5;
+            public static final int RPC_THREAD_POOL_QUEUE_SIZE=5;
+        }
+
     }
 
 

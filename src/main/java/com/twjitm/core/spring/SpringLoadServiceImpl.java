@@ -1,7 +1,10 @@
 package com.twjitm.core.spring;
 
+import com.twjitm.core.common.config.global.NettyGameServiceConfigService;
 import com.twjitm.core.common.factory.MessageRegistryFactory;
+import com.twjitm.core.common.factory.NettyRpcMethodRegistryFactory;
 import com.twjitm.core.common.factory.NettyTcpMessageFactory;
+import com.twjitm.core.common.factory.thread.RpcHandlerThreadPoolFactory;
 import com.twjitm.core.common.netstack.builder.NettyTcpSessionBuilder;
 import com.twjitm.core.common.netstack.coder.decode.http.INettyNetProtoBuffHttpToMessageDecoderFactory;
 import com.twjitm.core.common.netstack.coder.decode.tcp.INettyNetProtoBuffTCPToMessageDecoderFactory;
@@ -11,17 +14,19 @@ import com.twjitm.core.common.netstack.coder.encode.tcp.INettyNetProtoBufTcpMess
 import com.twjitm.core.common.netstack.coder.encode.udp.INettyNetProtoBufUdpMessageEncoderFactory;
 import com.twjitm.core.common.netstack.pipeline.NettyTcpServerPipeLineImpl;
 import com.twjitm.core.common.netstack.pipeline.NettyUdpServerPipeLineImpl;
+import com.twjitm.core.common.process.NettyNetMessageProcessLogic;
 import com.twjitm.core.common.process.NettyQueueMessageExecutorProcessor;
 import com.twjitm.core.common.process.tcp.INettyTcpNetProtoMessageProcess;
-import com.twjitm.core.common.process.tcp.NettyTcpNetProtoMessageProcess;
-import com.twjitm.core.common.process.NettyNetMessageProcessLogic;
 import com.twjitm.core.common.process.tcp.NettyTcpMessageQueueExecutorProcessor;
+import com.twjitm.core.common.process.tcp.NettyTcpNetProtoMessageProcess;
 import com.twjitm.core.common.process.udp.NettyUdpNetProtoMessageProcessor;
 import com.twjitm.core.common.service.INettyChannleOperationService;
 import com.twjitm.core.common.service.IService;
 import com.twjitm.core.common.service.Impl.NettyChannelOperationServiceImpl;
 import com.twjitm.core.common.service.Impl.NettyGamePlayerFindServiceImpl;
 import com.twjitm.core.common.service.http.AsyncNettyHttpHandlerService;
+import com.twjitm.core.common.service.rpc.serialize.NettyProtoBufRpcSerialize;
+import com.twjitm.core.common.service.rpc.service.NettyRemoteRpcHandlerService;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.service.test.TestService;
 import com.twjitm.core.service.user.UserService;
@@ -42,6 +47,14 @@ public class SpringLoadServiceImpl implements IService {
     @Resource
     private UserService userService;
 
+    //-----------------------------------------------------------------------------------------
+    /**
+     * 配置服务器
+     */
+    @Resource
+    NettyGameServiceConfigService nettyGameServiceConfigService;
+
+    //-----------------------------------------------------------------------------------------
     /**
      * 分发器服务
      */
@@ -54,6 +67,13 @@ public class SpringLoadServiceImpl implements IService {
      */
     @Resource
     private MessageRegistryFactory messageRegistryFactory;
+
+    /**
+     * rpc线程工厂
+     */
+    @Resource
+    private RpcHandlerThreadPoolFactory rpcHandlerThreadPoolFactory;
+
     //------------------------------------------------------------------------------------------
     /**
      * http编码器
@@ -131,7 +151,7 @@ public class SpringLoadServiceImpl implements IService {
     private NettyTcpSessionBuilder nettyTcpSessionBuilder;
 
     //------------------------------------------------------------------------------------------
-
+       //----------------------基础服务类--------------------------------------------------------
     /**
      * 查询器 netty的channel 和自定义session的查询
      */
@@ -142,6 +162,15 @@ public class SpringLoadServiceImpl implements IService {
      */
     @Resource
     private NettyGamePlayerFindServiceImpl nettyGamePlayerLoopUpService;
+
+    @Resource
+    NettyRemoteRpcHandlerService nettyRemoteRpcHandlerService;
+
+    /**
+     * rpc消息注解器
+     */
+    @Resource
+    NettyRpcMethodRegistryFactory nettyRpcMethodRegistryFactory;
     //------------------------------------------------------------------------------------------
 
 
@@ -165,7 +194,15 @@ public class SpringLoadServiceImpl implements IService {
     @Resource
     private AsyncNettyHttpHandlerService asyncNettyHttpHandlerService;
 
+    //-------------------------------------------------------------------------------------------
 
+    /**
+     * 序列化服务
+     *
+     * @return
+     */
+    @Resource
+    private NettyProtoBufRpcSerialize nettyProtoBufRpcSerialize;
 
 
 
@@ -260,6 +297,26 @@ public class SpringLoadServiceImpl implements IService {
 
     public AsyncNettyHttpHandlerService getAsyncNettyHttpHandlerService() {
         return asyncNettyHttpHandlerService;
+    }
+
+    public NettyProtoBufRpcSerialize getNettyProtoBufRpcSerialize() {
+        return nettyProtoBufRpcSerialize;
+    }
+
+    public RpcHandlerThreadPoolFactory getRpcHandlerThreadPoolFactory() {
+        return rpcHandlerThreadPoolFactory;
+    }
+
+    public NettyRemoteRpcHandlerService getNettyRemoteRpcHandlerService() {
+        return nettyRemoteRpcHandlerService;
+    }
+
+    public NettyGameServiceConfigService getNettyGameServiceConfigService() {
+        return nettyGameServiceConfigService;
+    }
+
+    public NettyRpcMethodRegistryFactory getNettyRpcMethodRegistryFactory() {
+        return nettyRpcMethodRegistryFactory;
     }
 
     @Override

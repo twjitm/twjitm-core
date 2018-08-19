@@ -321,6 +321,20 @@
             <artifactId>protobuf-java</artifactId>
             <version>3.2.0</version>
         </dependency>
+
+        <!-- protostuff    了解传送门 https://blog.csdn.net/chszs/article/details/50457206   -->
+        <dependency>
+            <groupId>com.dyuproject.protostuff</groupId>
+            <artifactId>protostuff-core</artifactId>
+            <version>1.0.8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dyuproject.protostuff</groupId>
+            <artifactId>protostuff-runtime</artifactId>
+            <version>1.0.8</version>
+        </dependency>
+
+
         <!--xml解析器-->
         <!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
         <dependency>

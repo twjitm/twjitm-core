@@ -11,6 +11,7 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
     <mvc:annotation-driven/>
 
+    <context:component-scan base-package="com.twjitm.core.common.config.*"/>
     <!--核心服务类-->
     <context:component-scan base-package="com.twjitm.core.service.*.Impl" use-default-filters="false"/>
 
@@ -21,13 +22,21 @@
     <context:component-scan base-package="com.twjitm.core.common.service.*"/>
 
     <bean id="springLoadService" class="com.twjitm.core.spring.SpringLoadServiceImpl"/>
+    <!--工厂-->
+
     <bean id="messageRegistryFactory" class="com.twjitm.core.common.factory.MessageRegistryFactory" init-method="init">
         <property name="namespace" value="com.twjitm.core.common.entity.chat"/>
     </bean>
+    <bean id="nettyTcpMessageFactory" class="com.twjitm.core.common.factory.NettyTcpMessageFactory"/>
+    <bean id="rpcHandlerThreadPoolFactory"  class="com.twjitm.core.common.factory.thread.RpcHandlerThreadPoolFactory"/>
+    <bean id="nettyRpcMethodRegistryFactory" class="com.twjitm.core.common.factory.NettyRpcMethodRegistryFactory"/>
+
     <!--原子id生产器-->
     <bean id="longIdGenerator" class="com.twjitm.core.utils.uuid.LongIdGenerator"/>
     <bean id="nettyNetMessageProcessLogic" class="com.twjitm.core.common.process.NettyNetMessageProcessLogic"/>
-    <bean id="nettyTcpMessageFactory" class="com.twjitm.core.common.factory.NettyTcpMessageFactory"/>
+
+
+
 
     <!--消息处理队列-->
     <bean id="nettyTcpMessageQueueExecutorProcessor"
