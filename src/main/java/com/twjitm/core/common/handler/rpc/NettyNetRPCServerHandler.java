@@ -60,14 +60,14 @@ public class NettyNetRPCServerHandler extends SimpleChannelInboundHandler<NettyR
         String methodName = request.getMethodName();
         Class<?>[] parameterTypes = request.getParameterTypes();
         Object[] parameters = request.getParameters();
-        if(logger.isDebugEnabled()) {
-            logger.debug(methodName);
-            logger.debug(serviceClass.getName());
+        if(logger.isInfoEnabled()) {
+            logger.info(methodName);
+            logger.info(serviceClass.getName());
             for (int i = 0; i < parameterTypes.length; ++i) {
                 logger.debug(parameterTypes[i].getName());
             }
             for (int i = 0; i < parameters.length; ++i) {
-                logger.debug(parameters[i].toString());
+                logger.info(parameters[i].toString());
             }
         }
         Method method = serviceClass.getMethod(methodName, parameterTypes);

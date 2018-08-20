@@ -39,7 +39,7 @@ private static final Logger logger = LogManager.getLogger(实际类名.class.get
     <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
     <loggers>
         <!--建立一个默认的root的logger-->
-        <Logger name="com.lhyl.front" level="trace"
+        <Logger name="com.twjitm.front" level="trace"
                 additivity="true">
             <AppenderRef ref="RollingFile"/>
         </Logger>
