@@ -72,7 +72,7 @@ public class RpcHandlerThreadPoolFactory {
     }
 
     public ExecutorService getExecutor() {
-        return executor;
+        return this.executor;
     }
 
     public void setExecutor(ExecutorService executor) {

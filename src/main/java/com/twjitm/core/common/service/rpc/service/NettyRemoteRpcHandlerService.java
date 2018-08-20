@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class NettyRemoteRpcHandlerService implements IService {
 
-
+private  RpcHandlerThreadPoolFactory rpcHandlerThreadPool;
 
     @Override
     public String getId() {
@@ -27,7 +27,11 @@ public class NettyRemoteRpcHandlerService implements IService {
        boolean isOpenRpc= GlobalConstants.NettyNetServerConfig.RPC.IS_OPEN_RPC;
         if (isOpenRpc) {
             //开启服务
-            SpringServiceManager.getSpringLoadService().getRpcHandlerThreadPoolFactory().createExecutor(GlobalConstants.NettyNetServerConfig.RPC.RPC_THREAD_POOL_SIZE, GlobalConstants.NettyNetServerConfig.RPC.RPC_THREAD_POOL_QUEUE_SIZE);
+            rpcHandlerThreadPool=  SpringServiceManager.getSpringLoadService().
+                    getRpcHandlerThreadPoolFactory();
+            rpcHandlerThreadPool.createExecutor(
+                            GlobalConstants.NettyNetServerConfig.RPC.RPC_THREAD_POOL_SIZE,
+                    GlobalConstants.NettyNetServerConfig.RPC.RPC_THREAD_POOL_QUEUE_SIZE);
         }
     }
 
@@ -37,6 +41,6 @@ public class NettyRemoteRpcHandlerService implements IService {
     }
 
     public void submit(Runnable runnable) {
-        SpringServiceManager.getSpringLoadService().getRpcHandlerThreadPoolFactory().getExecutor().submit(runnable);
+        rpcHandlerThreadPool.getExecutor().submit(runnable);
     }
 }

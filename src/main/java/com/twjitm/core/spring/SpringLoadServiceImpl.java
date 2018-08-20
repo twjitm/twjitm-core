@@ -380,16 +380,19 @@ public class SpringLoadServiceImpl implements IService {
 
     @Override
     public void startup() throws Exception {
+        nettyGameServiceConfigService.startup();
+
         netTcpSessionLoopUpService.startup();
         nettyTcpMessageQueueExecutorProcessor.start();
         nettyQueueMessageExecutorProcessor.start();
         asyncNettyHttpHandlerService.startup();
         nettyRpcMethodRegistryFactory.startup();
         asyncThreadService.startup();
+        nettyRemoteRpcHandlerService.startup();
         nettyRPCFutureService.startup();
         nettyRpcProxyService.startup();
         nettyRpcClientConnectService.startup();
-        nettyGameServiceConfigService.startup();
+
     }
 
     @Override
