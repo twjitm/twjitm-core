@@ -78,7 +78,7 @@ public class NettyTcpMessageQueueExecutorProcessor implements ITcpMessageProcess
         for (int i = 0; i < this.executorCoreSize; i++) {
             this.executorService.execute(new Processor());
         }
-        logger.info("nettytcpmessagequeueexecutorprocessor  message handler executorservice begin ["
+        logger.info("NETTYTCPMESSAGEQUEUEEXECUTORPROCESSOR  MESSAGE HANDLER EXECUTORSERVICE BEGIN ["
                 + this.executorService + " WITH " + this.executorCoreSize
                 + " THREADS ]");
 

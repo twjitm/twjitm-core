@@ -22,7 +22,9 @@ public class RpcHandlerThreadPoolFactory {
      * 线程决策。。。。。。。。。。
      *
      * @return
+     * @TODO 需要深入了解一下
      */
+
     private RejectedExecutionHandler createPolicy() {
         RejectedPolicyType rejectedPolicyType = RejectedPolicyType.fromString(System.getProperty(RpcSystemConfig.SystemPropertyThreadPoolRejectedPolicyAttr, "CallerRunsPolicy"));
 

@@ -3,8 +3,10 @@ package com.twjitm.core.spring;
 import com.twjitm.core.common.config.global.NettyGameServiceConfigService;
 import com.twjitm.core.common.factory.MessageRegistryFactory;
 import com.twjitm.core.common.factory.NettyRpcMethodRegistryFactory;
+import com.twjitm.core.common.factory.NettyRpcRequestFactory;
 import com.twjitm.core.common.factory.NettyTcpMessageFactory;
 import com.twjitm.core.common.factory.thread.RpcHandlerThreadPoolFactory;
+import com.twjitm.core.common.factory.thread.async.poll.AsyncThreadService;
 import com.twjitm.core.common.netstack.builder.NettyTcpSessionBuilder;
 import com.twjitm.core.common.netstack.coder.decode.http.INettyNetProtoBuffHttpToMessageDecoderFactory;
 import com.twjitm.core.common.netstack.coder.decode.tcp.INettyNetProtoBuffTCPToMessageDecoderFactory;
@@ -26,7 +28,10 @@ import com.twjitm.core.common.service.Impl.NettyChannelOperationServiceImpl;
 import com.twjitm.core.common.service.Impl.NettyGamePlayerFindServiceImpl;
 import com.twjitm.core.common.service.http.AsyncNettyHttpHandlerService;
 import com.twjitm.core.common.service.rpc.serialize.NettyProtoBufRpcSerialize;
+import com.twjitm.core.common.service.rpc.service.NettyRPCFutureService;
 import com.twjitm.core.common.service.rpc.service.NettyRemoteRpcHandlerService;
+import com.twjitm.core.common.service.rpc.service.NettyRpcClientConnectService;
+import com.twjitm.core.common.service.rpc.service.NettyRpcProxyService;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.service.test.TestService;
 import com.twjitm.core.service.user.UserService;
@@ -73,6 +78,12 @@ public class SpringLoadServiceImpl implements IService {
      */
     @Resource
     private RpcHandlerThreadPoolFactory rpcHandlerThreadPoolFactory;
+
+    /**
+     * rpc 请求消息构造工厂
+     */
+    @Resource
+    NettyRpcRequestFactory nettyRpcRequestFactory;
 
     //------------------------------------------------------------------------------------------
     /**
@@ -151,7 +162,7 @@ public class SpringLoadServiceImpl implements IService {
     private NettyTcpSessionBuilder nettyTcpSessionBuilder;
 
     //------------------------------------------------------------------------------------------
-       //----------------------基础服务类--------------------------------------------------------
+    //----------------------基础服务类--------------------------------------------------------
     /**
      * 查询器 netty的channel 和自定义session的查询
      */
@@ -164,13 +175,37 @@ public class SpringLoadServiceImpl implements IService {
     private NettyGamePlayerFindServiceImpl nettyGamePlayerLoopUpService;
 
     @Resource
-    NettyRemoteRpcHandlerService nettyRemoteRpcHandlerService;
+    private NettyRemoteRpcHandlerService nettyRemoteRpcHandlerService;
 
     /**
      * rpc消息注解器
      */
     @Resource
-    NettyRpcMethodRegistryFactory nettyRpcMethodRegistryFactory;
+    private NettyRpcMethodRegistryFactory nettyRpcMethodRegistryFactory;
+    /**
+     * 异步线程操作
+     */
+    @Resource
+    private AsyncThreadService asyncThreadService;
+
+    /**
+     * rpc 异步消息调用类
+     */
+    @Resource
+    private NettyRPCFutureService nettyRPCFutureService;
+
+    /**
+     * rpc 代理服务
+     */
+    @Resource
+    private NettyRpcProxyService nettyRpcProxyService;
+    /**
+     * rpc 服务发现
+     */
+    @Resource
+    private NettyRpcClientConnectService nettyRpcClientConnectService;
+
+
     //------------------------------------------------------------------------------------------
 
 
@@ -203,7 +238,6 @@ public class SpringLoadServiceImpl implements IService {
      */
     @Resource
     private NettyProtoBufRpcSerialize nettyProtoBufRpcSerialize;
-
 
 
     public TestService getTestService() {
@@ -319,6 +353,26 @@ public class SpringLoadServiceImpl implements IService {
         return nettyRpcMethodRegistryFactory;
     }
 
+    public AsyncThreadService getAsyncThreadService() {
+        return asyncThreadService;
+    }
+
+    public NettyRPCFutureService getNettyRPCFutureService() {
+        return nettyRPCFutureService;
+    }
+
+    public NettyRpcProxyService getNettyRpcProxyService() {
+        return nettyRpcProxyService;
+    }
+
+    public NettyRpcClientConnectService getNettyRpcClientConnectService() {
+        return nettyRpcClientConnectService;
+    }
+
+    public NettyRpcRequestFactory getNettyRpcRequestFactory() {
+        return nettyRpcRequestFactory;
+    }
+
     @Override
     public String getId() {
         return "";
@@ -330,6 +384,12 @@ public class SpringLoadServiceImpl implements IService {
         nettyTcpMessageQueueExecutorProcessor.start();
         nettyQueueMessageExecutorProcessor.start();
         asyncNettyHttpHandlerService.startup();
+        nettyRpcMethodRegistryFactory.startup();
+        asyncThreadService.startup();
+        nettyRPCFutureService.startup();
+        nettyRpcProxyService.startup();
+        nettyRpcClientConnectService.startup();
+        nettyGameServiceConfigService.startup();
     }
 
     @Override
@@ -337,6 +397,12 @@ public class SpringLoadServiceImpl implements IService {
         netTcpSessionLoopUpService.shutdown();
         nettyTcpMessageQueueExecutorProcessor.stop();
         asyncNettyHttpHandlerService.shutdown();
+        nettyRpcMethodRegistryFactory.shutdown();
+        asyncThreadService.shutdown();
+        nettyRPCFutureService.shutdown();
+        nettyRpcProxyService.shutdown();
+        nettyRpcClientConnectService.shutdown();
+        nettyGameServiceConfigService.shutdown();
     }
 
 

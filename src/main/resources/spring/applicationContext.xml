@@ -30,6 +30,10 @@
     <bean id="nettyTcpMessageFactory" class="com.twjitm.core.common.factory.NettyTcpMessageFactory"/>
     <bean id="rpcHandlerThreadPoolFactory"  class="com.twjitm.core.common.factory.thread.RpcHandlerThreadPoolFactory"/>
     <bean id="nettyRpcMethodRegistryFactory" class="com.twjitm.core.common.factory.NettyRpcMethodRegistryFactory"/>
+    <bean id="nettyRpcRequestFactory" class="com.twjitm.core.common.factory.NettyRpcRequestFactory"/>
+
+    <!--异步线程操作-->
+    <bean id="asyncThreadService" class="com.twjitm.core.common.factory.thread.async.poll.AsyncThreadService"/>
 
     <!--原子id生产器-->
     <bean id="longIdGenerator" class="com.twjitm.core.utils.uuid.LongIdGenerator"/>

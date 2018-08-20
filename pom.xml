@@ -361,6 +361,12 @@
             <artifactId>netty-all</artifactId>
             <version>4.1.15.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>jdom2</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 

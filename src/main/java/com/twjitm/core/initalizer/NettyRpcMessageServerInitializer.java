@@ -1,7 +1,7 @@
 package com.twjitm.core.initalizer;
 
 import com.twjitm.core.common.config.global.GlobalConstants;
-import com.twjitm.core.common.handler.rpc.GameNettyNetRPCServerHandler;
+import com.twjitm.core.common.handler.rpc.NettyNetRPCServerHandler;
 import com.twjitm.core.common.netstack.coder.decode.rpc.NettyNetMessageRPCDecoder;
 import com.twjitm.core.common.netstack.coder.encode.rpc.NettyNetMessageRPCEncoder;
 import com.twjitm.core.common.netstack.entity.rpc.NettyRpcRequestMessage;
@@ -33,6 +33,6 @@ public class NettyRpcMessageServerInitializer extends ChannelInitializer<NioSock
         int allIdleTimeSeconds = GlobalConstants.NettyNet.SESSION_HEART_ALL_TIMEOUT;
         pipeline.addLast("idleStateHandler", new IdleStateHandler(readerIdleTimeSeconds, writerIdleTimeSeconds, allIdleTimeSeconds));
         pipeline.addLast("logger", new LoggingHandler(LogLevel.DEBUG));
-        pipeline.addLast("handler", new GameNettyNetRPCServerHandler());
+        pipeline.addLast("handler", new NettyNetRPCServerHandler());
     }
 }

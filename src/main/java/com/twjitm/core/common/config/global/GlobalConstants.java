@@ -12,6 +12,12 @@ public class GlobalConstants {
 
         public static String SERVICE_TYPE = "udp";
         public static String NETTY_FILE_EXT = ".class";
+        /**rpc*/
+        public static final String RPC_SERVER_REGISTER_CONFIG ="bean/rpc-server-register.xml";
+        /**rpc service*/
+        public static final String RPC_SERVEICE_CONFIG="bean/rpc-service-register.xml";
+
+
     }
 
     public static class Thread {
@@ -20,7 +26,9 @@ public class GlobalConstants {
         public static final String GAME_MESSAGE_QUEUE_EXECUTOR = "game_message_queue_executor";
 
         public static final String RPC_HANDLER = "game_message_rpc_handler";
-    }
+
+        public static final String GAME_ASYNC_CALL = "game_async_call";
+        public static final String DETECT_RPC_PEND_ING ="detect_rpc_pend_ing";    }
 
     public static class UDPServiceConfig {
         public static final boolean IS_UDP_MESSAGE_ORDER_QUEUE_FLAG = false;

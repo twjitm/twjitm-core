@@ -1,5 +1,8 @@
 package com.twjitm.core.common.config.global;
 
+import com.twjitm.core.common.config.rpc.RpcServerConfig;
+import com.twjitm.core.common.service.IService;
+import org.jdom2.DataConversionException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -10,11 +13,14 @@ import javax.annotation.Resource;
  * https://blog.csdn.net/baidu_23086307
  */
 @Service
-public class NettyGameServiceConfigService {
+public class NettyGameServiceConfigService implements IService {
     @Resource
     NettyGameServiceConfig nettyGameServiceConfig;
     @Resource
     ZookeeperConfig zookeeperConfig;
+    @Resource
+    RpcServerConfig rpcServerConfig;
+
 
 
     public NettyGameServiceConfig getNettyGameServiceConfig() {
@@ -23,5 +29,33 @@ public class NettyGameServiceConfigService {
 
     public ZookeeperConfig getZookeeperConfig() {
         return zookeeperConfig;
+    }
+
+    public RpcServerConfig getRpcServerConfig() {
+        return rpcServerConfig;
+    }
+
+    @Override
+    public String getId() {
+        return NettyGameServiceConfigService.class.getSimpleName();
+    }
+
+    @Override
+    public void startup() throws Exception {
+        initRpcServer();
+    }
+
+    void initRpcServer(){
+        try {
+            rpcServerConfig.init();
+
+        } catch (DataConversionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void shutdown() throws Exception {
+
     }
 }

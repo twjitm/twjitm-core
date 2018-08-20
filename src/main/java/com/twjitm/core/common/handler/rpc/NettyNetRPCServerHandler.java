@@ -20,8 +20,8 @@ import java.lang.reflect.Method;
  * <p>
  * handler rpc message
  */
-public class GameNettyNetRPCServerHandler extends SimpleChannelInboundHandler<NettyRpcRequestMessage> {
-    Logger logger = LoggerUtils.getLogger(GameNettyNetRPCServerHandler.class);
+public class NettyNetRPCServerHandler extends SimpleChannelInboundHandler<NettyRpcRequestMessage> {
+    Logger logger = LoggerUtils.getLogger(NettyNetRPCServerHandler.class);
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
