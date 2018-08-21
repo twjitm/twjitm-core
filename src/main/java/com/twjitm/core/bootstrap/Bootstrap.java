@@ -36,7 +36,8 @@ public class Bootstrap {
                 GlobalConstants.NettyNetServerConfig.TCP.SERVER_IP,
                 GlobalConstants.NettyNetServerConfig.TCP.BOSS_THREAD_NAME,
                 GlobalConstants.NettyNetServerConfig.TCP.WORKER_THREAD_NAME,
-                new NettyTcpMessageServerInitializer());
+                new NettyTcpMessageServerInitializer(),
+                GlobalConstants.NettyNetServerConfig.TCP.SERVER_NAME);
         Thread tcpThread = factory.newThread(tcpService::startServer);
         tcpThread.start();
 
@@ -44,7 +45,8 @@ public class Bootstrap {
                 GlobalConstants.NettyNetServerConfig.UDP.SERVER_PORT,
                 GlobalConstants.NettyNetServerConfig.UDP.SERVER_IP,
                 GlobalConstants.NettyNetServerConfig.UDP.EVENT_THREAD_NAME,
-                new NettyUdpMessageServerInitializer());
+                new NettyUdpMessageServerInitializer(),
+                GlobalConstants.NettyNetServerConfig.UDP.SERVER_NAME);
         Thread udp = factory.newThread(udpService::startServer);
         udp.start();
 
@@ -53,7 +55,8 @@ public class Bootstrap {
                 GlobalConstants.NettyNetServerConfig.HTTP.SERVER_IP,
                 GlobalConstants.NettyNetServerConfig.HTTP.BOSS_THREAD_NAME,
                 GlobalConstants.NettyNetServerConfig.HTTP.WORKER_THREAD_NAME,
-                new NettyHttpMessageServerInitializer()
+                new NettyHttpMessageServerInitializer(),
+                GlobalConstants.NettyNetServerConfig.HTTP.SERVER_NAME
         );
         Thread http = factory.newThread(httpService::startServer);
 
@@ -64,7 +67,8 @@ public class Bootstrap {
                 GlobalConstants.NettyNetServerConfig.RPC.SERVER_IP,
                 GlobalConstants.NettyNetServerConfig.RPC.BOSS_THREAD_NAME,
                 GlobalConstants.NettyNetServerConfig.RPC.WORKER_THREAD_NAME,
-                new NettyRpcMessageServerInitializer());
+                new NettyRpcMessageServerInitializer(),
+                GlobalConstants.NettyNetServerConfig.RPC.SERVER_NAME);
         Thread rpc = factory.newThread(rpcService::startServer);
         rpc.start();
 

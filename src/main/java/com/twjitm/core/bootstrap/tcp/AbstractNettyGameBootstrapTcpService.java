@@ -26,6 +26,8 @@ public abstract class AbstractNettyGameBootstrapTcpService extends AbstractNetty
     private int serverPort;
     private String serverIp;
 
+    private String serverName;
+
     private ThreadNameFactory bossThreadNameFactory;
     private ThreadNameFactory workerThreadNameFactory;
     private ChannelInitializer channelInitializer;
@@ -33,13 +35,19 @@ public abstract class AbstractNettyGameBootstrapTcpService extends AbstractNetty
     private EventLoopGroup listenIntoGroup;
     private EventLoopGroup progressGroup;
 
-    public AbstractNettyGameBootstrapTcpService(int serverPort, String serverIp, String bossTreadName, String workerTreadName, ChannelInitializer channelInitializer) {
+    public AbstractNettyGameBootstrapTcpService(int serverPort,
+                                                String serverIp,
+                                                String bossTreadName,
+                                                String workerTreadName,
+                                                ChannelInitializer channelInitializer,
+                                                String serverName) {
         super(serverPort, new InetSocketAddress(serverIp, serverPort));
         this.serverIp = serverIp;
         this.serverPort = serverPort;
         this.bossThreadNameFactory = new ThreadNameFactory(bossTreadName);
         this.workerThreadNameFactory = new ThreadNameFactory(workerTreadName);
         this.channelInitializer = channelInitializer;
+        this.serverName = serverName;
     }
 
     @Override
@@ -55,17 +63,17 @@ public abstract class AbstractNettyGameBootstrapTcpService extends AbstractNetty
         ChannelFuture channelFuture;
         try {
             channelFuture = bootstrap.bind(this.serverIp, this.serverPort).sync();
-            logger.info("[---------------------TCP SERVICE START IS SUCCESSFUL IP=[" + serverIp + "]LISTENER PORT NUMBER IS :[" + serverPort + "]------------]");
+            logger.info("[---------------------" + serverName + " SERVICE START IS SUCCESSFUL IP=[" + serverIp + "]LISTENER PORT NUMBER IS :[" + serverPort + "]------------]");
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            logger.error("TCP START HAVE ERROR ,WILL STOP");
+            logger.error(serverName + "START HAVE ERROR ,WILL STOP");
             SpringServiceManager.shutdown();
             e.printStackTrace();
             logger.error(e);
         } finally {
             listenIntoGroup.shutdownGracefully();
             progressGroup.shutdownGracefully();
-            logger.info("SERVER WORLD STOP");
+            logger.info(serverName + "SERVER WORLD STOP");
         }
     }
 

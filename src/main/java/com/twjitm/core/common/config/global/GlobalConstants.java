@@ -72,6 +72,7 @@ public class GlobalConstants {
             public static final String SERVER_IP = "0.0.0.0";
             public static final String BOSS_THREAD_NAME = "tcp_boss_thread_name_";
             public static final String WORKER_THREAD_NAME = "tcp_worker_thread_name_";
+            public static  final String SERVER_NAME="TCP_GAME_SERVER";
 
         }
 
@@ -79,6 +80,8 @@ public class GlobalConstants {
             public static final int SERVER_PORT = 11020;
             public static final String SERVER_IP = "0.0.0.0";
             public static final String EVENT_THREAD_NAME = "udp_event_thread_name_";
+            public static  final String SERVER_NAME="UDP_GAME_SERVER";
+
         }
 
         public static class HTTP {
@@ -86,6 +89,8 @@ public class GlobalConstants {
             public static final String SERVER_IP = "0.0.0.0";
             public static final String BOSS_THREAD_NAME = "http_boss_thread_name_";
             public static final String WORKER_THREAD_NAME = "http_worker_thread_name_";
+            public static  final String SERVER_NAME="HTTP_GAME_SERVER";
+
         }
 
         public static class RPC {
@@ -94,6 +99,7 @@ public class GlobalConstants {
             public static final String SERVER_IP = "0.0.0.0";
             public static final String BOSS_THREAD_NAME = "rpc_boss_thread_name_";
             public static final String WORKER_THREAD_NAME = "rpc_worker_thread_name_";
+            public static  final String SERVER_NAME="RPC_GAME_SERVER";
 
             public static final boolean IS_OPEN_RPC = true;
             public static final int RPC_THREAD_POOL_SIZE = 5;

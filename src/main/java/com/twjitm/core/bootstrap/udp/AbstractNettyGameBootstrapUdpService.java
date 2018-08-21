@@ -24,6 +24,7 @@ public class AbstractNettyGameBootstrapUdpService extends AbstractNettyGameBoots
 
     private int serverPort;
     private String serverIp;
+    private String serverName;
 
     private EventLoopGroup eventLoopGroup;
     private ChannelFuture serverChannelFuture;
@@ -31,13 +32,14 @@ public class AbstractNettyGameBootstrapUdpService extends AbstractNettyGameBoots
     private ThreadNameFactory eventThreadNameFactory;
     private ChannelInitializer channelInitializer;
 
-    public AbstractNettyGameBootstrapUdpService(int serverPort, String serverIp, String threadName, ChannelInitializer channelInitializer) {
+    public AbstractNettyGameBootstrapUdpService(int serverPort, String serverIp, String threadName, ChannelInitializer channelInitializer, String serverName) {
         super(serverPort, new InetSocketAddress(serverIp, serverPort));
         this.serverPort = serverPort;
         this.serverIp = serverIp;
         this.channelInitializer = channelInitializer;
         this.eventThreadNameFactory = new ThreadNameFactory(threadName);
         this.channelInitializer = channelInitializer;
+        this.serverName = serverName;
 
     }
 
@@ -62,11 +64,11 @@ public class AbstractNettyGameBootstrapUdpService extends AbstractNettyGameBoots
             serverChannelFuture = bootstrap.bind(serverIp, serverPort).sync();
 
             serverChannelFuture.channel().closeFuture().addListener(ChannelFutureListener.CLOSE);
-            logger.info("[---------------------UDP SERVICE START IS SUCCESSFUL IP=[" + serverIp + "]LISTENER PORT NUMBER IS :[" + serverPort + "]------------]");
+            logger.info("[---------------------" + serverName + " SERVICE START IS SUCCESSFUL IP=[" + serverIp + "]LISTENER PORT NUMBER IS :[" + serverPort + "]------------]");
 
         } catch (Exception e) {
             if (logger.isDebugEnabled()) {
-                logger.error("UDP SERVER START HAVE ERROR ", e.getCause());
+                logger.error(serverName + " SERVER START HAVE ERROR ", e.getCause());
             }
             SpringServiceManager.shutdown();
         }

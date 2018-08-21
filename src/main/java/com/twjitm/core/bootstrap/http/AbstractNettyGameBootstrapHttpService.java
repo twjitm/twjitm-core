@@ -19,9 +19,11 @@ import java.net.InetSocketAddress;
  * @company http://www.g2us.com/
  * @jdk java version "1.8.0_77"
  */
-public class AbstractNettyGameBootstraptHttpService extends AbstractNettyGameBootstrapService {
-    Logger logger = LoggerUtils.getLogger(AbstractNettyGameBootstraptHttpService.class);
-    String serverIp;
+public class AbstractNettyGameBootstrapHttpService extends AbstractNettyGameBootstrapService {
+    private Logger logger = LoggerUtils.getLogger(AbstractNettyGameBootstrapHttpService.class);
+    private String serverIp;
+    private String serverName;
+
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
 
@@ -31,29 +33,29 @@ public class AbstractNettyGameBootstraptHttpService extends AbstractNettyGameBoo
 
     private ChannelFuture serverChannelFuture;
 
-    private  boolean startFag=false;
+    private boolean startFag = false;
 
-    public AbstractNettyGameBootstraptHttpService(int serverPort, String serverIp, String bossThreadName, String workThreadName, ChannelInitializer channelInitializer) {
-        super(serverPort, new InetSocketAddress(serverIp,serverPort));
-        this.serverIp=serverIp;
+    public AbstractNettyGameBootstrapHttpService(int serverPort, String serverIp, String bossThreadName, String workThreadName, ChannelInitializer channelInitializer, String serverName) {
+        super(serverPort, new InetSocketAddress(serverIp, serverPort));
+        this.serverIp = serverIp;
         this.bossThreadNameFactory = new ThreadNameFactory(bossThreadName);
         this.workerThreadNameFactory = new ThreadNameFactory(workThreadName);
         this.channelInitializer = channelInitializer;
-
+        this.serverName = serverName;
     }
 
     @Override
     public void stopServer() {
-        if(bossGroup != null){
+        if (bossGroup != null) {
             bossGroup.shutdownGracefully();
         }
-        if(workerGroup != null){
+        if (workerGroup != null) {
             workerGroup.shutdownGracefully();
         }
     }
 
     @Override
-    public void startServer()  {
+    public void startServer() {
         bossGroup = new NioEventLoopGroup(1, bossThreadNameFactory);
         workerGroup = new NioEventLoopGroup(0, workerThreadNameFactory);
         ServerBootstrap serverBootstrap = new ServerBootstrap();
@@ -74,8 +76,8 @@ public class AbstractNettyGameBootstraptHttpService extends AbstractNettyGameBoo
         try {
             serverChannelFuture = serverBootstrap.bind(serverPort).sync();
             serverChannelFuture.channel().closeFuture().addListener(ChannelFutureListener.CLOSE);
-            startFag=true;
-            logger.info("[---------------------HTTP SERVICE START IS SUCCESSFUL IP=[" + serverIp + "]LISTENER PORT NUMBER IS :[" + serverPort + "]------------]");
+            startFag = true;
+            logger.info("[---------------------" + serverName + " SERVICE START IS SUCCESSFUL IP=[" + serverIp + "]LISTENER PORT NUMBER IS :[" + serverPort + "]------------]");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

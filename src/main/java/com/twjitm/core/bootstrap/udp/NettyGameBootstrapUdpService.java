@@ -8,7 +8,7 @@ import io.netty.channel.ChannelInitializer;
  * @jdk java version "1.8.0_77"
  */
 public class NettyGameBootstrapUdpService extends AbstractNettyGameBootstrapUdpService {
-    public NettyGameBootstrapUdpService(int serverPort, String serverIp, String threadName, ChannelInitializer channelInitializer) {
-        super(serverPort, serverIp, threadName, channelInitializer);
+    public NettyGameBootstrapUdpService(int serverPort, String serverIp, String threadName, ChannelInitializer channelInitializer,String serverName) {
+        super(serverPort, serverIp, threadName, channelInitializer,serverName);
     }
 }
