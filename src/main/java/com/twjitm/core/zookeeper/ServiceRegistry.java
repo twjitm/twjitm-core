@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * Created by 文江 on 2018/4/17.
- * zookeeper服务器注册类
+ * Created by  on 2018/4/17.
+ * zookeeper
  */
 public class ServiceRegistry {
     private static final Logger LOGGER = Logger.getLogger(ServiceRegistry.class);
@@ -33,7 +33,7 @@ public class ServiceRegistry {
 
 
     /**
-     * 连接到zookeeper
+     * ookeeper
      *
      * @return
      */
@@ -57,7 +57,7 @@ public class ServiceRegistry {
     }
 
     /**
-     * 添加一个跟节点
+     *
      *
      * @param zk
      */
@@ -75,7 +75,7 @@ public class ServiceRegistry {
     }
 
     /**
-     * 创建一个节点数据
+     *
      *
      * @param zk
      * @param data

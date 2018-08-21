@@ -14,6 +14,7 @@ import com.twjitm.core.initalizer.NettyUdpMessageServerInitializer;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.utils.logs.LoggerUtils;
 import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author EGLS0807 - [Created on 2018-07-27 11:30]
@@ -23,6 +24,7 @@ import org.apache.log4j.Logger;
  */
 public class Bootstrap {
     static Logger logger = LoggerUtils.getLogger(Bootstrap.class);
+    static org.slf4j.Logger loggers=LoggerFactory.getLogger(Bootstrap.class);
 
     public static void main(String[] args) {
         getBuddha();
@@ -71,8 +73,6 @@ public class Bootstrap {
                 GlobalConstants.NettyNetServerConfig.RPC.SERVER_NAME);
         Thread rpc = factory.newThread(rpcService::startServer);
         rpc.start();
-
-        //successful();
     }
 
     public static void getBuddha() {

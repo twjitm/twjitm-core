@@ -41,6 +41,8 @@ private  RpcHandlerThreadPoolFactory rpcHandlerThreadPool;
     }
 
     public void submit(Runnable runnable) {
-        rpcHandlerThreadPool.getExecutor().submit(runnable);
+        if(rpcHandlerThreadPool!=null){
+            rpcHandlerThreadPool.getExecutor().submit(runnable);
+        }
     }
 }
