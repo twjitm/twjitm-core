@@ -16,6 +16,8 @@ import com.twjitm.core.utils.logs.LoggerUtils;
 import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.*;
+
 /**
  * @author EGLS0807 - [Created on 2018-07-27 11:30]
  * @company http://www.g2us.com/
@@ -27,9 +29,11 @@ public class Bootstrap {
     static org.slf4j.Logger loggers=LoggerFactory.getLogger(Bootstrap.class);
 
     public static void main(String[] args) {
+        ExecutorService executorService=new ThreadPoolExecutor(5, 10,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>());
         getBuddha();
         SystemService.getSystem();
-        TwjThreadFactory factory = new TwjThreadFactory();
         SpringServiceManager.init();
         SpringServiceManager.start();
 
@@ -40,8 +44,7 @@ public class Bootstrap {
                 GlobalConstants.NettyNetServerConfig.TCP.WORKER_THREAD_NAME,
                 new NettyTcpMessageServerInitializer(),
                 GlobalConstants.NettyNetServerConfig.TCP.SERVER_NAME);
-        Thread tcpThread = factory.newThread(tcpService::startServer);
-        tcpThread.start();
+        executorService.execute(tcpService::startServer);
 
         NettyGameBootstrapUdpService udpService = new NettyGameBootstrapUdpService(
                 GlobalConstants.NettyNetServerConfig.UDP.SERVER_PORT,
@@ -49,8 +52,8 @@ public class Bootstrap {
                 GlobalConstants.NettyNetServerConfig.UDP.EVENT_THREAD_NAME,
                 new NettyUdpMessageServerInitializer(),
                 GlobalConstants.NettyNetServerConfig.UDP.SERVER_NAME);
-        Thread udp = factory.newThread(udpService::startServer);
-        udp.start();
+        executorService.execute(udpService::startServer);
+
 
         NettyGameBootstrapHttpService httpService = new NettyGameBootstrapHttpService(
                 GlobalConstants.NettyNetServerConfig.HTTP.SERVER_PORT,
@@ -60,10 +63,8 @@ public class Bootstrap {
                 new NettyHttpMessageServerInitializer(),
                 GlobalConstants.NettyNetServerConfig.HTTP.SERVER_NAME
         );
-        Thread http = factory.newThread(httpService::startServer);
+        executorService.execute(httpService::startServer);
 
-
-        http.start();
         NettyGameBootstrapRpcService rpcService = new NettyGameBootstrapRpcService(
                 GlobalConstants.NettyNetServerConfig.RPC.SERVER_PORT,
                 GlobalConstants.NettyNetServerConfig.RPC.SERVER_IP,
@@ -71,8 +72,8 @@ public class Bootstrap {
                 GlobalConstants.NettyNetServerConfig.RPC.WORKER_THREAD_NAME,
                 new NettyRpcMessageServerInitializer(),
                 GlobalConstants.NettyNetServerConfig.RPC.SERVER_NAME);
-        Thread rpc = factory.newThread(rpcService::startServer);
-        rpc.start();
+        executorService.execute(rpcService::startServer);
+
     }
 
     public static void getBuddha() {
