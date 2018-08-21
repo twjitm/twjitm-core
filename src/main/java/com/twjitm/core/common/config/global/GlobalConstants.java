@@ -15,7 +15,7 @@ public class GlobalConstants {
         /**rpc*/
         public static final String RPC_SERVER_REGISTER_CONFIG ="bean/rpc-server-register.xml";
         /**rpc service*/
-        public static final String RPC_SERVEICE_CONFIG="bean/rpc-service-register.xml";
+        public static final String RPC_SERVICE_CONFIG ="bean/rpc-service-register.xml";
 
 
     }
@@ -68,30 +68,30 @@ public class GlobalConstants {
 
     public static class NettyNetServerConfig {
         public static class TCP {
-            public static final int SERVER_PORT = 9090;
-            public static final String SERVER_IP = "127.0.0.1";
+            public static final int SERVER_PORT = 11010;
+            public static final String SERVER_IP = "0.0.0.0";
             public static final String BOSS_THREAD_NAME = "tcp_boss_thread_name_";
             public static final String WORKER_THREAD_NAME = "tcp_worker_thread_name_";
 
         }
 
         public static class UDP {
-            public static final int SERVER_PORT = 9099;
-            public static final String SERVER_IP = "127.0.0.1";
+            public static final int SERVER_PORT = 11020;
+            public static final String SERVER_IP = "0.0.0.0";
             public static final String EVENT_THREAD_NAME = "udp_event_thread_name_";
         }
 
         public static class HTTP {
-            public static final int SERVER_PORT = 8080;
-            public static final String SERVER_IP = "127.0.0.1";
+            public static final int SERVER_PORT = 11030;
+            public static final String SERVER_IP = "0.0.0.0";
             public static final String BOSS_THREAD_NAME = "http_boss_thread_name_";
             public static final String WORKER_THREAD_NAME = "http_worker_thread_name_";
         }
 
         public static class RPC {
 
-            public static final int SERVER_PORT = 8090;
-            public static final String SERVER_IP = "127.0.0.1";
+            public static final int SERVER_PORT = 11040;
+            public static final String SERVER_IP = "0.0.0.0";
             public static final String BOSS_THREAD_NAME = "rpc_boss_thread_name_";
             public static final String WORKER_THREAD_NAME = "rpc_worker_thread_name_";
 

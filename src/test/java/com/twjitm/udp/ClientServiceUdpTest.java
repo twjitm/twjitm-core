@@ -21,7 +21,7 @@ import java.net.InetSocketAddress;
  * udp test;
  */
 public class ClientServiceUdpTest {
-    private static int port=9099;
+    private static int port=11020;
 
     public static void main(String[] args) throws InterruptedException {
         TestSpring.initSpring();
@@ -47,7 +47,7 @@ public class ClientServiceUdpTest {
     }
 
     public static void sendUdpMessage(Channel channel) throws InterruptedException {
-        InetSocketAddress receive =new InetSocketAddress("127.0.0.1",port);
+        InetSocketAddress receive =new InetSocketAddress("47.93.22.194",port);
         OnlineMessageUdpMessage messageUdpMessage=new OnlineMessageUdpMessage();
         messageUdpMessage.setId(520);
         messageUdpMessage.setPlayerId(10086);
