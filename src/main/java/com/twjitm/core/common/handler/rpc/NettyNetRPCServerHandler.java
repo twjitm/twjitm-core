@@ -38,7 +38,7 @@ public class NettyNetRPCServerHandler extends SimpleChannelInboundHandler<NettyR
             NettyRpcResponseMessage response = new NettyRpcResponseMessage();
             response.setRequestId(request.getRequestId());
             try {
-                Object result = dispatcher(request);
+                Object result =  SpringServiceManager.getSpringLoadService().getDispatcherService().dispatcher(request);
                 response.setResult(result);
             } catch (Throwable t) {
                 response.setError(t.toString());
@@ -52,27 +52,6 @@ public class NettyNetRPCServerHandler extends SimpleChannelInboundHandler<NettyR
         });
     }
 
-    private Object dispatcher(NettyRpcRequestMessage request) throws Throwable {
-        String className = request.getClassName();
-        NettyRpcMethodRegistryFactory factory = SpringServiceManager.getSpringLoadService().getNettyRpcMethodRegistryFactory();
-        Object serviceBean = factory.getServiceBean(className);
-        Class<?> serviceClass = serviceBean.getClass();
-        String methodName = request.getMethodName();
-        Class<?>[] parameterTypes = request.getParameterTypes();
-        Object[] parameters = request.getParameters();
-        if(logger.isInfoEnabled()) {
-            logger.info(methodName);
-            logger.info(serviceClass.getName());
-            for (int i = 0; i < parameterTypes.length; ++i) {
-                logger.debug(parameterTypes[i].getName());
-            }
-            for (int i = 0; i < parameters.length; ++i) {
-                logger.info(parameters[i].toString());
-            }
-        }
-        Method method = serviceClass.getMethod(methodName, parameterTypes);
-        return method.invoke(serviceBean, parameters);
-    }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {

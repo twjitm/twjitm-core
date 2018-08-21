@@ -1,9 +1,11 @@
 package com.twjitm.core.service.dispatcher.Impl;
 
 
+import com.twjitm.core.common.factory.NettyRpcMethodRegistryFactory;
 import com.twjitm.core.common.logic.handler.BaseHandler;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
+import com.twjitm.core.common.netstack.entity.rpc.NettyRpcRequestMessage;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.utils.logs.LoggerUtils;
@@ -25,6 +27,7 @@ import java.lang.reflect.Method;
  *
  * Object object = method.invoke(baseHandler,message);
  * use proxy pattern progress message :tcp.udp stream in the dispatcher handler
+ * and add rpc message dispatcher handler in this
  */
 @Service
 public class DispatcherServiceImpl implements IDispatcherService {
@@ -59,6 +62,30 @@ public class DispatcherServiceImpl implements IDispatcherService {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    @Override
+    public Object dispatcher(NettyRpcRequestMessage request) throws Throwable {
+        String className = request.getClassName();
+        NettyRpcMethodRegistryFactory factory = SpringServiceManager.getSpringLoadService().getNettyRpcMethodRegistryFactory();
+        Object serviceBean = factory.getServiceBean(className);
+        Class<?> serviceClass = serviceBean.getClass();
+        String methodName = request.getMethodName();
+        Class<?>[] parameterTypes = request.getParameterTypes();
+        Object[] parameters = request.getParameters();
+        if(logger.isInfoEnabled()) {
+            logger.info(methodName);
+            logger.info(serviceClass.getName());
+            for (int i = 0; i < parameterTypes.length; ++i) {
+                logger.debug(parameterTypes[i].getName());
+            }
+            for (int i = 0; i < parameters.length; ++i) {
+                logger.info(parameters[i].toString());
+            }
+        }
+        Method method = serviceClass.getMethod(methodName, parameterTypes);
+        return method.invoke(serviceBean, parameters);
     }
 
 }
