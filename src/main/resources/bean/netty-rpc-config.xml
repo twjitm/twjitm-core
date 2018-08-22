@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?><services>    <service> </service></services>
+<?xml version="1.0" encoding="UTF-8"?><services>    <name>rpc_server</name>    <id>21001</id>    <ip>127.0.0.1</ip>    <port>21040</port></services>

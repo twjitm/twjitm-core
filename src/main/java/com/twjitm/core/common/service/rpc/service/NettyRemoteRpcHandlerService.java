@@ -1,6 +1,8 @@
 package com.twjitm.core.common.service.rpc.service;
 
 import com.twjitm.core.common.config.global.GlobalConstants;
+import com.twjitm.core.common.config.global.NettyGameServiceConfig;
+import com.twjitm.core.common.config.global.NettyGameServiceConfigService;
 import com.twjitm.core.common.factory.thread.RpcHandlerThreadPoolFactory;
 import com.twjitm.core.common.service.IService;
 import com.twjitm.core.common.utils.ExecutorUtil;
@@ -24,14 +26,15 @@ private  RpcHandlerThreadPoolFactory rpcHandlerThreadPool;
 
     @Override
     public void startup() throws Exception {
-       boolean isOpenRpc= GlobalConstants.NettyNetServerConfig.RPC.IS_OPEN_RPC;
-        if (isOpenRpc) {
+        NettyGameServiceConfigService config = SpringServiceManager.getSpringLoadService().getNettyGameServiceConfigService();
+        NettyGameServiceConfig gameConfig = config.getNettyGameServiceConfig();
+        if (gameConfig.isRpcOpen()) {
             //开启服务
             rpcHandlerThreadPool=  SpringServiceManager.getSpringLoadService().
                     getRpcHandlerThreadPoolFactory();
             rpcHandlerThreadPool.createExecutor(
-                            GlobalConstants.NettyNetServerConfig.RPC.RPC_THREAD_POOL_SIZE,
-                    GlobalConstants.NettyNetServerConfig.RPC.RPC_THREAD_POOL_QUEUE_SIZE);
+                    gameConfig.getRpcConnectThreadSize(),
+                    gameConfig.getRpcSendProxyThreadSize());
         }
     }
 

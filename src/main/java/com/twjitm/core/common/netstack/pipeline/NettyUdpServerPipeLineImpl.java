@@ -1,6 +1,8 @@
 package com.twjitm.core.common.netstack.pipeline;
 
 import com.twjitm.core.common.config.global.GlobalConstants;
+import com.twjitm.core.common.config.global.NettyGameServiceConfigService;
+import com.twjitm.core.common.config.global.NettyGameUdpConfig;
 import com.twjitm.core.common.enums.MessageAttributeEnum;
 import com.twjitm.core.common.enums.MessageComm;
 import com.twjitm.core.common.factory.MessageRegistryFactory;
@@ -49,7 +51,9 @@ public class NettyUdpServerPipeLineImpl implements INettyServerPipeLine {
         }
         message.setAttribute(MessageAttributeEnum.DISPATCH_SESSION, new NettyUdpSession(channel));
         //处理方式
-        if (GlobalConstants.UDPServiceConfig.IS_UDP_MESSAGE_ORDER_QUEUE_FLAG) {
+        NettyGameServiceConfigService config = SpringServiceManager.getSpringLoadService().getNettyGameServiceConfigService();
+        NettyGameUdpConfig udpConfig = config.getUdpConfig();
+        if (udpConfig.isMessageInOrderQueue()) {
             //有序队列
 
         } else {

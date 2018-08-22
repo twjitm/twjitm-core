@@ -9,6 +9,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * Created by IntelliJ IDEA.
  * User: 文江 Date: 2018/8/19  Time: 10:52
  * https://blog.csdn.net/baidu_23086307
+ * 队列满抛出异常
  */
 public class AbortPolicy extends ThreadPoolExecutor.AbortPolicy {
     private String threadName;
@@ -22,6 +23,7 @@ public class AbortPolicy extends ThreadPoolExecutor.AbortPolicy {
         this.threadName = threadName;
     }
 
+    @Override
     public void rejectedExecution(Runnable runnable, ThreadPoolExecutor executor) {
         if (threadName != null) {
             logger.error("THREAD POOL " + threadName + " IS EXHAUSTED, EXECUTOR=" + executor.toString());

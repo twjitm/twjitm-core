@@ -32,6 +32,8 @@ import com.twjitm.core.common.service.rpc.service.NettyRPCFutureService;
 import com.twjitm.core.common.service.rpc.service.NettyRemoteRpcHandlerService;
 import com.twjitm.core.common.service.rpc.service.NettyRpcClientConnectService;
 import com.twjitm.core.common.service.rpc.service.NettyRpcProxyService;
+import com.twjitm.core.common.zookeeper.NettyZookeeperRpcServiceDiscoveryService;
+import com.twjitm.core.common.zookeeper.NettyZookeeperRpcServiceRegistryService;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.service.test.TestService;
 import com.twjitm.core.service.user.UserService;
@@ -205,6 +207,17 @@ public class SpringLoadServiceImpl implements IService {
     @Resource
     private NettyRpcClientConnectService nettyRpcClientConnectService;
 
+    /**
+     * zookeeper ×¢²áÆ÷
+     */
+    @Resource
+    private NettyZookeeperRpcServiceRegistryService nettyZookeeperRpcServiceRegistryService;
+    /**
+     * zookeeper ·¢ÏÖÆ÷
+     */
+    @Resource
+    private NettyZookeeperRpcServiceDiscoveryService nettyZookeeperRpcServiceDiscoveryService;
+
 
     //------------------------------------------------------------------------------------------
 
@@ -373,6 +386,14 @@ public class SpringLoadServiceImpl implements IService {
         return nettyRpcRequestFactory;
     }
 
+    public NettyZookeeperRpcServiceRegistryService getNettyZookeeperRpcServiceRegistryService() {
+        return nettyZookeeperRpcServiceRegistryService;
+    }
+
+    public NettyZookeeperRpcServiceDiscoveryService getNettyZookeeperRpcServiceDiscoveryService() {
+        return nettyZookeeperRpcServiceDiscoveryService;
+    }
+
     @Override
     public String getId() {
         return "";
@@ -392,6 +413,8 @@ public class SpringLoadServiceImpl implements IService {
         nettyRPCFutureService.startup();
         nettyRpcProxyService.startup();
         nettyRpcClientConnectService.startup();
+        nettyZookeeperRpcServiceRegistryService.startup();
+        nettyZookeeperRpcServiceDiscoveryService.startup();
 
     }
 
@@ -406,6 +429,8 @@ public class SpringLoadServiceImpl implements IService {
         nettyRpcProxyService.shutdown();
         nettyRpcClientConnectService.shutdown();
         nettyGameServiceConfigService.shutdown();
+        nettyZookeeperRpcServiceRegistryService.shutdown();
+        nettyZookeeperRpcServiceDiscoveryService.shutdown();
     }
 
 

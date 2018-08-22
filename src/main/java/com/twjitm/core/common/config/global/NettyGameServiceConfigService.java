@@ -15,16 +15,33 @@ import javax.annotation.Resource;
 @Service
 public class NettyGameServiceConfigService implements IService {
     @Resource
-    NettyGameServiceConfig nettyGameServiceConfig;
+    private NettyGameServiceConfig nettyGameServiceConfig;
     @Resource
-    ZookeeperConfig zookeeperConfig;
+    private ZookeeperConfig zookeeperConfig;
     @Resource
-    RpcServerConfig rpcServerConfig;
+    private RpcServerConfig rpcServerConfig;
+    @Resource
+    private NettyGameUdpConfig udpConfig;
+    @Resource
+    private NettyGameHttpConfig httpConfig;
+    @Resource
+    private NettyGameRpcConfig rpcNetConfig;
 
 
+    public NettyGameRpcConfig getRpcNetConfig() {
+        return rpcNetConfig;
+    }
 
     public NettyGameServiceConfig getNettyGameServiceConfig() {
         return nettyGameServiceConfig;
+    }
+
+    public NettyGameUdpConfig getUdpConfig() {
+        return udpConfig;
+    }
+
+    public NettyGameHttpConfig getHttpConfig() {
+        return httpConfig;
     }
 
     public ZookeeperConfig getZookeeperConfig() {
@@ -42,13 +59,24 @@ public class NettyGameServiceConfigService implements IService {
 
     @Override
     public void startup() throws Exception {
-        initRpcServer();
+        initConfigServer();
     }
 
-    void initRpcServer(){
+    void initConfigServer() {
         try {
-            rpcServerConfig.init();
+            //-----------------------网络
+            //tcp
+            nettyGameServiceConfig.init();
+            //udp
+            udpConfig.init();
+            //http
+            httpConfig.init();
+            //rpc
+            rpcNetConfig.init();
+            //-------------------rpc注册
 
+            rpcServerConfig.init();
+            zookeeperConfig.init();
         } catch (DataConversionException e) {
             e.printStackTrace();
         }

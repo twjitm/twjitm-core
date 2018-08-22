@@ -1,9 +1,13 @@
 package com.twjitm.core.common.config.global;
 
 import com.twjitm.core.common.service.rpc.server.NettySdServer;
+import com.twjitm.core.utils.file.FileUtil;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,19 +17,83 @@ import java.util.List;
 @Service
 public class NettyGameServiceConfig {
     /**
+     * 版本号
+     */
+    private String serverVersion;
+    /**
+     * 主机地址
+     */
+    private String serverHost;
+    /**
+     * 端口号
+     */
+    private String serverPort;
+    /**
+     * 服务器id
+     */
+    private String serverId;
+    /**
      * rpc服务的包名字
      */
-    private String rpcServicePackageName = "com.twjitm.core.service.rpc.service";
-    private int asyncThreadPoolCoreSize = 5;
-    private int asyncThreadPoolMaxSize = 5;
-    private int rpcFutureDeleteTimeOut = 2000;
-    private int rpcTimeOut = 5000;
-    /*rpc连接线程池大小*/
-    private int rpcConnectThreadSize=5;
-    /*rpc连接线程池大小*/
-    private int rpcSendProxyThreadSize=5;
-    //开启rpc
-    private boolean rpcOpen = false;
+    private String rpcServicePackageName;
+    /**
+     * 异步线程池核心大小
+     */
+    private int asyncThreadPoolCoreSize;
+    /**
+     * 异步线程最大大小
+     */
+    private int asyncThreadPoolMaxSize;
+    /**
+     * rpc回调超时时间
+     */
+    private int rpcFutureDeleteTimeOut;
+    /**
+     * rpc请求超时时间
+     */
+    private int rpcTimeOut;
+    /**
+     * rpc连接线程池大小
+     */
+    private int rpcConnectThreadSize;
+    /**
+     * rpc连接线程池大小
+     */
+    private int rpcSendProxyThreadSize;
+    /**
+     * 开启rpc
+     */
+
+    private boolean rpcOpen;
+    /**
+     * 是否开启zookeeper
+     */
+    private boolean zookeeperOpen;
+
+
+    public void init() {
+        String config = GlobalConstants.ConfigFile.GAME_SERVER_RPROERTIES_FILE_PATH;
+        InputStream inputStream = FileUtil.getFileInputStreanOnSafe(config);
+        Properties properties = new Properties();
+        try {
+            properties.load(inputStream);
+            serverVersion = properties.getProperty("serverVersion");
+            serverHost = properties.getProperty("serverHost");
+            serverPort = properties.getProperty("serverPort");
+            serverId = properties.getProperty("serverId");
+            rpcServicePackageName = properties.getProperty("rpcServicePackageName");
+            asyncThreadPoolCoreSize = Integer.parseInt(properties.getProperty("asyncThreadPoolCoreSize"));
+            asyncThreadPoolMaxSize = Integer.parseInt(properties.getProperty("asyncThreadPoolMaxSize"));
+            rpcFutureDeleteTimeOut = Integer.parseInt(properties.getProperty("rpcFutureDeleteTimeOut"));
+            rpcTimeOut = Integer.parseInt(properties.getProperty("rpcTimeOut"));
+            rpcConnectThreadSize = Integer.parseInt(properties.getProperty("rpcConnectThreadSize"));
+            rpcSendProxyThreadSize = Integer.parseInt(properties.getProperty("rpcSendProxyThreadSize"));
+            rpcOpen = Boolean.parseBoolean(properties.getProperty("rpcOpen"));
+            zookeeperOpen = Boolean.parseBoolean(properties.getProperty("zookeeperOpen"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public void setRpcServicePackageName(String rpcServicePackageName) {
@@ -92,5 +160,35 @@ public class NettyGameServiceConfig {
         this.rpcSendProxyThreadSize = rpcSendProxyThreadSize;
     }
 
+    public boolean isZookeeperOpen() {
+        return zookeeperOpen;
+    }
 
+    public void setZookeeperOpen(boolean zookeeperOpen) {
+        this.zookeeperOpen = zookeeperOpen;
+    }
+
+    public String getServerHost() {
+        return serverHost;
+    }
+
+    public void setServerHost(String serverHost) {
+        this.serverHost = serverHost;
+    }
+
+    public String getServerPort() {
+        return serverPort;
+    }
+
+    public void setServerPort(String serverPort) {
+        this.serverPort = serverPort;
+    }
+
+    public String getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(String serverId) {
+        this.serverId = serverId;
+    }
 }

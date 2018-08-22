@@ -7,16 +7,26 @@ public class GlobalConstants {
 
 
     public static class ConfigFile {
-        //http服务器配置文件
-        public static String HTTP_SERVER_CONFIG = "bean\\http_service_config.xml";
+        /**
+         * udp服务配置
+         */
+        public static final String UDP_SERVER_CONFIG_FILE_PATH = "bean/netty-udp-config.xml";
+        public static final  String RPC_SERVER_CONFIG_FILE_PATH="bean/netty-rpc-config.xml";
+        /**
+         *  http服务器配置文件
+         */
+        public static String HTTP_SERVER_CONFIG = "bean/netty-http-config.xml";
 
-        public static String SERVICE_TYPE = "udp";
         public static String NETTY_FILE_EXT = ".class";
+        public static final String GAME_SERVER_RPROERTIES_FILE_PATH="bean/game-properties.properties";
         /**rpc*/
         public static final String RPC_SERVER_REGISTER_CONFIG ="bean/rpc-server-register.xml";
         /**rpc service*/
         public static final String RPC_SERVICE_CONFIG ="bean/rpc-service-register.xml";
-
+        /**
+         * zookeeper
+         */
+        public static final String ZOOKEEPER_PROPERTIES_FILE_PATH="bean/game-zookeeper.properties";
 
     }
 
@@ -68,25 +78,18 @@ public class GlobalConstants {
 
     public static class NettyNetServerConfig {
         public static class TCP {
-            public static final int SERVER_PORT = 11010;
-            public static final String SERVER_IP = "0.0.0.0";
             public static final String BOSS_THREAD_NAME = "tcp_boss_thread_name_";
             public static final String WORKER_THREAD_NAME = "tcp_worker_thread_name_";
             public static  final String SERVER_NAME="TCP_GAME_SERVER";
-
         }
 
         public static class UDP {
-            public static final int SERVER_PORT = 11020;
-            public static final String SERVER_IP = "0.0.0.0";
             public static final String EVENT_THREAD_NAME = "udp_event_thread_name_";
             public static  final String SERVER_NAME="UDP_GAME_SERVER";
 
         }
 
         public static class HTTP {
-            public static final int SERVER_PORT = 11030;
-            public static final String SERVER_IP = "0.0.0.0";
             public static final String BOSS_THREAD_NAME = "http_boss_thread_name_";
             public static final String WORKER_THREAD_NAME = "http_worker_thread_name_";
             public static  final String SERVER_NAME="HTTP_GAME_SERVER";
@@ -94,16 +97,10 @@ public class GlobalConstants {
         }
 
         public static class RPC {
-
-            public static final int SERVER_PORT = 11040;
-            public static final String SERVER_IP = "0.0.0.0";
             public static final String BOSS_THREAD_NAME = "rpc_boss_thread_name_";
             public static final String WORKER_THREAD_NAME = "rpc_worker_thread_name_";
             public static  final String SERVER_NAME="RPC_GAME_SERVER";
 
-            public static final boolean IS_OPEN_RPC = true;
-            public static final int RPC_THREAD_POOL_SIZE = 5;
-            public static final int RPC_THREAD_POOL_QUEUE_SIZE = 5;
         }
 
     }

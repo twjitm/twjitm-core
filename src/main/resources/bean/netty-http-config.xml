@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><services>    <server>        <name>http_server</name>        <id>21001</id>        <ip>127.0.0.1</ip>        <port>21030</port>        <ssl>false</ssl>        <handleThreadSize>300</handleThreadSize>    </server></services>

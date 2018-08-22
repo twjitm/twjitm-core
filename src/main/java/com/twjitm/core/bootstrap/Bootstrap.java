@@ -4,7 +4,7 @@ import com.twjitm.core.bootstrap.http.NettyGameBootstrapHttpService;
 import com.twjitm.core.bootstrap.rpc.NettyGameBootstrapRpcService;
 import com.twjitm.core.bootstrap.tcp.NettyGameBootstrapTcpService;
 import com.twjitm.core.bootstrap.udp.NettyGameBootstrapUdpService;
-import com.twjitm.core.common.config.global.GlobalConstants;
+import com.twjitm.core.common.config.global.*;
 import com.twjitm.core.common.factory.thread.TwjThreadFactory;
 import com.twjitm.core.common.system.SystemService;
 import com.twjitm.core.initalizer.NettyHttpMessageServerInitializer;
@@ -36,28 +36,30 @@ public class Bootstrap {
         SystemService.getSystem();
         SpringServiceManager.init();
         SpringServiceManager.start();
-
+        NettyGameServiceConfig config = SpringServiceManager.getSpringLoadService().getNettyGameServiceConfigService().getNettyGameServiceConfig();
+        int tcpPort=Integer.parseInt(config.getServerPort());
         NettyGameBootstrapTcpService tcpService = new NettyGameBootstrapTcpService(
-                GlobalConstants.NettyNetServerConfig.TCP.SERVER_PORT,
-                GlobalConstants.NettyNetServerConfig.TCP.SERVER_IP,
+                tcpPort,
+                config.getServerHost(),
                 GlobalConstants.NettyNetServerConfig.TCP.BOSS_THREAD_NAME,
                 GlobalConstants.NettyNetServerConfig.TCP.WORKER_THREAD_NAME,
                 new NettyTcpMessageServerInitializer(),
                 GlobalConstants.NettyNetServerConfig.TCP.SERVER_NAME);
         executorService.execute(tcpService::startServer);
 
+        NettyGameUdpConfig udpConfig = SpringServiceManager.getSpringLoadService().getNettyGameServiceConfigService().getUdpConfig();
         NettyGameBootstrapUdpService udpService = new NettyGameBootstrapUdpService(
-                GlobalConstants.NettyNetServerConfig.UDP.SERVER_PORT,
-                GlobalConstants.NettyNetServerConfig.UDP.SERVER_IP,
+                udpConfig.getServerPort(),
+                udpConfig.getServerHost(),
                 GlobalConstants.NettyNetServerConfig.UDP.EVENT_THREAD_NAME,
                 new NettyUdpMessageServerInitializer(),
                 GlobalConstants.NettyNetServerConfig.UDP.SERVER_NAME);
         executorService.execute(udpService::startServer);
 
-
+        NettyGameHttpConfig httpConfig = SpringServiceManager.getSpringLoadService().getNettyGameServiceConfigService().getHttpConfig();
         NettyGameBootstrapHttpService httpService = new NettyGameBootstrapHttpService(
-                GlobalConstants.NettyNetServerConfig.HTTP.SERVER_PORT,
-                GlobalConstants.NettyNetServerConfig.HTTP.SERVER_IP,
+                httpConfig.getServerPort(),
+                httpConfig.getServerHost(),
                 GlobalConstants.NettyNetServerConfig.HTTP.BOSS_THREAD_NAME,
                 GlobalConstants.NettyNetServerConfig.HTTP.WORKER_THREAD_NAME,
                 new NettyHttpMessageServerInitializer(),
@@ -65,9 +67,10 @@ public class Bootstrap {
         );
         executorService.execute(httpService::startServer);
 
+        NettyGameRpcConfig rpcConfig = SpringServiceManager.getSpringLoadService().getNettyGameServiceConfigService().getRpcNetConfig();
         NettyGameBootstrapRpcService rpcService = new NettyGameBootstrapRpcService(
-                GlobalConstants.NettyNetServerConfig.RPC.SERVER_PORT,
-                GlobalConstants.NettyNetServerConfig.RPC.SERVER_IP,
+                rpcConfig.getServerPort(),
+                rpcConfig.getServerHost(),
                 GlobalConstants.NettyNetServerConfig.RPC.BOSS_THREAD_NAME,
                 GlobalConstants.NettyNetServerConfig.RPC.WORKER_THREAD_NAME,
                 new NettyRpcMessageServerInitializer(),
