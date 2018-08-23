@@ -5,7 +5,6 @@ import com.twjitm.core.bootstrap.rpc.NettyGameBootstrapRpcService;
 import com.twjitm.core.bootstrap.tcp.NettyGameBootstrapTcpService;
 import com.twjitm.core.bootstrap.udp.NettyGameBootstrapUdpService;
 import com.twjitm.core.common.config.global.*;
-import com.twjitm.core.common.factory.thread.TwjThreadFactory;
 import com.twjitm.core.common.system.SystemService;
 import com.twjitm.core.initalizer.NettyHttpMessageServerInitializer;
 import com.twjitm.core.initalizer.NettyRpcMessageServerInitializer;
@@ -16,7 +15,10 @@ import com.twjitm.core.utils.logs.LoggerUtils;
 import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author EGLS0807 - [Created on 2018-07-27 11:30]
@@ -26,18 +28,27 @@ import java.util.concurrent.*;
  */
 public class Bootstrap {
     static Logger logger = LoggerUtils.getLogger(Bootstrap.class);
-    static org.slf4j.Logger loggers=LoggerFactory.getLogger(Bootstrap.class);
+    static org.slf4j.Logger loggers = LoggerFactory.getLogger(Bootstrap.class);
 
     public static void main(String[] args) {
-        ExecutorService executorService=new ThreadPoolExecutor(5, 10,
-                0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<>());
         getBuddha();
         SystemService.getSystem();
+        Bootstrap.init();
+        Bootstrap.startServer();
+    }
+
+    public static void init() {
+        loggers.info("INIT SERVER STARTING");
         SpringServiceManager.init();
         SpringServiceManager.start();
+    }
+
+    public static void startServer() {
+        ExecutorService executorService = new ThreadPoolExecutor(5, 10,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>());
         NettyGameServiceConfig config = SpringServiceManager.getSpringLoadService().getNettyGameServiceConfigService().getNettyGameServiceConfig();
-        int tcpPort=Integer.parseInt(config.getServerPort());
+        int tcpPort = Integer.parseInt(config.getServerPort());
         NettyGameBootstrapTcpService tcpService = new NettyGameBootstrapTcpService(
                 tcpPort,
                 config.getServerHost(),
@@ -78,6 +89,7 @@ public class Bootstrap {
         executorService.execute(rpcService::startServer);
 
     }
+
 
     public static void getBuddha() {
         logger.info("\n" +

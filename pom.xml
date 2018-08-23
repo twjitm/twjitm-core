@@ -359,12 +359,12 @@
             <version>3.4.9</version>
 
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
