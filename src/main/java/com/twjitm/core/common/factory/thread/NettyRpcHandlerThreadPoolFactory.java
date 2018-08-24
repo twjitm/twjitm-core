@@ -2,8 +2,8 @@ package com.twjitm.core.common.factory.thread;
 
 import com.twjitm.core.common.config.global.GlobalConstants;
 import com.twjitm.core.common.config.rpc.RpcSystemConfig;
-import com.twjitm.core.common.enums.queue.BlockingQueueType;
 import com.twjitm.core.utils.logs.LoggerUtils;
+import com.twjitm.threads.thread.BlockingQueueType;
 import com.twjitm.threads.thread.NettyThreadNameFactory;
 import com.twjitm.threads.thread.policy.*;
 import org.apache.log4j.Logger;
@@ -15,8 +15,8 @@ import java.util.concurrent.*;
  * User: 文江 Date: 2018/8/19  Time: 10:40
  * https://blog.csdn.net/baidu_23086307
  */
-public class RpcHandlerThreadPoolFactory {
-    private final Logger logger = LoggerUtils.getLogger(RpcHandlerThreadPoolFactory.class);
+public class NettyRpcHandlerThreadPoolFactory {
+    private final Logger logger = LoggerUtils.getLogger(NettyRpcHandlerThreadPoolFactory.class);
     private ExecutorService executor;
 
     /**

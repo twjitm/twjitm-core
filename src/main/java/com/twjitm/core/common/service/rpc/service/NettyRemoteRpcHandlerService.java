@@ -2,7 +2,7 @@ package com.twjitm.core.common.service.rpc.service;
 
 import com.twjitm.core.common.config.global.NettyGameServiceConfig;
 import com.twjitm.core.common.config.global.NettyGameServiceConfigService;
-import com.twjitm.core.common.factory.thread.RpcHandlerThreadPoolFactory;
+import com.twjitm.core.common.factory.thread.NettyRpcHandlerThreadPoolFactory;
 import com.twjitm.core.common.service.IService;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.threads.utils.ExecutorUtil;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class NettyRemoteRpcHandlerService implements IService {
 
-private  RpcHandlerThreadPoolFactory rpcHandlerThreadPool;
+private NettyRpcHandlerThreadPoolFactory rpcHandlerThreadPool;
 
     @Override
     public String getId() {
@@ -30,7 +30,7 @@ private  RpcHandlerThreadPoolFactory rpcHandlerThreadPool;
         if (gameConfig.isRpcOpen()) {
             //开启服务
             rpcHandlerThreadPool=  SpringServiceManager.getSpringLoadService().
-                    getRpcHandlerThreadPoolFactory();
+                    getNettyRpcHandlerThreadPoolFactory();
             rpcHandlerThreadPool.createExecutor(
                     gameConfig.getRpcConnectThreadSize(),
                     gameConfig.getRpcSendProxyThreadSize());
@@ -39,7 +39,7 @@ private  RpcHandlerThreadPoolFactory rpcHandlerThreadPool;
 
     @Override
     public void shutdown() throws Exception {
-        ExecutorUtil.shutdownAndAwaitTermination(SpringServiceManager.getSpringLoadService().getRpcHandlerThreadPoolFactory().getExecutor());
+        ExecutorUtil.shutdownAndAwaitTermination(SpringServiceManager.getSpringLoadService().getNettyRpcHandlerThreadPoolFactory().getExecutor());
     }
 
     public void submit(Runnable runnable) {

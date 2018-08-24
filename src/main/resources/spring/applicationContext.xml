@@ -28,7 +28,7 @@
         <property name="namespace" value="com.twjitm.core.common.entity.chat"/>
     </bean>
     <bean id="nettyTcpMessageFactory" class="com.twjitm.core.common.factory.NettyTcpMessageFactory"/>
-    <bean id="rpcHandlerThreadPoolFactory"  class="com.twjitm.core.common.factory.thread.RpcHandlerThreadPoolFactory"/>
+    <bean id="rpcHandlerThreadPoolFactory"  class="com.twjitm.core.common.factory.thread.NettyRpcHandlerThreadPoolFactory"/>
     <bean id="nettyRpcMethodRegistryFactory" class="com.twjitm.core.common.factory.NettyRpcMethodRegistryFactory"/>
     <bean id="nettyRpcRequestFactory" class="com.twjitm.core.common.factory.NettyRpcRequestFactory"/>
 

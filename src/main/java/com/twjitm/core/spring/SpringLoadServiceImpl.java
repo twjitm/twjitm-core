@@ -5,7 +5,7 @@ import com.twjitm.core.common.factory.MessageRegistryFactory;
 import com.twjitm.core.common.factory.NettyRpcMethodRegistryFactory;
 import com.twjitm.core.common.factory.NettyRpcRequestFactory;
 import com.twjitm.core.common.factory.NettyTcpMessageFactory;
-import com.twjitm.core.common.factory.thread.RpcHandlerThreadPoolFactory;
+import com.twjitm.core.common.factory.thread.NettyRpcHandlerThreadPoolFactory;
 import com.twjitm.core.common.factory.thread.async.poll.AsyncThreadService;
 import com.twjitm.core.common.netstack.builder.NettyTcpSessionBuilder;
 import com.twjitm.core.common.netstack.coder.decode.http.INettyNetProtoBuffHttpToMessageDecoderFactory;
@@ -79,7 +79,7 @@ public class SpringLoadServiceImpl implements IService {
      * rpc线程工厂
      */
     @Resource
-    private RpcHandlerThreadPoolFactory rpcHandlerThreadPoolFactory;
+    private NettyRpcHandlerThreadPoolFactory nettyRpcHandlerThreadPoolFactory;
 
     /**
      * rpc 请求消息构造工厂
@@ -350,8 +350,8 @@ public class SpringLoadServiceImpl implements IService {
         return nettyProtoBufRpcSerialize;
     }
 
-    public RpcHandlerThreadPoolFactory getRpcHandlerThreadPoolFactory() {
-        return rpcHandlerThreadPoolFactory;
+    public NettyRpcHandlerThreadPoolFactory getNettyRpcHandlerThreadPoolFactory() {
+        return nettyRpcHandlerThreadPoolFactory;
     }
 
     public NettyRemoteRpcHandlerService getNettyRemoteRpcHandlerService() {
