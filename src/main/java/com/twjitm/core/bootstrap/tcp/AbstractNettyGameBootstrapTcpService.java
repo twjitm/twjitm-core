@@ -1,9 +1,9 @@
 package com.twjitm.core.bootstrap.tcp;
 
-import com.twjitm.core.common.factory.thread.ThreadNameFactory;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.bootstrap.AbstractNettyGameBootstrapService;
 import com.twjitm.core.utils.logs.LoggerUtils;
+import com.twjitm.threads.thread.NettyThreadNameFactory;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -27,8 +27,8 @@ import java.net.InetSocketAddress;
  * <h3>服务器启动过程<h3/>
  * <pre>
  * {@code}
- *     listenIntoGroup = new NioEventLoopGroup(1, bossThreadNameFactory);
- *         progressGroup = new NioEventLoopGroup(0, workerThreadNameFactory);
+ *     listenIntoGroup = new NioEventLoopGroup(1, bossNettyThreadNameFactory);
+ *         progressGroup = new NioEventLoopGroup(0, workerNettyThreadNameFactory);
  *         ServerBootstrap bootstrap = new ServerBootstrap();
  *         bootstrap.group(listenIntoGroup, progressGroup)
  *                 .channel(NioServerSocketChannel.class)
@@ -62,8 +62,8 @@ public abstract class AbstractNettyGameBootstrapTcpService extends AbstractNetty
 
     private String serverName;
 
-    private ThreadNameFactory bossThreadNameFactory;
-    private ThreadNameFactory workerThreadNameFactory;
+    private NettyThreadNameFactory bossNettyThreadNameFactory;
+    private NettyThreadNameFactory workerNettyThreadNameFactory;
     private ChannelInitializer channelInitializer;
 
     private EventLoopGroup listenIntoGroup;
@@ -78,16 +78,16 @@ public abstract class AbstractNettyGameBootstrapTcpService extends AbstractNetty
         super(serverPort, new InetSocketAddress(serverIp, serverPort));
         this.serverIp = serverIp;
         this.serverPort = serverPort;
-        this.bossThreadNameFactory = new ThreadNameFactory(bossTreadName);
-        this.workerThreadNameFactory = new ThreadNameFactory(workerTreadName);
+        this.bossNettyThreadNameFactory = new NettyThreadNameFactory(bossTreadName);
+        this.workerNettyThreadNameFactory = new NettyThreadNameFactory(workerTreadName);
         this.channelInitializer = channelInitializer;
         this.serverName = serverName;
     }
 
     @Override
     public void startServer() {
-        listenIntoGroup = new NioEventLoopGroup(1, bossThreadNameFactory);
-        progressGroup = new NioEventLoopGroup(0, workerThreadNameFactory);
+        listenIntoGroup = new NioEventLoopGroup(1, bossNettyThreadNameFactory);
+        progressGroup = new NioEventLoopGroup(0, workerNettyThreadNameFactory);
         ServerBootstrap bootstrap = new ServerBootstrap();
         bootstrap.group(listenIntoGroup, progressGroup)
                 .channel(NioServerSocketChannel.class)

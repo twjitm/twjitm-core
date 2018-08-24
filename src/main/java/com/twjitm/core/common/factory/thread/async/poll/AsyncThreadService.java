@@ -3,11 +3,11 @@ package com.twjitm.core.common.factory.thread.async.poll;
 import com.twjitm.core.common.config.global.GlobalConstants;
 import com.twjitm.core.common.config.global.NettyGameServiceConfig;
 import com.twjitm.core.common.config.global.NettyGameServiceConfigService;
-import com.twjitm.core.common.factory.thread.ThreadNameFactory;
 import com.twjitm.core.common.factory.thread.async.AsyncCall;
 import com.twjitm.core.common.service.IService;
-import com.twjitm.core.common.utils.ExecutorUtil;
 import com.twjitm.core.spring.SpringServiceManager;
+import com.twjitm.threads.thread.NettyThreadNameFactory;
+import com.twjitm.threads.utils.ExecutorUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.*;
@@ -36,8 +36,8 @@ public class AsyncThreadService implements AsyncThreadPool, IService {
     public void startup() throws Exception {
         NettyGameServiceConfigService gameServerConfigService = SpringServiceManager.getSpringLoadService().getNettyGameServiceConfigService();
         NettyGameServiceConfig gameServerConfig = gameServerConfigService.getNettyGameServiceConfig();
-        ThreadNameFactory threadNameFactory =  new ThreadNameFactory(GlobalConstants.Thread.GAME_ASYNC_CALL);
-        executorService = new ThreadPoolExecutor(gameServerConfig.getAsyncThreadPoolCoreSize(), gameServerConfig.getAsyncThreadPoolMaxSize(),60L, TimeUnit.SECONDS,new LinkedBlockingQueue<Runnable>(), threadNameFactory);
+        NettyThreadNameFactory nettyThreadNameFactory =  new NettyThreadNameFactory(GlobalConstants.Thread.GAME_ASYNC_CALL);
+        executorService = new ThreadPoolExecutor(gameServerConfig.getAsyncThreadPoolCoreSize(), gameServerConfig.getAsyncThreadPoolMaxSize(),60L, TimeUnit.SECONDS,new LinkedBlockingQueue<Runnable>(), nettyThreadNameFactory);
     }
 
     @Override

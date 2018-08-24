@@ -1,12 +1,11 @@
 package com.twjitm.core.common.service.rpc.service;
 
-import com.twjitm.core.common.config.global.GlobalConstants;
 import com.twjitm.core.common.config.global.NettyGameServiceConfig;
 import com.twjitm.core.common.config.global.NettyGameServiceConfigService;
 import com.twjitm.core.common.factory.thread.RpcHandlerThreadPoolFactory;
 import com.twjitm.core.common.service.IService;
-import com.twjitm.core.common.utils.ExecutorUtil;
 import com.twjitm.core.spring.SpringServiceManager;
+import com.twjitm.threads.utils.ExecutorUtil;
 import org.springframework.stereotype.Service;
 
 /**

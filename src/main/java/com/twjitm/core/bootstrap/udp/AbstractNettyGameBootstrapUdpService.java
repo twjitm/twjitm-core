@@ -1,9 +1,9 @@
 package com.twjitm.core.bootstrap.udp;
 
-import com.twjitm.core.common.factory.thread.ThreadNameFactory;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.bootstrap.AbstractNettyGameBootstrapService;
 import com.twjitm.core.utils.logs.LoggerUtils;
+import com.twjitm.threads.thread.NettyThreadNameFactory;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.*;
@@ -29,7 +29,7 @@ public class AbstractNettyGameBootstrapUdpService extends AbstractNettyGameBoots
     private EventLoopGroup eventLoopGroup;
     private ChannelFuture serverChannelFuture;
 
-    private ThreadNameFactory eventThreadNameFactory;
+    private NettyThreadNameFactory eventNettyThreadNameFactory;
     private ChannelInitializer channelInitializer;
 
     public AbstractNettyGameBootstrapUdpService(int serverPort, String serverIp, String threadName, ChannelInitializer channelInitializer, String serverName) {
@@ -37,7 +37,7 @@ public class AbstractNettyGameBootstrapUdpService extends AbstractNettyGameBoots
         this.serverPort = serverPort;
         this.serverIp = serverIp;
         this.channelInitializer = channelInitializer;
-        this.eventThreadNameFactory = new ThreadNameFactory(threadName);
+        this.eventNettyThreadNameFactory = new NettyThreadNameFactory(threadName);
         this.channelInitializer = channelInitializer;
         this.serverName = serverName;
 
@@ -48,7 +48,7 @@ public class AbstractNettyGameBootstrapUdpService extends AbstractNettyGameBoots
     public void startServer() {
 
         Bootstrap bootstrap = new Bootstrap();
-        eventLoopGroup = new NioEventLoopGroup(1, eventThreadNameFactory);
+        eventLoopGroup = new NioEventLoopGroup(1, eventNettyThreadNameFactory);
         try {
             bootstrap.group(eventLoopGroup)
                     .channel(NioDatagramChannel.class)

@@ -1,8 +1,8 @@
 package com.twjitm.core.bootstrap.http;
 
-import com.twjitm.core.common.factory.thread.ThreadNameFactory;
 import com.twjitm.core.bootstrap.AbstractNettyGameBootstrapService;
 import com.twjitm.core.utils.logs.LoggerUtils;
+import com.twjitm.threads.thread.NettyThreadNameFactory;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.*;
@@ -27,8 +27,8 @@ public class AbstractNettyGameBootstrapHttpService extends AbstractNettyGameBoot
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
 
-    private ThreadNameFactory bossThreadNameFactory;
-    private ThreadNameFactory workerThreadNameFactory;
+    private NettyThreadNameFactory bossNettyThreadNameFactory;
+    private NettyThreadNameFactory workerNettyThreadNameFactory;
     private ChannelInitializer channelInitializer;
 
     private ChannelFuture serverChannelFuture;
@@ -38,8 +38,8 @@ public class AbstractNettyGameBootstrapHttpService extends AbstractNettyGameBoot
     public AbstractNettyGameBootstrapHttpService(int serverPort, String serverIp, String bossThreadName, String workThreadName, ChannelInitializer channelInitializer, String serverName) {
         super(serverPort, new InetSocketAddress(serverIp, serverPort));
         this.serverIp = serverIp;
-        this.bossThreadNameFactory = new ThreadNameFactory(bossThreadName);
-        this.workerThreadNameFactory = new ThreadNameFactory(workThreadName);
+        this.bossNettyThreadNameFactory = new NettyThreadNameFactory(bossThreadName);
+        this.workerNettyThreadNameFactory = new NettyThreadNameFactory(workThreadName);
         this.channelInitializer = channelInitializer;
         this.serverName = serverName;
     }
@@ -56,8 +56,8 @@ public class AbstractNettyGameBootstrapHttpService extends AbstractNettyGameBoot
 
     @Override
     public void startServer() {
-        bossGroup = new NioEventLoopGroup(1, bossThreadNameFactory);
-        workerGroup = new NioEventLoopGroup(0, workerThreadNameFactory);
+        bossGroup = new NioEventLoopGroup(1, bossNettyThreadNameFactory);
+        workerGroup = new NioEventLoopGroup(0, workerNettyThreadNameFactory);
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         serverBootstrap = serverBootstrap.group(bossGroup, workerGroup);
         serverBootstrap.channel(NioServerSocketChannel.class)

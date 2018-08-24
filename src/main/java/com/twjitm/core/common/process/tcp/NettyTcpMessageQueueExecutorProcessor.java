@@ -2,14 +2,14 @@ package com.twjitm.core.common.process.tcp;
 
 import com.twjitm.core.common.config.global.GlobalConstants;
 import com.twjitm.core.common.enums.MessageAttributeEnum;
-import com.twjitm.core.common.factory.thread.ThreadNameFactory;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.netstack.session.NettySession;
 import com.twjitm.core.common.process.NettyNetMessageProcessLogic;
-import com.twjitm.core.common.utils.ExecutorUtil;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.utils.logs.LoggerUtils;
+import com.twjitm.threads.thread.NettyThreadNameFactory;
+import com.twjitm.threads.utils.ExecutorUtil;
 import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
@@ -72,7 +72,7 @@ public class NettyTcpMessageQueueExecutorProcessor implements ITcpMessageProcess
                     "执行器没有被停止");
         }
         stop = false;
-        ThreadNameFactory factory = new ThreadNameFactory(GlobalConstants.Thread.MESSAGE_QUEUE_EXECUTOR);
+        NettyThreadNameFactory factory = new NettyThreadNameFactory(GlobalConstants.Thread.MESSAGE_QUEUE_EXECUTOR);
         this.executorService = Executors
                 .newFixedThreadPool(this.executorCoreSize, factory);
         for (int i = 0; i < this.executorCoreSize; i++) {
