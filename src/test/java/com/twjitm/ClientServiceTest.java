@@ -22,7 +22,7 @@ public class ClientServiceTest {
 
     public static void main(String[] args) {
         TestSpring.initSpring();
-         startup(ip,port);
+            startup(ip,port);
     }
 
 

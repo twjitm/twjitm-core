@@ -8,12 +8,15 @@ import com.twjitm.core.common.netstack.session.NettySession;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.utils.logs.LoggerUtils;
+import com.twjitm.core.utils.time.TimeUtils;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import org.apache.log4j.Logger;
+
+import java.util.concurrent.TimeUnit;
 
 import static io.netty.handler.codec.http.HttpResponseStatus.OK;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
@@ -34,6 +37,9 @@ public class NettyNetMessageProcessLogic {
      * @param session
      */
     public void processTcpMessage(AbstractNettyNetMessage message, NettySession session) {
+        /**
+         * 返回最准确的可用系统计时器的当前值，以毫微秒为单位
+         */
         long begin = System.nanoTime();
         IDispatcherService dispatcherService = SpringServiceManager.springLoadService.getDispatcherService();
         AbstractNettyNetProtoBufMessage response = dispatcherService.dispatcher(message);
@@ -47,6 +53,8 @@ public class NettyNetMessageProcessLogic {
             }
         }
         long end = System.nanoTime();
+       double difference=(end-begin)/1000000000;
+       logger.info("HANDLER MESSAGE CONSUME TIME "+difference+" s(秒)");
         if (logger.isInfoEnabled()) {
             logger.info("HANDLER MESSAGE CONSUME TIME=" + (end - begin));
         }

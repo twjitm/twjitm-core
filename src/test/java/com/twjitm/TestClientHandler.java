@@ -6,12 +6,14 @@ import com.twjitm.core.common.enums.MessageComm;
 import com.twjitm.core.common.proto.BaseMessageProto;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by 文江 on 2017/11/13.
  */
 public class TestClientHandler extends ChannelInboundHandlerAdapter {
-
+private Logger logger=LoggerFactory.getLogger(TestClientHandler.class);
 
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
 
@@ -39,9 +41,12 @@ public class TestClientHandler extends ChannelInboundHandlerAdapter {
         chatMessage.setReceiveSession("gaga");
         chatMessage.setReceiveUId(11);
         ctx.writeAndFlush(chatMessage);*/
-        LoginOnlineClientTcpMessage login=new LoginOnlineClientTcpMessage();
-        login.setPlayerId(Long.valueOf(10086));
-        ctx.writeAndFlush(login);
+     for(int i=0;i<1;i++){
+         LoginOnlineClientTcpMessage login=new LoginOnlineClientTcpMessage();
+         login.setPlayerId(Long.valueOf(10086));
+         ctx.writeAndFlush(login);
+         logger.info("send message to server................................");
+     }
 
     }
 
