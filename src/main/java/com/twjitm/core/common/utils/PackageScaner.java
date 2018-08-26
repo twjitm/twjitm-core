@@ -104,11 +104,11 @@ public class PackageScaner {
                         }
                     }
                 } else {
-                    //  logger.error("scaning stop,invalid package path:" + url.getFile());
+                    //  logger.error("scaning shutdown,invalid package path:" + url.getFile());
                 }
             }
         } catch (Exception e) {
-            // logger.error("scaning stop,invalid package path error" + e.toString());
+            // logger.error("scaning shutdown,invalid package path error" + e.toString());
         }
 
 

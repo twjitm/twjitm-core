@@ -12,12 +12,12 @@ public interface IMessageProcessor {
     /**
      * 启动消息处理器
      */
-    public void start();
+    public void startup();
 
     /**
      * 停止消息处理器
      */
-    public void stop();
+    public void shutdown();
 
     /**
      * 向消息队列投递消息

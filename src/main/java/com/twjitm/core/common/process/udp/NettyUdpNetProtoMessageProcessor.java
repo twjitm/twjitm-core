@@ -25,13 +25,13 @@ public class NettyUdpNetProtoMessageProcessor implements IMessageProcessor {
     }
 
     @Override
-    public void start() {
-        this.mainMessageProcessor.start();
+    public void startup() {
+        this.mainMessageProcessor.startup();
     }
 
     @Override
-    public void stop() {
-        this.mainMessageProcessor.stop();
+    public void shutdown() {
+        this.mainMessageProcessor.shutdown();
     }
 
     /**

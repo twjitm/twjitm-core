@@ -55,6 +55,9 @@
           class="com.twjitm.core.common.process.udp.NettyUdpNetProtoMessageProcessor">
         <constructor-arg ref="nettyQueueMessageExecutorProcessor"/>
     </bean>
+
+    <bean  id="nettyUdpOrderNetProtoMessageProcessor" class="com.twjitm.core.common.process.udp.NettyUdpOrderNetProtoMessageProcessor"/>
+
     <!--zookeeper 注册服务-->
     <bean id="nettyZookeeperRpcServiceRegistryService" class="com.twjitm.core.common.zookeeper.NettyZookeeperRpcServiceRegistryService"/>
     <!--zookeeper 发现服务-->

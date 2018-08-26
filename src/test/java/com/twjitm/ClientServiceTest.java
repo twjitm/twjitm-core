@@ -17,8 +17,8 @@ import java.security.MessageDigest;
  * netty客户端
  */
 public class ClientServiceTest {
-    static String ip = "47.93.22.194";
-    static int port = 11010;
+    static String ip = "127.0.0.1";
+    static int port = 21010;
 
     public static void main(String[] args) {
         TestSpring.initSpring();

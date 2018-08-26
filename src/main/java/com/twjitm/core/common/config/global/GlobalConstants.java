@@ -38,7 +38,10 @@ public class GlobalConstants {
         public static final String RPC_HANDLER = "game_message_rpc_handler";
 
         public static final String GAME_ASYNC_CALL = "game_async_call";
-        public static final String DETECT_RPC_PEND_ING ="detect_rpc_pend_ing";    }
+        public static final String DETECT_RPC_PEND_ING ="detect_rpc_pend_ing";
+
+        public static  final  String MESSAGE_UDP_ORDER_EXECUTOR="message_udp_order_executor";
+    }
 
     public static class UDPServiceConfig {
         public static final boolean IS_UDP_MESSAGE_ORDER_QUEUE_FLAG = false;

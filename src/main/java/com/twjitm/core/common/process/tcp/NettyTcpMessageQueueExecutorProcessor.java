@@ -66,7 +66,7 @@ public class NettyTcpMessageQueueExecutorProcessor implements ITcpMessageProcess
     }
 
     @Override
-    public void start() {
+    public void startup() {
         if (this.executorService != null) {
             throw new IllegalStateException(
                     "执行器没有被停止");
@@ -85,7 +85,7 @@ public class NettyTcpMessageQueueExecutorProcessor implements ITcpMessageProcess
     }
 
     @Override
-    public void stop() {
+    public void shutdown() {
         logger.info("MESSAGE STOPPING " + this);
         this.stop = true;
         if (this.executorService != null) {

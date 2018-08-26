@@ -10,6 +10,7 @@ import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.entity.udp.AbstractNettyNetProtoBufUdpMessage;
 import com.twjitm.core.common.netstack.session.udp.NettyUdpSession;
 import com.twjitm.core.common.process.udp.NettyUdpNetProtoMessageProcessor;
+import com.twjitm.core.common.process.udp.NettyUdpOrderNetProtoMessageProcessor;
 import com.twjitm.core.common.service.INettyChannleOperationService;
 import com.twjitm.core.common.service.Impl.NettyGamePlayerFindServiceImpl;
 import com.twjitm.core.player.entity.GameNettyPlayer;
@@ -54,7 +55,10 @@ public class NettyUdpServerPipeLineImpl implements INettyServerPipeLine {
         NettyGameServiceConfigService config = SpringServiceManager.getSpringLoadService().getNettyGameServiceConfigService();
         NettyGameUdpConfig udpConfig = config.getUdpConfig();
         if (udpConfig.isMessageInOrderQueue()) {
-            //有序队列
+            //有序队列异步处理
+            NettyUdpOrderNetProtoMessageProcessor orderNetProtoMessageProcessor = SpringServiceManager.getSpringLoadService().getNettyUdpOrderNetProtoMessageProcessor();
+            orderNetProtoMessageProcessor.put(message);
+
 
         } else {
             //消费者模式

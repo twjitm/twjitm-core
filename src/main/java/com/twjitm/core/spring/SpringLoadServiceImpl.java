@@ -22,6 +22,7 @@ import com.twjitm.core.common.process.tcp.INettyTcpNetProtoMessageProcess;
 import com.twjitm.core.common.process.tcp.NettyTcpMessageQueueExecutorProcessor;
 import com.twjitm.core.common.process.tcp.NettyTcpNetProtoMessageProcess;
 import com.twjitm.core.common.process.udp.NettyUdpNetProtoMessageProcessor;
+import com.twjitm.core.common.process.udp.NettyUdpOrderNetProtoMessageProcessor;
 import com.twjitm.core.common.service.INettyChannleOperationService;
 import com.twjitm.core.common.service.IService;
 import com.twjitm.core.common.service.Impl.NettyChannelOperationServiceImpl;
@@ -155,6 +156,12 @@ public class SpringLoadServiceImpl implements IService {
      */
     @Resource
     private NettyUdpNetProtoMessageProcessor nettyUdpNetProtoMessageProcessor;
+
+    /**
+     * netty udp “Ï≤Ω¥¶¿Ì
+     */
+    @Resource
+    private NettyUdpOrderNetProtoMessageProcessor nettyUdpOrderNetProtoMessageProcessor;
 
     //------------------------------------------------------------------------------------------
     /**
@@ -394,6 +401,10 @@ public class SpringLoadServiceImpl implements IService {
         return nettyZookeeperRpcServiceDiscoveryService;
     }
 
+    public NettyUdpOrderNetProtoMessageProcessor getNettyUdpOrderNetProtoMessageProcessor() {
+        return nettyUdpOrderNetProtoMessageProcessor;
+    }
+
     @Override
     public String getId() {
         return "";
@@ -404,8 +415,9 @@ public class SpringLoadServiceImpl implements IService {
         nettyGameServiceConfigService.startup();
 
         netTcpSessionLoopUpService.startup();
-        nettyTcpMessageQueueExecutorProcessor.start();
-        nettyQueueMessageExecutorProcessor.start();
+        nettyTcpMessageQueueExecutorProcessor.startup();
+        nettyQueueMessageExecutorProcessor.startup();
+        nettyUdpOrderNetProtoMessageProcessor.startup();
         asyncNettyHttpHandlerService.startup();
         nettyRpcMethodRegistryFactory.startup();
         asyncThreadService.startup();
@@ -421,7 +433,7 @@ public class SpringLoadServiceImpl implements IService {
     @Override
     public void shutdown() throws Exception {
         netTcpSessionLoopUpService.shutdown();
-        nettyTcpMessageQueueExecutorProcessor.stop();
+        nettyTcpMessageQueueExecutorProcessor.shutdown();
         asyncNettyHttpHandlerService.shutdown();
         nettyRpcMethodRegistryFactory.shutdown();
         asyncThreadService.shutdown();

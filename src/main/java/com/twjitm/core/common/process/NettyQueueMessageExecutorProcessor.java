@@ -66,7 +66,7 @@ public class NettyQueueMessageExecutorProcessor implements IMessageProcessor {
     }
 
     @Override
-    public void start() {
+    public void startup() {
         if (this.executorService != null) {
             throw new IllegalStateException(
                     "THE EXECUTORSERVICE HAS NOT BEEN STOPPED.");
@@ -84,7 +84,7 @@ public class NettyQueueMessageExecutorProcessor implements IMessageProcessor {
     }
 
     @Override
-    public void stop() {
+    public void shutdown() {
         logger.info("MESSAGE PROCESSOR EXECUTOR " + this + " STOPPING ...");
         this.stop = true;
         if (this.executorService != null) {
