@@ -12,15 +12,19 @@ import io.netty.channel.Channel;
  */
 public class NettyUdpSession extends NettySession {
     private NettyNetUdpMessageSender udpMessageSender;
+
     public NettyUdpSession(Channel channel) {
         super(channel);
-        this.udpMessageSender=new NettyNetUdpMessageSender(this);
+        this.udpMessageSender = new NettyNetUdpMessageSender(this);
     }
 
     @Override
     public void write(AbstractNettyNetMessage msg) throws Exception {
-       if(msg!=null){
-           channel.writeAndFlush(msg);
-       }
+        if (msg != null) {
+            if (channel.isActive()) {
+                channel.writeAndFlush(msg);
+            }
+
+        }
     }
 }

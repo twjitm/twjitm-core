@@ -6,7 +6,7 @@
 
     <groupId>twjitm-core</groupId>
     <artifactId>twjitm-core</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>2018-08-28-01</version>
     <build>
         <resources>
             <!-- 先指定 src/main/resources下所有文件及文件夹为资源文件 -->
@@ -392,6 +392,12 @@
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-recipes</artifactId>
             <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>twjitm-threads</groupId>
+            <artifactId>twjitm-threads</artifactId>
+            <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
 

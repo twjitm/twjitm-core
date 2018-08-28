@@ -29,7 +29,10 @@ public abstract class NettySession implements ISession {
     public void write(AbstractNettyNetMessage msg) throws Exception {
         if (msg != null) {
             try {
-                channel.writeAndFlush(msg);
+                //防止客户端被重置
+                if (channel.isActive()) {
+                    channel.writeAndFlush(msg);
+                }
             } catch (Exception e) {
                 throw new Exception();
             }
