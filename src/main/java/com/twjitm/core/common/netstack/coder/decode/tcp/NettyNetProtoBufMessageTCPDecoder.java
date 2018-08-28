@@ -12,12 +12,11 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 /**
- *
  * @author tjwitm
  * @date 2017/11/16
  */
 public class NettyNetProtoBufMessageTCPDecoder extends MessageToMessageDecoder<ByteBuf> {
-    Logger logger=LoggerUtils.getLogger(NettyNetProtoBufMessageTCPDecoder.class);
+    Logger logger = LoggerUtils.getLogger(NettyNetProtoBufMessageTCPDecoder.class);
     private final Charset charset;
     private INettyNetProtoBuffTCPToMessageDecoderFactory iNettyNetProtoBuffTCPToMessageDecoderFactory;
 

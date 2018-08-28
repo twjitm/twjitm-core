@@ -15,6 +15,7 @@ public abstract class ChatHandler extends AbstractBaseHandler {
         return chatMessageImpl(chatMessage);
     }
 
+
     public abstract AbstractNettyNetProtoBufMessage chatMessageImpl(ChatMessage chatMessage);
 
 }

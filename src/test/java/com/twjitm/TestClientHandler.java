@@ -41,7 +41,7 @@ private Logger logger=LoggerFactory.getLogger(TestClientHandler.class);
         chatMessage.setReceiveSession("gaga");
         chatMessage.setReceiveUId(11);
         ctx.writeAndFlush(chatMessage);*/
-     for(int i=0;i<1;i++){
+     for(int i=0;i<10000;i++){
          LoginOnlineClientTcpMessage login=new LoginOnlineClientTcpMessage();
          login.setPlayerId(Long.valueOf(10086));
          ctx.writeAndFlush(login);
