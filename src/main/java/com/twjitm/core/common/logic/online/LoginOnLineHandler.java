@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 public abstract class LoginOnLineHandler extends AbstractBaseHandler {
     Logger logger = LoggerUtils.getLogger(LoginOnLineHandler.class);
 
-    @MessageCommandAnntation(messagecmd = MessageComm.PLAYER_LOGIN_MESSAGE)
+    @MessageCommandAnntation(messageCmd = MessageComm.PLAYER_LOGIN_MESSAGE)
     public AbstractNettyNetMessage login(LoginOnlineClientTcpMessage message) {
         logger.info("INVOKE HANDLER BEGAN.......loginImpl()");
         return loginImpl(message);

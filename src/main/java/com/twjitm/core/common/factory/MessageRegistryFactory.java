@@ -94,8 +94,8 @@ public class MessageRegistryFactory {
             }
             MessageCommandAnntation annotation = (MessageCommandAnntation) messageClass
                     .getAnnotation(MessageCommandAnntation.class);
-            if (annotation != null && annotation.messagecmd() != null) {
-                putMessages(annotation.messagecmd().commId, messageClass);
+            if (annotation != null && annotation.messageCmd() != null) {
+                putMessages(annotation.messageCmd().commId, messageClass);
             }
         }
         */
@@ -103,11 +103,11 @@ public class MessageRegistryFactory {
         for (Class messageClass : list) {
             MessageCommandAnntation annotation = (MessageCommandAnntation) messageClass
                     .getAnnotation(MessageCommandAnntation.class);
-            if (annotation != null && annotation.messagecmd() != null) {
+            if (annotation != null && annotation.messageCmd() != null) {
                 if(logger.isInfoEnabled()){
-                    logger.info("REGISTER MESSAGE SUCCESSFUL COMM ID IS= "+annotation.messagecmd().commId+" ON CLASS "+messageClass);
+                    logger.info("REGISTER MESSAGE SUCCESSFUL COMM ID IS= "+annotation.messageCmd().commId+" ON CLASS "+messageClass);
                 }
-                putMessages(annotation.messagecmd().commId, messageClass);
+                putMessages(annotation.messageCmd().commId, messageClass);
             }
         }
 
@@ -141,12 +141,12 @@ public class MessageRegistryFactory {
                 for (Method method : methods) {
                     if (method.isAnnotationPresent(MessageCommandAnntation.class)) {
                         MessageCommandAnntation messageCommandAnnotation = (MessageCommandAnntation) method.getAnnotation(MessageCommandAnntation.class);
-                        if (messageCommandAnnotation != null && messageCommandAnnotation.messagecmd() != null) {
+                        if (messageCommandAnnotation != null && messageCommandAnnotation.messageCmd() != null) {
                             if(logger.isInfoEnabled()){
-                                logger.info("REGISTER HANDLER SUCCESSFUL COMM ID= "+messageCommandAnnotation.messagecmd().commId+" ON CLASS  "+messageClass+
+                                logger.info("REGISTER HANDLER SUCCESSFUL COMM ID= "+messageCommandAnnotation.messageCmd().commId+" ON CLASS  "+messageClass+
                                         "  AND HANDLER IS"+baseHandler);
                             }
-                            addHandler(messageCommandAnnotation.messagecmd().commId, baseHandler);
+                            addHandler(messageCommandAnnotation.messageCmd().commId, baseHandler);
                         }
                     }
                 }

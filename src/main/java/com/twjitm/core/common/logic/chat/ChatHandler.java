@@ -9,7 +9,7 @@ import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 
 public abstract class ChatHandler extends AbstractBaseHandler {
 
-    @MessageCommandAnntation(messagecmd = MessageComm.PRIVATE_CHAT_MESSAGE)
+    @MessageCommandAnntation(messageCmd = MessageComm.PRIVATE_CHAT_MESSAGE)
     public AbstractNettyNetProtoBufMessage chatMessage(ChatMessage chatMessage) {
         System.out.println("实现代理注解方法了");
         return chatMessageImpl(chatMessage);

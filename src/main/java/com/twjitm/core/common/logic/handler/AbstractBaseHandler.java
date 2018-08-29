@@ -22,7 +22,7 @@ public abstract class AbstractBaseHandler implements BaseHandler {
             if (method.isAnnotationPresent(MessageCommandAnntation.class)) {
                 MessageCommandAnntation messageCommandAnnotation = method.getAnnotation(MessageCommandAnntation.class);
                 if (messageCommandAnnotation != null) {
-                    handlerMethods.put(messageCommandAnnotation.messagecmd().commId, method);
+                    handlerMethods.put(messageCommandAnnotation.messageCmd().commId, method);
                 }
             }
         }

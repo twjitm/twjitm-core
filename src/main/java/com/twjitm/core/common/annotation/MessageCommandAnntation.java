@@ -12,5 +12,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface MessageCommandAnntation {
-    MessageComm messagecmd();
+    MessageComm messageCmd();
 }

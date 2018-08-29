@@ -12,7 +12,7 @@ import io.netty.handler.codec.CodecException;
 /**
  * 正常返回消息对象
  */
-@MessageCommandAnntation(messagecmd = MessageComm.MESSAGE_TRUE_RETURN)
+@MessageCommandAnntation(messageCmd = MessageComm.MESSAGE_TRUE_RETURN)
 public class ResponseMessage extends AbstractNettyNetProtoBufMessage {
 
 

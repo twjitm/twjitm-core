@@ -11,7 +11,7 @@ import io.netty.handler.codec.CodecException;
  * @company http://www.g2us.com/
  * @jdk java version "1.8.0_77"
  */
-@MessageCommandAnntation(messagecmd = MessageComm.UDP_ONLINE_HEART_MESSAGE)
+@MessageCommandAnntation(messageCmd = MessageComm.UDP_ONLINE_HEART_MESSAGE)
 public class OnlineMessageUdpMessage extends AbstractNettyNetProtoBufUdpMessage {
     private long id;
 

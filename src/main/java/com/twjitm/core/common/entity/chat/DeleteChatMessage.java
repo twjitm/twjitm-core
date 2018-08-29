@@ -8,7 +8,7 @@ import io.netty.handler.codec.CodecException;
 /**
  * 删除聊天消息
  */
-@MessageCommandAnntation(messagecmd = MessageComm.DELETE_CHAT_MESSAGE)
+@MessageCommandAnntation(messageCmd = MessageComm.DELETE_CHAT_MESSAGE)
 public class DeleteChatMessage extends AbstractNettyNetProtoBufMessage {
 
 
