@@ -7,7 +7,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
 
 /**
- * Created by нд╫╜ on 2018/5/18.
+ * Created by О©╫д╫О©╫ on 2018/5/18.
  */
 public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
@@ -19,7 +19,7 @@ public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
-        System.out.println("client received"+msg.toString(CharsetUtil.UTF_8));
+        System.out.println("client hdfhdfdfh received"+msg.toString(CharsetUtil.UTF_8));
     }
 
     @Override
