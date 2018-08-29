@@ -1,0 +1,38 @@
+17:55:17,730 - NettyTransactionRedisServiceImpl.returnBrokenResource - 2018-08-27 17:55:17:::::setString
+17:55:17,734 - NettyTransactionRedisServiceImpl.returnBrokenResource - java.lang.NullPointerException
+java.lang.NullPointerException
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.setString(NettyTransactionRedisServiceImpl.java:204)
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.setString(NettyTransactionRedisServiceImpl.java:196)
+	at com.twjitm.transaction.redis.RedisServiceTest.main(RedisServiceTest.java:20)
+17:55:17,736 - NettyTransactionRedisServiceImpl.returnBrokenResource - 2018-08-27 17:55:17:::::expire:twjitm
+17:55:17,737 - NettyTransactionRedisServiceImpl.returnBrokenResource - java.lang.NullPointerException
+java.lang.NullPointerException
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.expire(NettyTransactionRedisServiceImpl.java:103)
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.setString(NettyTransactionRedisServiceImpl.java:212)
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.setString(NettyTransactionRedisServiceImpl.java:196)
+	at com.twjitm.transaction.redis.RedisServiceTest.main(RedisServiceTest.java:20)
+17:55:17,737 - NettyTransactionRedisServiceImpl.returnBrokenResource - 2018-08-27 17:55:17:::::getString
+17:55:17,737 - NettyTransactionRedisServiceImpl.returnBrokenResource - java.lang.NullPointerException
+java.lang.NullPointerException
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.getString(NettyTransactionRedisServiceImpl.java:231)
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.getString(NettyTransactionRedisServiceImpl.java:222)
+	at com.twjitm.transaction.redis.RedisServiceTest.main(RedisServiceTest.java:21)
+17:57:44,279 - NettyTransactionRedisServiceImpl.returnBrokenResource - 2018-08-27 17:57:44:::::setString
+17:57:44,280 - NettyTransactionRedisServiceImpl.returnBrokenResource - java.lang.NullPointerException
+java.lang.NullPointerException
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.setString(NettyTransactionRedisServiceImpl.java:204)
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.setString(NettyTransactionRedisServiceImpl.java:196)
+	at com.twjitm.transaction.redis.RedisServiceTest.main(RedisServiceTest.java:20)
+17:57:44,282 - NettyTransactionRedisServiceImpl.returnBrokenResource - 2018-08-27 17:57:44:::::expire:twjitm
+17:57:44,282 - NettyTransactionRedisServiceImpl.returnBrokenResource - java.lang.NullPointerException
+java.lang.NullPointerException
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.expire(NettyTransactionRedisServiceImpl.java:103)
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.setString(NettyTransactionRedisServiceImpl.java:212)
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.setString(NettyTransactionRedisServiceImpl.java:196)
+	at com.twjitm.transaction.redis.RedisServiceTest.main(RedisServiceTest.java:20)
+17:57:44,282 - NettyTransactionRedisServiceImpl.returnBrokenResource - 2018-08-27 17:57:44:::::getString
+17:57:44,282 - NettyTransactionRedisServiceImpl.returnBrokenResource - java.lang.NullPointerException
+java.lang.NullPointerException
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.getString(NettyTransactionRedisServiceImpl.java:231)
+	at com.twjitm.transaction.service.redis.impl.NettyTransactionRedisServiceImpl.getString(NettyTransactionRedisServiceImpl.java:222)
+	at com.twjitm.transaction.redis.RedisServiceTest.main(RedisServiceTest.java:21)
