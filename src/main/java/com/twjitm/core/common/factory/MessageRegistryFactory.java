@@ -1,7 +1,7 @@
 package com.twjitm.core.common.factory;
 
 
-import com.twjitm.core.common.annotation.MessageCommandAnntation;
+import com.twjitm.core.common.annotation.MessageCommandAnnotation;
 import com.twjitm.core.common.enums.MessageComm;
 import com.twjitm.core.common.logic.handler.AbstractBaseHandler;
 import com.twjitm.core.common.logic.handler.BaseHandler;
@@ -92,8 +92,8 @@ public class MessageRegistryFactory {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            MessageCommandAnntation annotation = (MessageCommandAnntation) messageClass
-                    .getAnnotation(MessageCommandAnntation.class);
+            MessageCommandAnnotation annotation = (MessageCommandAnnotation) messageClass
+                    .getAnnotation(MessageCommandAnnotation.class);
             if (annotation != null && annotation.messageCmd() != null) {
                 putMessages(annotation.messageCmd().commId, messageClass);
             }
@@ -101,8 +101,8 @@ public class MessageRegistryFactory {
         */
         List<Class> list = PackageScaner.getSubClasses(AbstractNettyNetProtoBufMessage.class, "com.twjitm.core.*.*");
         for (Class messageClass : list) {
-            MessageCommandAnntation annotation = (MessageCommandAnntation) messageClass
-                    .getAnnotation(MessageCommandAnntation.class);
+            MessageCommandAnnotation annotation = (MessageCommandAnnotation) messageClass
+                    .getAnnotation(MessageCommandAnnotation.class);
             if (annotation != null && annotation.messageCmd() != null) {
                 if(logger.isInfoEnabled()){
                     logger.info("REGISTER MESSAGE SUCCESSFUL COMM ID IS= "+annotation.messageCmd().commId+" ON CLASS "+messageClass);
@@ -139,8 +139,8 @@ public class MessageRegistryFactory {
                 abstractBaseHandler.init();
                 Method[] methods = messageClass.getMethods();
                 for (Method method : methods) {
-                    if (method.isAnnotationPresent(MessageCommandAnntation.class)) {
-                        MessageCommandAnntation messageCommandAnnotation = (MessageCommandAnntation) method.getAnnotation(MessageCommandAnntation.class);
+                    if (method.isAnnotationPresent(MessageCommandAnnotation.class)) {
+                        MessageCommandAnnotation messageCommandAnnotation = (MessageCommandAnnotation) method.getAnnotation(MessageCommandAnnotation.class);
                         if (messageCommandAnnotation != null && messageCommandAnnotation.messageCmd() != null) {
                             if(logger.isInfoEnabled()){
                                 logger.info("REGISTER HANDLER SUCCESSFUL COMM ID= "+messageCommandAnnotation.messageCmd().commId+" ON CLASS  "+messageClass+

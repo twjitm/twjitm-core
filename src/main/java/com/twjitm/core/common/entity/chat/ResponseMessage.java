@@ -1,6 +1,6 @@
 package com.twjitm.core.common.entity.chat;
 
-import com.twjitm.core.common.annotation.MessageCommandAnntation;
+import com.twjitm.core.common.annotation.MessageCommandAnnotation;
 import com.twjitm.core.common.enums.MessageComm;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import io.netty.handler.codec.CodecException;
@@ -12,7 +12,7 @@ import io.netty.handler.codec.CodecException;
 /**
  * 正常返回消息对象
  */
-@MessageCommandAnntation(messageCmd = MessageComm.MESSAGE_TRUE_RETURN)
+@MessageCommandAnnotation(messageCmd = MessageComm.MESSAGE_TRUE_RETURN)
 public class ResponseMessage extends AbstractNettyNetProtoBufMessage {
 
 

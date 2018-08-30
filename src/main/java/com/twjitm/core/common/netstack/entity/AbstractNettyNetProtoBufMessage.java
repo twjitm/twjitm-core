@@ -1,6 +1,6 @@
 package com.twjitm.core.common.netstack.entity;
 
-import com.twjitm.core.common.annotation.MessageCommandAnntation;
+import com.twjitm.core.common.annotation.MessageCommandAnnotation;
 import io.netty.handler.codec.CodecException;
 
 
@@ -25,9 +25,9 @@ public abstract class AbstractNettyNetProtoBufMessage extends AbstractNettyNetMe
     }
 
     protected void initHeadCommId() {
-        MessageCommandAnntation messageCommandAnntation = this.getClass().getAnnotation(MessageCommandAnntation.class);
-         if(messageCommandAnntation!=null){
-             getNetMessageHead().setCmd((short) messageCommandAnntation.messageCmd().commId);
+        MessageCommandAnnotation messageCommandAnnotation = this.getClass().getAnnotation(MessageCommandAnnotation.class);
+         if(messageCommandAnnotation !=null){
+             getNetMessageHead().setCmd((short) messageCommandAnnotation.messageCmd().commId);
          }
     }
     /*释放message的body*/

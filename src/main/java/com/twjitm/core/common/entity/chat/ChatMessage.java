@@ -1,6 +1,6 @@
 package com.twjitm.core.common.entity.chat;
 
-import com.twjitm.core.common.annotation.MessageCommandAnntation;
+import com.twjitm.core.common.annotation.MessageCommandAnnotation;
 import com.twjitm.core.common.enums.MessageComm;
 import com.twjitm.core.common.netstack.entity.tcp.AbstractNettyNetProtoBufTcpMessage;
 import com.twjitm.core.common.proto.BaseMessageProto;
@@ -10,7 +10,7 @@ import io.netty.handler.codec.CodecException;
  * Created by 文江 on 2017/10/27.
  * 基于tcp或者是udp的聊天消息：聊天消息类型
  */
-@MessageCommandAnntation(messageCmd = MessageComm.PRIVATE_CHAT_MESSAGE)
+@MessageCommandAnnotation(messageCmd = MessageComm.PRIVATE_CHAT_MESSAGE)
 public class ChatMessage extends AbstractNettyNetProtoBufTcpMessage {
     private int chatType;//文件，语言，文字，等
     private String context;//消息内容

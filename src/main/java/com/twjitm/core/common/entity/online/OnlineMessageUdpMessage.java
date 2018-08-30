@@ -1,6 +1,6 @@
 package com.twjitm.core.common.entity.online;
 
-import com.twjitm.core.common.annotation.MessageCommandAnntation;
+import com.twjitm.core.common.annotation.MessageCommandAnnotation;
 import com.twjitm.core.common.enums.MessageComm;
 import com.twjitm.core.common.netstack.entity.udp.AbstractNettyNetProtoBufUdpMessage;
 import com.twjitm.core.common.proto.OnlineClientUdpMessageBuf;
@@ -11,7 +11,7 @@ import io.netty.handler.codec.CodecException;
  * @company http://www.g2us.com/
  * @jdk java version "1.8.0_77"
  */
-@MessageCommandAnntation(messageCmd = MessageComm.UDP_ONLINE_HEART_MESSAGE)
+@MessageCommandAnnotation(messageCmd = MessageComm.UDP_ONLINE_HEART_MESSAGE)
 public class OnlineMessageUdpMessage extends AbstractNettyNetProtoBufUdpMessage {
     private long id;
 

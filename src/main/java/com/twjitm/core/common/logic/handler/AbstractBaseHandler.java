@@ -1,7 +1,7 @@
 package com.twjitm.core.common.logic.handler;
 
 
-import com.twjitm.core.common.annotation.MessageCommandAnntation;
+import com.twjitm.core.common.annotation.MessageCommandAnnotation;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -19,8 +19,8 @@ public abstract class AbstractBaseHandler implements BaseHandler {
         handlerMethods = new HashMap<>();
         Method[] methods = this.getClass().getMethods();
         for (Method method : methods) {
-            if (method.isAnnotationPresent(MessageCommandAnntation.class)) {
-                MessageCommandAnntation messageCommandAnnotation = method.getAnnotation(MessageCommandAnntation.class);
+            if (method.isAnnotationPresent(MessageCommandAnnotation.class)) {
+                MessageCommandAnnotation messageCommandAnnotation = method.getAnnotation(MessageCommandAnnotation.class);
                 if (messageCommandAnnotation != null) {
                     handlerMethods.put(messageCommandAnnotation.messageCmd().commId, method);
                 }

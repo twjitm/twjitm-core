@@ -1,14 +1,14 @@
 package com.twjitm.core.common.entity.chat;
 
 
-import com.twjitm.core.common.annotation.MessageCommandAnntation;
+import com.twjitm.core.common.annotation.MessageCommandAnnotation;
 import com.twjitm.core.common.enums.MessageComm;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import io.netty.handler.codec.CodecException;
 
 import java.util.List;
 
-@MessageCommandAnntation(messageCmd = MessageComm.PUBLIC_CHART_MESSAGE)
+@MessageCommandAnnotation(messageCmd = MessageComm.PUBLIC_CHART_MESSAGE)
 public class BoradCastAllChatMessage extends AbstractNettyNetProtoBufMessage {
     private List<ChatMessage> messages;
 

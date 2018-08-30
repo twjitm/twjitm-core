@@ -1,6 +1,6 @@
 package com.twjitm.core.common.entity.online;
 
-import com.twjitm.core.common.annotation.MessageCommandAnntation;
+import com.twjitm.core.common.annotation.MessageCommandAnnotation;
 import com.twjitm.core.common.enums.MessageComm;
 import com.twjitm.core.common.netstack.entity.http.AbstractNettyNetProtoBufHttpMessage;
 import com.twjitm.core.common.proto.OnlineHeratClientHttpMessageBuf;
@@ -11,7 +11,7 @@ import io.netty.handler.codec.CodecException;
  * @company http://www.g2us.com/
  * @jdk java version "1.8.0_77"
  */
-@MessageCommandAnntation(messageCmd = MessageComm.HTTP_ONLINE_HEART_MESSAGE)
+@MessageCommandAnnotation(messageCmd = MessageComm.HTTP_ONLINE_HEART_MESSAGE)
 public class OnlineHeartClientHttpMessage extends AbstractNettyNetProtoBufHttpMessage {
     private long playerId;
     private String playerName;
