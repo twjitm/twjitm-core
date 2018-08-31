@@ -23,8 +23,8 @@ import java.lang.reflect.Method;
  * ------------------------------
  * msg1,mes2,msg3,msg4,msg5......
  * ------------------------------
- * head                      last
- *
+ * head   /\                 last
+ * |
  * Object object = method.invoke(baseHandler,message);
  * use proxy pattern progress message :tcp.udp stream in the dispatcher handler
  * and add rpc message dispatcher handler in this
@@ -50,18 +50,19 @@ public class DispatcherServiceImpl implements IDispatcherService {
             AbstractNettyNetProtoBufMessage baseMessage = null;
             if (object != null) {
                 baseMessage = (AbstractNettyNetProtoBufMessage) object;
-            }else {
-                baseMessage= (AbstractNettyNetProtoBufMessage) SpringServiceManager.getSpringLoadService().getNettyTcpMessageFactory().createCommonErrorResponseMessage(1,1);
+            } else {
+                baseMessage = (AbstractNettyNetProtoBufMessage) SpringServiceManager.getSpringLoadService().getNettyTcpMessageFactory().createCommonErrorResponseMessage(1, 1);
             }
 
-            if(logger.isDebugEnabled()){
-                logger.info("INVOKE MESSAGE SUCCESSFUL MESSAGE COMM ID IS:"+commId);
+            if (logger.isDebugEnabled()) {
+                logger.info("INVOKE MESSAGE SUCCESSFUL MESSAGE COMM ID IS:" + commId);
             }
             return baseMessage;
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
-        return null;
+        AbstractNettyNetMessage error = SpringServiceManager.getSpringLoadService().getNettyTcpMessageFactory().createCommonErrorResponseMessage(1, 1);
+        return (AbstractNettyNetProtoBufMessage) error;
     }
 
 
@@ -74,7 +75,7 @@ public class DispatcherServiceImpl implements IDispatcherService {
         String methodName = request.getMethodName();
         Class<?>[] parameterTypes = request.getParameterTypes();
         Object[] parameters = request.getParameters();
-        if(logger.isInfoEnabled()) {
+        if (logger.isInfoEnabled()) {
             logger.info(methodName);
             logger.info(serviceClass.getName());
             for (int i = 0; i < parameterTypes.length; ++i) {

@@ -1,5 +1,6 @@
 package com.twjitm.core.spring;
 
+import com.twjitm.core.common.check.NettyLifeCycleCheckService;
 import com.twjitm.core.common.config.global.NettyGameServiceConfigService;
 import com.twjitm.core.common.factory.MessageRegistryFactory;
 import com.twjitm.core.common.factory.NettyRpcMethodRegistryFactory;
@@ -246,6 +247,9 @@ public class SpringLoadServiceImpl implements IService {
     @Resource
     private NettyUdpServerPipeLineImpl nettyUdpServerPipeLine;
     //-------------------------------------------------------------------------------------------
+    /**
+     * 异步http handler 服务
+     */
     @Resource
     private AsyncNettyHttpHandlerService asyncNettyHttpHandlerService;
 
@@ -258,7 +262,12 @@ public class SpringLoadServiceImpl implements IService {
      */
     @Resource
     private NettyProtoBufRpcSerialize nettyProtoBufRpcSerialize;
-
+    //-----------------------------------------------------------------------------------------
+    /**
+     * 周期性游戏检测
+     */
+    @Resource
+    NettyLifeCycleCheckService nettyLifeCycleCheckService;
 
     public TestService getTestService() {
         return testService;
@@ -405,15 +414,23 @@ public class SpringLoadServiceImpl implements IService {
         return nettyUdpOrderNetProtoMessageProcessor;
     }
 
-    @Override
-    public String getId() {
-        return "";
+    public NettyLifeCycleCheckService getNettyLifeCycleCheckService() {
+        return nettyLifeCycleCheckService;
     }
 
     @Override
+    public String getId() {
+        return SpringLoadServiceImpl.class.getSimpleName();
+    }
+
+    /**
+     * 顺序不能改。否者有不可预知的bug
+     *
+     * @throws Exception
+     */
+    @Override
     public void startup() throws Exception {
         nettyGameServiceConfigService.startup();
-
         netTcpSessionLoopUpService.startup();
         nettyTcpMessageQueueExecutorProcessor.startup();
         nettyQueueMessageExecutorProcessor.startup();
@@ -427,6 +444,7 @@ public class SpringLoadServiceImpl implements IService {
         nettyRpcClientConnectService.startup();
         nettyZookeeperRpcServiceRegistryService.startup();
         nettyZookeeperRpcServiceDiscoveryService.startup();
+        nettyLifeCycleCheckService.startup();
 
     }
 
@@ -443,6 +461,7 @@ public class SpringLoadServiceImpl implements IService {
         nettyGameServiceConfigService.shutdown();
         nettyZookeeperRpcServiceRegistryService.shutdown();
         nettyZookeeperRpcServiceDiscoveryService.shutdown();
+        nettyLifeCycleCheckService.shutdown();
     }
 
 

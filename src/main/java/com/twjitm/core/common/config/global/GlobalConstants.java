@@ -1,5 +1,7 @@
 package com.twjitm.core.common.config.global;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by 文江 on 2017/11/25.
  */
@@ -41,6 +43,7 @@ public class GlobalConstants {
         public static final String DETECT_RPC_PEND_ING ="detect_rpc_pend_ing";
 
         public static  final  String MESSAGE_UDP_ORDER_EXECUTOR="message_udp_order_executor";
+        public static  final  String POLL_LIFE_CYCLE="poll_life_cycle";
     }
 
     public static class UDPServiceConfig {
@@ -106,6 +109,12 @@ public class GlobalConstants {
 
         }
 
+    }
+    public static class PollTimer{
+        public static final  int tickDuration=20;
+        public static final TimeUnit timeUnit = TimeUnit.SECONDS;
+
+        public static final  int ticksPerPoll=60;
     }
 
 

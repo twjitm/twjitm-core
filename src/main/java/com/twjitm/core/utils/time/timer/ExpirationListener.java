@@ -1,0 +1,1 @@
+package com.twjitm.core.utils.time.timer;/** * @author EGLS0807 - [Created on 2018-08-31 10:36] * @company http://www.g2us.com/ * @jdk java version "1.8.0_77" */public interface ExpirationListener<E> {    /**     * 过期的任务清理     *     * @param expireObject     */    void expired(E expireObject);}

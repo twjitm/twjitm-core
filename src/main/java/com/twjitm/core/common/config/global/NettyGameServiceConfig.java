@@ -70,6 +70,11 @@ public class NettyGameServiceConfig {
      */
     private boolean zookeeperOpen;
 
+    /**
+     * 是否开启生命周期任务
+     */
+    private boolean lifeCycleOpen;
+
 
     public void init() {
         String config = GlobalConstants.ConfigFile.GAME_SERVER_RPROERTIES_FILE_PATH;
@@ -90,6 +95,7 @@ public class NettyGameServiceConfig {
             rpcSendProxyThreadSize = Integer.parseInt(properties.getProperty("rpcSendProxyThreadSize"));
             rpcOpen = Boolean.parseBoolean(properties.getProperty("rpcOpen"));
             zookeeperOpen = Boolean.parseBoolean(properties.getProperty("zookeeperOpen"));
+            lifeCycleOpen=Boolean.parseBoolean(properties.getProperty("lifeCycleOpen"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -190,5 +196,13 @@ public class NettyGameServiceConfig {
 
     public void setServerId(String serverId) {
         this.serverId = serverId;
+    }
+
+    public boolean isLifeCycleOpen() {
+        return lifeCycleOpen;
+    }
+
+    public void setLifeCycleOpen(boolean lifeCycleOpen) {
+        this.lifeCycleOpen = lifeCycleOpen;
     }
 }

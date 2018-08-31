@@ -1,7 +1,6 @@
 package com.twjitm.core.service.dispatcher;
 
 
-import com.google.protobuf.AbstractMessage;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
 import com.twjitm.core.common.netstack.entity.rpc.NettyRpcRequestMessage;

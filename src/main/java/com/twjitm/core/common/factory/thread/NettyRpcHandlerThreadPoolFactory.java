@@ -8,6 +8,7 @@ import com.twjitm.threads.thread.NettyThreadNameFactory;
 import com.twjitm.threads.thread.policy.*;
 import org.apache.log4j.Logger;
 
+import java.util.Objects;
 import java.util.concurrent.*;
 
 /**
@@ -66,8 +67,8 @@ public class NettyRpcHandlerThreadPoolFactory {
     public Executor createExecutor(int threads, int queues) {
         String name = GlobalConstants.Thread.RPC_HANDLER;
         ThreadPoolExecutor executor = new ThreadPoolExecutor(threads, threads,
-                0, TimeUnit.MILLISECONDS, createBlockingQueue(queues),
-                new NettyThreadNameFactory(name, false), createPolicy());
+                0, TimeUnit.MILLISECONDS, Objects.requireNonNull(createBlockingQueue(queues)),
+                new NettyThreadNameFactory(name, false), Objects.requireNonNull(createPolicy()));
         this.executor = executor;
         return executor;
     }
