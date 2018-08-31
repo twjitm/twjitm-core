@@ -11,6 +11,7 @@ import com.twjitm.core.initalizer.NettyRpcMessageServerInitializer;
 import com.twjitm.core.initalizer.NettyTcpMessageServerInitializer;
 import com.twjitm.core.initalizer.NettyUdpMessageServerInitializer;
 import com.twjitm.core.spring.SpringServiceManager;
+import com.twjitm.core.test.AsyncExecutorService;
 import com.twjitm.core.utils.logs.LoggerUtils;
 import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,10 @@ public class Bootstrap {
         getBuddha();
         SystemService.getSystem();
         Bootstrap.init();
-        Bootstrap.startServer();
+      //  Bootstrap.startServer();
+        AsyncExecutorService asyncExecutorService = SpringServiceManager.getSpringLoadService().getAsyncExecutorService();
+        asyncExecutorService.saveUser(null);
+        logger.info("eeee");
     }
 
     public static void init() {

@@ -17,7 +17,8 @@ public class SpringServiceManager {
 
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
                 "classpath:spring/applicationContext.xml",
-                "classpath:spring/applicationContext-spring.xml");
+                "classpath:spring/applicationContext-spring.xml",
+                "classpath:spring/applicationContext-async-task.xml");
 
         logger.info("--------------------load spring end------------------");
         springLoadService = (SpringLoadServiceImpl) applicationContext.getBean("springLoadService");
@@ -25,27 +26,29 @@ public class SpringServiceManager {
 
     public static SpringLoadServiceImpl springLoadService;
 
-    public static void start(){
+    public static void start() {
         try {
             springLoadService.startup();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public static  void shutdown(){
+
+    public static void shutdown() {
         try {
             logger.info("shutdown local server begin");
             springLoadService.shutdown();
             logger.info("shutdown local server success");
         } catch (Exception e) {
-            if(logger.isDebugEnabled()){
-                logger.error("shutdown local server error",e.getCause());
+            if (logger.isDebugEnabled()) {
+                logger.error("shutdown local server error", e.getCause());
             }
             e.printStackTrace();
         }
     }
-    public static SpringLoadServiceImpl getSpringLoadService(){
-       return springLoadService;
+
+    public static SpringLoadServiceImpl getSpringLoadService() {
+        return springLoadService;
     }
 
 }

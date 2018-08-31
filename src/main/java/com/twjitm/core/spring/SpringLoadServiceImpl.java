@@ -39,6 +39,7 @@ import com.twjitm.core.common.zookeeper.NettyZookeeperRpcServiceRegistryService;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
 import com.twjitm.core.service.test.TestService;
 import com.twjitm.core.service.user.UserService;
+import com.twjitm.core.test.AsyncExecutorService;
 import com.twjitm.core.utils.uuid.LongIdGenerator;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +56,8 @@ public class SpringLoadServiceImpl implements IService {
     private TestService testService;
     @Resource
     private UserService userService;
+    @Resource
+    AsyncExecutorService asyncExecutorService;
 
     //-----------------------------------------------------------------------------------------
     /**
@@ -268,6 +271,10 @@ public class SpringLoadServiceImpl implements IService {
      */
     @Resource
     NettyLifeCycleCheckService nettyLifeCycleCheckService;
+
+    public AsyncExecutorService getAsyncExecutorService() {
+        return asyncExecutorService;
+    }
 
     public TestService getTestService() {
         return testService;
