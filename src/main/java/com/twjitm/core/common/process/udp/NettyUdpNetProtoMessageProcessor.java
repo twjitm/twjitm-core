@@ -45,6 +45,7 @@ public class NettyUdpNetProtoMessageProcessor implements IMessageProcessor {
         if (!GlobalConstants.GameServiceRuntime.IS_OPEN) {
             return;
         }
+        logger.info("放入消息执行队列"+msg.toString());
         this.mainMessageProcessor.put(msg);
     }
 

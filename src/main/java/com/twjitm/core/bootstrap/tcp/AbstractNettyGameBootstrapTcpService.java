@@ -17,14 +17,14 @@ import java.net.InetSocketAddress;
 
 
 /**
- * ³éÏóµÄtcpĞ­Òé·şÎñÆô¶¯Àà£¬
- * ±¾ÀàÌá¹©ÁËÆô¶¯tcpĞ­Òé·şÎñµÄ³éÏóÀà£¬Ö÷ÒªÓÃÀ´ÊµÏÖÆô¶¯Æô¶¯·şÎñÆ÷£¬
- * ¶ø¾ßÌåµÄ²Ù×÷ĞèÒªÓÉ×ÓÀàÀ´ÊµÏÖ¡£ÊµÏÖÀàĞèÒª½«»ù±¾ĞÅÏ¢´«µİ½øÀ´
- * ²Å¿ÉÒÔ³É¹¦µÄÆô¶¯·şÎñ¡£
- * <h3>²»Òª°ÑÕâ¸öÀàºÍ{@link  com.twjitm.core.bootstrap.udp.AbstractNettyGameBootstrapUdpService},
- * {@link com.twjitm.core.bootstrap.http.AbstractNettyGameBootstrapHttpService}ÀàÏà»¥µ÷ÓÃ<h3/>
+ * æŠ½è±¡çš„tcpåè®®æœåŠ¡å¯åŠ¨ç±»ï¼Œ
+ * æœ¬ç±»æä¾›äº†å¯åŠ¨tcpåè®®æœåŠ¡çš„æŠ½è±¡ç±»ï¼Œä¸»è¦ç”¨æ¥å®ç°å¯åŠ¨å¯åŠ¨æœåŠ¡å™¨ï¼Œ
+ * è€Œå…·ä½“çš„æ“ä½œéœ€è¦ç”±å­ç±»æ¥å®ç°ã€‚å®ç°ç±»éœ€è¦å°†åŸºæœ¬ä¿¡æ¯ä¼ é€’è¿›æ¥
+ * æ‰å¯ä»¥æˆåŠŸçš„å¯åŠ¨æœåŠ¡ã€‚
+ * <h3>ä¸è¦æŠŠè¿™ä¸ªç±»å’Œ{@link  com.twjitm.core.bootstrap.udp.AbstractNettyGameBootstrapUdpService},
+ * {@link com.twjitm.core.bootstrap.http.AbstractNettyGameBootstrapHttpService}ç±»ç›¸äº’è°ƒç”¨<h3/>
  *
- * <h3>·şÎñÆ÷Æô¶¯¹ı³Ì<h3/>
+ * <h3>æœåŠ¡å™¨å¯åŠ¨è¿‡ç¨‹<h3/>
  * <pre>
  * {@code}
  *     listenIntoGroup = new NioEventLoopGroup(1, bossNettyThreadNameFactory);
@@ -51,7 +51,7 @@ import java.net.InetSocketAddress;
  *             logger.info(serverName + "SERVER WORLD STOP");
  *         }
  *
- * @author ÎÄ½­
+ * @author æ–‡æ±Ÿ
  * @date 2018/4/16
 
  */

@@ -13,6 +13,7 @@ import com.twjitm.core.initalizer.NettyUdpMessageServerInitializer;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.test.AsyncExecutorService;
 import com.twjitm.core.utils.logs.LoggerUtils;
+import com.twjitm.threads.thread.NettyThreadNameFactory;
 import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,7 +51,9 @@ public class Bootstrap {
     public static void startServer() {
         ExecutorService executorService = new ThreadPoolExecutor(5, 10,
                 0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<>());
+                new LinkedBlockingQueue<>(), new
+                NettyThreadNameFactory("bootstrap_service_thread_"));
+
         NettyGameServiceConfig config = SpringServiceManager.getSpringLoadService().getNettyGameServiceConfigService().getNettyGameServiceConfig();
         int tcpPort = Integer.parseInt(config.getServerPort());
         NettyGameBootstrapTcpService tcpService = new NettyGameBootstrapTcpService(
@@ -120,33 +123,4 @@ public class Bootstrap {
                 "//           Buddha bless the never down never BUG               //\n");
     }
 
-    public static void successful() {
-        //http://patorjk.com/software/taag
-        logger.info("\n" +
-                "                                                                                                                                                                              \n" +
-                "                                                                                                                                                                              \n" +
-                "                                                                                                                                  ffffffffffffffff                    lllllll \n" +
-                "                                                                                                                                 f::::::::::::::::f                   l:::::l \n" +
-                "                                                                                                                                f::::::::::::::::::f                  l:::::l \n" +
-                "                                                                                                                                f::::::fffffff:::::f                  l:::::l \n" +
-                "    ssssssssss   uuuuuu    uuuuuu      cccccccccccccccc   cccccccccccccccc    eeeeeeeeeeee        ssssssssss      ssssssssss    f:::::f       ffffffuuuuuu    uuuuuu   l::::l \n" +
-                "  ss::::::::::s  u::::u    u::::u    cc:::::::::::::::c cc:::::::::::::::c  ee::::::::::::ee    ss::::::::::s   ss::::::::::s   f:::::f             u::::u    u::::u   l::::l \n" +
-                "ss:::::::::::::s u::::u    u::::u   c:::::::::::::::::cc:::::::::::::::::c e::::::eeeee:::::eess:::::::::::::sss:::::::::::::s f:::::::ffffff       u::::u    u::::u   l::::l \n" +
-                "s::::::ssss:::::su::::u    u::::u  c:::::::cccccc:::::c:::::::cccccc:::::ce::::::e     e:::::es::::::ssss:::::s::::::ssss:::::sf::::::::::::f       u::::u    u::::u   l::::l \n" +
-                " s:::::s  ssssss u::::u    u::::u  c::::::c     ccccccc::::::c     ccccccce:::::::eeeee::::::e s:::::s  ssssss s:::::s  ssssss f::::::::::::f       u::::u    u::::u   l::::l \n" +
-                "   s::::::s      u::::u    u::::u  c:::::c            c:::::c             e:::::::::::::::::e    s::::::s        s::::::s      f:::::::ffffff       u::::u    u::::u   l::::l \n" +
-                "      s::::::s   u::::u    u::::u  c:::::c            c:::::c             e::::::eeeeeeeeeee        s::::::s        s::::::s    f:::::f             u::::u    u::::u   l::::l \n" +
-                "ssssss   s:::::s u:::::uuuu:::::u  c::::::c     ccccccc::::::c     ccccccce:::::::e           ssssss   s:::::sssssss   s:::::s  f:::::f             u:::::uuuu:::::u   l::::l \n" +
-                "s:::::ssss::::::su:::::::::::::::uuc:::::::cccccc:::::c:::::::cccccc:::::ce::::::::e          s:::::ssss::::::s:::::ssss::::::sf:::::::f            u:::::::::::::::uul::::::l\n" +
-                "s::::::::::::::s  u:::::::::::::::u c:::::::::::::::::cc:::::::::::::::::c e::::::::eeeeeeee  s::::::::::::::ss::::::::::::::s f:::::::f             u:::::::::::::::ul::::::l\n" +
-                " s:::::::::::ss    uu::::::::uu:::u  cc:::::::::::::::c cc:::::::::::::::c  ee:::::::::::::e   s:::::::::::ss  s:::::::::::ss  f:::::::f              uu::::::::uu:::ul::::::l\n" +
-                "  sssssssssss        uuuuuuuu  uuuu    cccccccccccccccc   cccccccccccccccc    eeeeeeeeeeeeee    sssssssssss     sssssssssss    fffffffff                uuuuuuuu  uuuullllllll\n" +
-                "                                                                                                                                                                              \n" +
-                "                                                                                                                                                                              \n" +
-                "                                                                                                                                                                              \n" +
-                "                                                                                                                                                                              \n" +
-                "                                                                                                                                                                              \n" +
-                "                                                                                                                                                                              \n" +
-                "                                                                                                                                                                              \n");
-    }
 }

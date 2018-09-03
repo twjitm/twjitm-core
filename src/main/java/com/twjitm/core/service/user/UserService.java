@@ -1,7 +1,7 @@
 package com.twjitm.core.service.user;
 
 /**
- * Created by ÎÄ½­ on 2018/4/16.
+ * Created by æ–‡æ±Ÿ on 2018/4/16.
  */
 public interface UserService {
 }

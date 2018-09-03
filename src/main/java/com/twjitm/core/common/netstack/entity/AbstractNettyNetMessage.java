@@ -41,4 +41,12 @@ public abstract class AbstractNettyNetMessage implements INettyMessage {
        attributes.remove(key);
     }
 
+    @Override
+    public String toString() {
+        return "AbstractNettyNetMessage{" +
+                "nettyNetMessageHead=" + nettyNetMessageHead +
+                ", nettyNetMessageBody=" + nettyNetMessageBody +
+                ", attributes=" + attributes +
+                '}';
+    }
 }

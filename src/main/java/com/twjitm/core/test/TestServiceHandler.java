@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by ÎÄ½­ on 2018/5/16.
+ * Created by æ–‡æ±Ÿ on 2018/5/16.
  */
 public class TestServiceHandler extends ChannelInboundHandlerAdapter {
     Logger logger = LoggerUtils.getLogger(TestServiceHandler.class);
@@ -26,8 +26,8 @@ public class TestServiceHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
-        logger.info("ÓĞĞÂ¿Í»§¶ËÇëÇó½¨Á¢");
-        /*  ctx.writeAndFlush("ÄãºÃ£¬¿Í»§¶Ë");*/
+        logger.info("æœ‰æ–°å®¢æˆ·ç«¯è¯·æ±‚å»ºç«‹");
+        /*  ctx.writeAndFlush("ä½ å¥½ï¼Œå®¢æˆ·ç«¯");*/
     }
 
     @Override
@@ -37,11 +37,10 @@ public class TestServiceHandler extends ChannelInboundHandlerAdapter {
         System.out.println("hahahahah");
         System.out.println(ctx.channel().remoteAddress() + "->Server :" + msg.toString());
         System.out.println(ctx.channel().id());
-        springLoadManager.getTestService().say();
         AbstractNettyNetProtoBufMessage message = springLoadManager.getDispatcherService().dispatcher((AbstractNettyNetProtoBufMessage) msg);
-       /* ctx.channel().writeAndFlush("·şÎñÆ÷¶Ô´ó¼ÒËµµÄ»°£¡");
+       /* ctx.channel().writeAndFlush("æœåŠ¡å™¨å¯¹å¤§å®¶è¯´çš„è¯ï¼");
         for (Channel channel : list) {
-            channel.writeAndFlush("¹ã²¥µÄÏûÏ¢");
+            channel.writeAndFlush("å¹¿æ’­çš„æ¶ˆæ¯");
         }*/
         /*list.add(ctx.channel());
         ctx.flush();*/
