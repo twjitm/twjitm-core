@@ -450,7 +450,7 @@ public class SpringLoadServiceImpl implements IService {
     @Resource
     NettyKafkaProducerListener nettyKafkaProducerListener;
     private void test() {
-        nettyKafkaProducerListener.sendMessage();
+        //nettyKafkaProducerListener.sendMessage();
 
 
     }
