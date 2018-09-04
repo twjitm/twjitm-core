@@ -8,6 +8,7 @@ import com.twjitm.core.common.factory.NettyRpcRequestFactory;
 import com.twjitm.core.common.factory.NettyTcpMessageFactory;
 import com.twjitm.core.common.factory.thread.NettyRpcHandlerThreadPoolFactory;
 import com.twjitm.core.common.factory.thread.async.poll.AsyncThreadService;
+import com.twjitm.core.common.kafka.NettyKafkaProducerListener;
 import com.twjitm.core.common.netstack.builder.NettyTcpSessionBuilder;
 import com.twjitm.core.common.netstack.coder.decode.http.INettyNetProtoBuffHttpToMessageDecoderFactory;
 import com.twjitm.core.common.netstack.coder.decode.tcp.INettyNetProtoBuffTCPToMessageDecoderFactory;
@@ -37,7 +38,6 @@ import com.twjitm.core.common.service.rpc.service.NettyRpcProxyService;
 import com.twjitm.core.common.zookeeper.NettyZookeeperRpcServiceDiscoveryService;
 import com.twjitm.core.common.zookeeper.NettyZookeeperRpcServiceRegistryService;
 import com.twjitm.core.service.dispatcher.IDispatcherService;
-import com.twjitm.core.service.test.TestService;
 import com.twjitm.core.service.user.UserService;
 import com.twjitm.core.test.AsyncExecutorService;
 import com.twjitm.core.utils.uuid.LongIdGenerator;
@@ -46,14 +46,13 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * @author ÎÄ½­
+ * @author ï¿½Ä½ï¿½
  * @date 2018/4/16
- * Í¨¹ýspring beanÅäÖÃ
+ * Í¨ï¿½ï¿½spring beanï¿½ï¿½ï¿½ï¿½
  */
 @Service
 public class SpringLoadServiceImpl implements IService {
-    @Resource
-    private TestService testService;
+
     @Resource
     private UserService userService;
     @Resource
@@ -61,128 +60,128 @@ public class SpringLoadServiceImpl implements IService {
 
     //-----------------------------------------------------------------------------------------
     /**
-     * ÅäÖÃ·þÎñÆ÷
+     * ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     NettyGameServiceConfigService nettyGameServiceConfigService;
 
     //-----------------------------------------------------------------------------------------
     /**
-     * ·Ö·¢Æ÷·þÎñ
+     * ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private IDispatcherService dispatcherService;
     //------------------------------------------------------------------------------------------
 
     /**
-     * nettyÏûÏ¢×¢²á¹¤³§
+     * nettyï¿½ï¿½Ï¢×¢ï¿½á¹¤ï¿½ï¿½
      */
     @Resource
     private MessageRegistryFactory messageRegistryFactory;
 
     /**
-     * rpcÏß³Ì¹¤³§
+     * rpcï¿½ß³Ì¹ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyRpcHandlerThreadPoolFactory nettyRpcHandlerThreadPoolFactory;
 
     /**
-     * rpc ÇëÇóÏûÏ¢¹¹Ôì¹¤³§
+     * rpc ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ì¹¤ï¿½ï¿½
      */
     @Resource
     NettyRpcRequestFactory nettyRpcRequestFactory;
 
     //------------------------------------------------------------------------------------------
     /**
-     * http±àÂëÆ÷
+     * httpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private INettyNetProtoBufHttpMessageEncoderFactory nettyNetProtoBufHttpMessageEncoderFactory;
 
     /**
-     * http½âÂëÆ÷
+     * httpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private INettyNetProtoBuffHttpToMessageDecoderFactory nettyNetProtoBuffHttpToMessageDecoderFactory;
 
     /**
-     * tcpÐ­Òé±àÂëÆ÷
+     * tcpÐ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private INettyNetProtoBufTcpMessageEncoderFactory nettyNetProtoBufTcpMessageEncoderFactory;
 
     /**
-     * tcpÐ­Òé½âÂëÆ÷
+     * tcpÐ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private INettyNetProtoBuffTCPToMessageDecoderFactory nettyNetProtoBuffTCPToMessageDecoderFactory;
 
     /**
-     * updÐ­Òé±àÂëÆ÷¹¤³§
+     * updÐ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      **/
     @Resource
     private INettyNetProtoBufUdpMessageEncoderFactory nettyNetProtoBufUdpMessageEncoderFactory;
     /**
-     * udpÐ­Òé½âÂëÆ÷
+     * udpÐ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      **/
     @Resource
     private INettyNetProtoBuffUDPToMessageDecoderFactory nettyNetProtoBuffUDPToMessageDecoderFactory;
     //---------------------------------------------------------------------------------------------------
     /**
-     * Ô­×ÓidÉú³ÉÆ÷
+     * Ô­ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      **/
     @Resource
     private LongIdGenerator longIdGenerator;
     //-----------------------------------------------------------------------------------------------------
     /**
-     * ÏûÏ¢´¦Àíbean
+     * ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½bean
      **/
     @Resource
     private NettyNetMessageProcessLogic nettyNetMessageProcessLogic;
     /**
-     * ÕæÕý×îÖÕÏûÏ¢Ö´ÐÐÆ÷
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Ö´ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyTcpNetProtoMessageProcess netProtoMessageProcess;
 
     /**
-     * tcpÏûÏ¢µ¥¶À--´¦ÀíÆ÷
+     * tcpï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyTcpMessageQueueExecutorProcessor nettyTcpMessageQueueExecutorProcessor;
     /**
-     * ÏµÍ³ÄÚ²¿ÏûÏ¢´¦Àí¶ÓÁÐ
+     * ÏµÍ³ï¿½Ú²ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyQueueMessageExecutorProcessor nettyQueueMessageExecutorProcessor;
     /**
-     * udpÐ­ÒéÏûÏ¢´¦Àí---Éú²úÕß-Ïû·ÑÕß
+     * udpÐ­ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½---ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyUdpNetProtoMessageProcessor nettyUdpNetProtoMessageProcessor;
 
     /**
-     * netty udp Òì²½´¦Àí
+     * netty udp ï¿½ì²½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyUdpOrderNetProtoMessageProcessor nettyUdpOrderNetProtoMessageProcessor;
 
     //------------------------------------------------------------------------------------------
     /**
-     * session°ó¶¨Æ÷
+     * sessionï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyTcpSessionBuilder nettyTcpSessionBuilder;
 
     //------------------------------------------------------------------------------------------
-    //----------------------»ù´¡·þÎñÀà--------------------------------------------------------
+    //----------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½--------------------------------------------------------
     /**
-     * ²éÑ¯Æ÷ nettyµÄchannel ºÍ×Ô¶¨ÒåsessionµÄ²éÑ¯
+     * ï¿½ï¿½Ñ¯ï¿½ï¿½ nettyï¿½ï¿½channel ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½sessionï¿½Ä²ï¿½Ñ¯
      */
     @Resource
     private NettyChannelOperationServiceImpl netTcpSessionLoopUpService;
     /**
-     * ²éÑ¯Æ÷ ×Ô¶¨ÒåsessionºÍ×Ô¶¨ÒåplayerÊµÌå°ó¶¨²éÑ¯
+     * ï¿½ï¿½Ñ¯ï¿½ï¿½ ï¿½Ô¶ï¿½ï¿½ï¿½sessionï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½playerÊµï¿½ï¿½ó¶¨²ï¿½Ñ¯
      */
     @Resource
     private NettyGamePlayerFindServiceImpl nettyGamePlayerLoopUpService;
@@ -191,40 +190,40 @@ public class SpringLoadServiceImpl implements IService {
     private NettyRemoteRpcHandlerService nettyRemoteRpcHandlerService;
 
     /**
-     * rpcÏûÏ¢×¢½âÆ÷
+     * rpcï¿½ï¿½Ï¢×¢ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyRpcMethodRegistryFactory nettyRpcMethodRegistryFactory;
     /**
-     * Òì²½Ïß³Ì²Ù×÷
+     * ï¿½ì²½ï¿½ß³Ì²ï¿½ï¿½ï¿½
      */
     @Resource
     private AsyncThreadService asyncThreadService;
 
     /**
-     * rpc Òì²½ÏûÏ¢µ÷ÓÃÀà
+     * rpc ï¿½ì²½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyRPCFutureService nettyRPCFutureService;
 
     /**
-     * rpc ´úÀí·þÎñ
+     * rpc ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyRpcProxyService nettyRpcProxyService;
     /**
-     * rpc ·þÎñ·¢ÏÖ
+     * rpc ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyRpcClientConnectService nettyRpcClientConnectService;
 
     /**
-     * zookeeper ×¢²áÆ÷
+     * zookeeper ×¢ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyZookeeperRpcServiceRegistryService nettyZookeeperRpcServiceRegistryService;
     /**
-     * zookeeper ·¢ÏÖÆ÷
+     * zookeeper ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyZookeeperRpcServiceDiscoveryService nettyZookeeperRpcServiceDiscoveryService;
@@ -234,24 +233,24 @@ public class SpringLoadServiceImpl implements IService {
 
 
     /**
-     * tcpÏûÏ¢¹¤³§
+     * tcpï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private NettyTcpMessageFactory nettyTcpMessageFactory;
     //------------------------------------------------------------------------------------------
     /**
-     * tcp¹ÜµÀ
+     * tcpï¿½Üµï¿½
      */
     @Resource
     private NettyTcpServerPipeLineImpl nettyTcpServerPipeLine;
     /**
-     * udp¹ÜµÀ
+     * udpï¿½Üµï¿½
      */
     @Resource
     private NettyUdpServerPipeLineImpl nettyUdpServerPipeLine;
     //-------------------------------------------------------------------------------------------
     /**
-     * Òì²½http handler ·þÎñ
+     * ï¿½ì²½http handler ï¿½ï¿½ï¿½ï¿½
      */
     @Resource
     private AsyncNettyHttpHandlerService asyncNettyHttpHandlerService;
@@ -259,7 +258,7 @@ public class SpringLoadServiceImpl implements IService {
     //-------------------------------------------------------------------------------------------
 
     /**
-     * ÐòÁÐ»¯·þÎñ
+     * ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½
      *
      * @return
      */
@@ -267,7 +266,7 @@ public class SpringLoadServiceImpl implements IService {
     private NettyProtoBufRpcSerialize nettyProtoBufRpcSerialize;
     //-----------------------------------------------------------------------------------------
     /**
-     * ÖÜÆÚÐÔÓÎÏ·¼ì²â
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½
      */
     @Resource
     NettyLifeCycleCheckService nettyLifeCycleCheckService;
@@ -276,13 +275,6 @@ public class SpringLoadServiceImpl implements IService {
         return asyncExecutorService;
     }
 
-    public TestService getTestService() {
-        return testService;
-    }
-
-    public UserService getUserService() {
-        return userService;
-    }
 
     public IDispatcherService getDispatcherService() {
         return dispatcherService;
@@ -431,7 +423,7 @@ public class SpringLoadServiceImpl implements IService {
     }
 
     /**
-     * Ë³Ðò²»ÄÜ¸Ä¡£·ñÕßÓÐ²»¿ÉÔ¤ÖªµÄbug
+     * Ë³ï¿½ï¿½ï¿½Ü¸Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½Ô¤Öªï¿½ï¿½bug
      *
      * @throws Exception
      */
@@ -452,6 +444,14 @@ public class SpringLoadServiceImpl implements IService {
         nettyZookeeperRpcServiceRegistryService.startup();
         nettyZookeeperRpcServiceDiscoveryService.startup();
         nettyLifeCycleCheckService.startup();
+        test();
+
+    }
+    @Resource
+    NettyKafkaProducerListener nettyKafkaProducerListener;
+    private void test() {
+        nettyKafkaProducerListener.sendMessage();
+
 
     }
 

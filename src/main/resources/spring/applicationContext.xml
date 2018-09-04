@@ -65,4 +65,6 @@
     <bean id="nettyLifeCycleCheckService"
           class="com.twjitm.core.common.check.NettyLifeCycleCheckService"/>
 
+    <bean id="nettyKafkaProducerListener" class="com.twjitm.core.common.kafka.NettyKafkaProducerListener"/>
+
 </beans>

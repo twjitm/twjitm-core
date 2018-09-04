@@ -18,10 +18,14 @@ public class SpringServiceManager {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
                 "classpath:spring/applicationContext.xml",
                 "classpath:spring/applicationContext-spring.xml",
-                "classpath:spring/applicationContext-async-task.xml");
+                "classpath:spring/applicationContext-async-task.xml",
+                "classpath:spring/applicationContext-kafka-producer.xml",
+                "classpath:spring/applicationContext-kafka.consumer.xml");
 
         logger.info("--------------------load spring end------------------");
         springLoadService = (SpringLoadServiceImpl) applicationContext.getBean("springLoadService");
+
+
     }
 
     public static SpringLoadServiceImpl springLoadService;
