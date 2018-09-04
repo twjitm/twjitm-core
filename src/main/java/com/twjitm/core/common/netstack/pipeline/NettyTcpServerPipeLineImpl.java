@@ -31,7 +31,7 @@ private Logger logger=LoggerUtils.getLogger(NettyTcpServerPipeLineImpl.class);
         if (message instanceof AbstractNettyNetProtoBufTcpMessage) {
             AbstractNettyNetProtoBufTcpMessage protoBufTcpMessage = (AbstractNettyNetProtoBufTcpMessage) message;
             INettyChannleOperationService netTcpSessionLoopUpService = SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService();
-            long sessionId = channel.attr(NettyTcpSessionBuilder.sessionId).get();
+            long sessionId = channel.attr(NettyTcpSessionBuilder.SESSION_ID).get();
             NettyTcpSession nettySession = (NettyTcpSession) netTcpSessionLoopUpService.findNettySession(sessionId);
             if(nettySession==null){
                 logger.error("NETTY SESSION IS NULL");

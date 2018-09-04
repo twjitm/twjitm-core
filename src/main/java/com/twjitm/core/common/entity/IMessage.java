@@ -2,7 +2,7 @@ package com.twjitm.core.common.entity;
 
 public interface IMessage {
     /**
-     * sessionId
+     * SESSION_ID
      * @return
      */
     public long getSessionId();

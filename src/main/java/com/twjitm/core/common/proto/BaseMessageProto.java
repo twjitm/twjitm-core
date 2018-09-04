@@ -19,7 +19,7 @@ public final class BaseMessageProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>int64 sessionId = 1;</code>
+     * <code>int64 SESSION_ID = 1;</code>
      */
     long getSessionId();
 
@@ -138,7 +138,7 @@ public final class BaseMessageProto {
     public static final int SESSIONID_FIELD_NUMBER = 1;
     private long sessionId_;
     /**
-     * <code>int64 sessionId = 1;</code>
+     * <code>int64 SESSION_ID = 1;</code>
      */
     public long getSessionId() {
       return sessionId_;
@@ -522,13 +522,13 @@ public final class BaseMessageProto {
 
       private long sessionId_ ;
       /**
-       * <code>int64 sessionId = 1;</code>
+       * <code>int64 SESSION_ID = 1;</code>
        */
       public long getSessionId() {
         return sessionId_;
       }
       /**
-       * <code>int64 sessionId = 1;</code>
+       * <code>int64 SESSION_ID = 1;</code>
        */
       public Builder setSessionId(long value) {
         
@@ -537,7 +537,7 @@ public final class BaseMessageProto {
         return this;
       }
       /**
-       * <code>int64 sessionId = 1;</code>
+       * <code>int64 SESSION_ID = 1;</code>
        */
       public Builder clearSessionId() {
         

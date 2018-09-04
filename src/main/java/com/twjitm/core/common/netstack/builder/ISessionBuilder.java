@@ -10,6 +10,13 @@ import io.netty.channel.Channel;
  */
 public interface ISessionBuilder {
 
+    /**
+     * 绑定session，将netty的{@link Channel}
+     * 组件和自定义{@link com.twjitm.core.common.netstack.session.NettySession}对象进行绑定
+     *
+     * @param channel
+     * @return
+     */
     public ISession buildSession(Channel channel);
 
 }

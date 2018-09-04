@@ -12,12 +12,16 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class NettyTcpSessionBuilder implements ISessionBuilder {
-    public static final AttributeKey<Long> sessionId = AttributeKey.valueOf("sessionId");
+    /**
+     * 通过netty 提供的属性保存机制，提供在{@link Channel}中保存一些自定义数据的容器。
+     * {@link AttributeKey}
+     */
+    public static final AttributeKey<Long> SESSION_ID = AttributeKey.valueOf("SESSION_ID");
 
     @Override
     public ISession buildSession(Channel channel) {
         NettyTcpSession tcpSession = new NettyTcpSession(channel);
-        channel.attr(sessionId).set(tcpSession.getSessionId());
+        channel.attr(SESSION_ID).set(tcpSession.getSessionId());
         return tcpSession;
     }
 }

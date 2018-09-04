@@ -43,6 +43,7 @@ public class NettyProtoBufRpcSerialize implements INettyRpcSerialize {
     /**
      * 序列化（对象 -> 字节数组）
      */
+    @Override
     @SuppressWarnings("unchecked")
     public <T> byte[] serialize(T obj) {
         Class<T> cls = (Class<T>) obj.getClass();
@@ -61,6 +62,7 @@ public class NettyProtoBufRpcSerialize implements INettyRpcSerialize {
     /**
      * 反序列化（字节数组 -> 对象）
      */
+    @Override
     public <T> T deserialize(byte[] data, Class<T> cls) {
         try {
             T message = (T) objenesis.newInstance(cls);

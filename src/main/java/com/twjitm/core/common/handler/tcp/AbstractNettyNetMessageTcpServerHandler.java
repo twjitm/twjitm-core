@@ -75,7 +75,7 @@ public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInb
      * @param channel
      */
     public void disconnect(Channel channel) {
-        long sessionId = channel.attr(NettyTcpSessionBuilder.sessionId).get();
+        long sessionId = channel.attr(NettyTcpSessionBuilder.SESSION_ID).get();
         NettyTcpSession nettySession = (NettyTcpSession) SpringServiceManager.springLoadService.getNetTcpSessionLoopUpService().findNettySession(sessionId);
         if (nettySession == null) {
             logger.error("TCP NET SESSION NULL CHANNEL ID IS:" + channel.id().asLongText());
@@ -103,7 +103,7 @@ public abstract class AbstractNettyNetMessageTcpServerHandler extends ChannelInb
      */
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        long sessionId = ctx.channel().attr(NettyTcpSessionBuilder.sessionId).get();
+        long sessionId = ctx.channel().attr(NettyTcpSessionBuilder.SESSION_ID).get();
         if (evt instanceof IdleStateEvent) {
             IdleStateEvent event = (IdleStateEvent) evt;
             switch (event.state()) {

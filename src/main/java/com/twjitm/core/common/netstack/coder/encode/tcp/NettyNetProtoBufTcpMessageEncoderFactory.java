@@ -9,6 +9,11 @@ import io.netty.buffer.Unpooled;
 import org.springframework.stereotype.Service;
 
 
+/**
+ * tcp proto buf 协议编码器工厂，主要完成编码功能
+ *
+ * @author twjitm
+ */
 @Service
 public class NettyNetProtoBufTcpMessageEncoderFactory implements INettyNetProtoBufTcpMessageEncoderFactory {
 
@@ -35,6 +40,7 @@ public class NettyNetProtoBufTcpMessageEncoderFactory implements INettyNetProtoB
         int skip = 6;
         int length = byteBuf.readableBytes() - skip;
         byteBuf.setInt(2, length);
+        //！！！！！！！注意此方法不能调用retain()
         byteBuf.slice();
         return byteBuf;
     }
