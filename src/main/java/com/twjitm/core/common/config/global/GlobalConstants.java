@@ -45,7 +45,7 @@ public class GlobalConstants {
         /**
          * rpc代理消息执行线程
          */
-        public static final  String RPC_PROXY_MESSAGE_EXECUTOR="rpc_proxy_message_executor";
+        public static final String RPC_PROXY_MESSAGE_EXECUTOR = "rpc_proxy_message_executor";
 
         public static final String GAME_ASYNC_CALL = "game_async_call";
 
@@ -54,6 +54,12 @@ public class GlobalConstants {
         public static final String MESSAGE_UDP_ORDER_EXECUTOR = "message_udp_order_executor";
 
         public static final String POLL_LIFE_CYCLE = "poll_life_cycle";
+
+        /**
+         * kafka消息消费者处理线程
+         */
+        public static final String GAME_KAFKA_TASK_EXECUTOR = "game_kafka_task_executor";
+
     }
 
     public static class UDPServiceConfig {
