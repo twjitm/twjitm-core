@@ -8,6 +8,7 @@ import com.twjitm.core.common.factory.NettyRpcRequestFactory;
 import com.twjitm.core.common.factory.NettyTcpMessageFactory;
 import com.twjitm.core.common.factory.thread.NettyRpcHandlerThreadPoolFactory;
 import com.twjitm.core.common.factory.thread.async.poll.AsyncThreadService;
+import com.twjitm.core.common.kafka.KafkaTaskType;
 import com.twjitm.core.common.kafka.NettyKafkaProducerListener;
 import com.twjitm.core.common.netstack.builder.NettyTcpSessionBuilder;
 import com.twjitm.core.common.netstack.coder.decode.http.INettyNetProtoBuffHttpToMessageDecoderFactory;
@@ -271,6 +272,10 @@ public class SpringLoadServiceImpl implements IService {
     @Resource
     NettyLifeCycleCheckService nettyLifeCycleCheckService;
 
+    @Resource
+    NettyKafkaProducerListener nettyKafkaProducerListener;
+
+
     public AsyncExecutorService getAsyncExecutorService() {
         return asyncExecutorService;
     }
@@ -444,16 +449,10 @@ public class SpringLoadServiceImpl implements IService {
         nettyZookeeperRpcServiceRegistryService.startup();
         nettyZookeeperRpcServiceDiscoveryService.startup();
         nettyLifeCycleCheckService.startup();
-        test();
-
+        nettyKafkaProducerListener.startup();
     }
-    @Resource
-    NettyKafkaProducerListener nettyKafkaProducerListener;
-    private void test() {
-        //nettyKafkaProducerListener.sendMessage();
 
 
-    }
 
     @Override
     public void shutdown() throws Exception {
@@ -469,6 +468,7 @@ public class SpringLoadServiceImpl implements IService {
         nettyZookeeperRpcServiceRegistryService.shutdown();
         nettyZookeeperRpcServiceDiscoveryService.shutdown();
         nettyLifeCycleCheckService.shutdown();
+        nettyKafkaProducerListener.shutdown();
     }
 
 
