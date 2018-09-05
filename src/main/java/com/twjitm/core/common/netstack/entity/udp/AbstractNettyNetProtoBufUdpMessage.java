@@ -2,7 +2,7 @@ package com.twjitm.core.common.netstack.entity.udp;
 
 
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
-import com.twjitm.core.common.netstack.entity.NettyNetProtoBufMessageBody;
+import com.twjitm.core.common.netstack.entity.NettyNetMessageBody;
 
 import java.net.InetSocketAddress;
 
@@ -40,7 +40,7 @@ public abstract class AbstractNettyNetProtoBufUdpMessage extends AbstractNettyNe
     public AbstractNettyNetProtoBufUdpMessage(){
         super();
         setNettyNetMessageHead(new NettyUDPMessageHead());
-        setNettyNetMessageBody(new NettyNetProtoBufMessageBody());
+        setNettyNetMessageBody(new NettyNetMessageBody());
         initHeadCommId();
     }
 

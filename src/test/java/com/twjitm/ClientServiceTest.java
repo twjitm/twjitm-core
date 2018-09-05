@@ -8,17 +8,12 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-
 /**
  * Created by twjitm on 2018/5/14.
  * netty客户端
  */
 public class ClientServiceTest {
-    static String ip = "47.93.22.194";
+    static String ip = "127.0.0.1";
     static int port = 11010;
 
     public static void main(String[] args) {

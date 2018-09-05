@@ -2,7 +2,7 @@ package com.twjitm.core.common.netstack.coder.decode.http;
 
 import com.twjitm.core.common.factory.MessageRegistryFactory;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetProtoBufMessage;
-import com.twjitm.core.common.netstack.entity.NettyNetProtoBufMessageBody;
+import com.twjitm.core.common.netstack.entity.NettyNetMessageBody;
 import com.twjitm.core.common.netstack.entity.http.NettyNetHttpMessageHead;
 import com.twjitm.core.spring.SpringServiceManager;
 import com.twjitm.core.utils.logs.LoggerUtils;
@@ -43,7 +43,7 @@ public class NettyNetProtoBuffHttpToMessageDecoderFactory implements INettyNetPr
         MessageRegistryFactory messageRegistry = SpringServiceManager.springLoadService.getMessageRegistryFactory();
         AbstractNettyNetProtoBufMessage netMessage = messageRegistry.get(cmd);
         //读取body
-        NettyNetProtoBufMessageBody netMessageBody = new NettyNetProtoBufMessageBody();
+        NettyNetMessageBody netMessageBody = new NettyNetMessageBody();
         int byteLength = byteBuf.readableBytes();
         ByteBuf bodyByteBuffer = null;
         byte[] bytes = new byte[byteLength];

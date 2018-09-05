@@ -1,9 +1,6 @@
 package com.twjitm;
 
-import com.twjitm.core.common.entity.chat.ChatMessage;
 import com.twjitm.core.common.entity.online.LoginOnlineClientTcpMessage;
-import com.twjitm.core.common.enums.MessageComm;
-import com.twjitm.core.common.proto.BaseMessageProto;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
@@ -41,7 +38,7 @@ private Logger logger=LoggerFactory.getLogger(TestClientHandler.class);
         chatMessage.setReceiveSession("gaga");
         chatMessage.setReceiveUId(11);
         ctx.writeAndFlush(chatMessage);*/
-     for(int i=0;i<10000;i++){
+     for(int i=0;i<100;i++){
          LoginOnlineClientTcpMessage login=new LoginOnlineClientTcpMessage();
          login.setPlayerId(Long.valueOf(10086));
          ctx.writeAndFlush(login);
