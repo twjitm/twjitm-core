@@ -9,39 +9,29 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
     <!--<mvc:annotation-driven/>-->
-
     <context:component-scan base-package="com.twjitm.core.common.config.*"/>
     <context:component-scan base-package="com.twjitm.core.test"/>
     <!--核心服务类-->
     <context:component-scan base-package="com.twjitm.core.service.*.*"/>
-
     <!--协议栈编码解码器工厂扫描-->
     <context:component-scan base-package="com.twjitm.core.common.netstack.*"/>
-
     <!--基础服务类-->
     <context:component-scan base-package="com.twjitm.core.common.service.*"/>
-
     <bean id="springLoadService" class="com.twjitm.core.spring.SpringLoadServiceImpl"/>
     <!--工厂-->
-
     <bean id="messageRegistryFactory" class="com.twjitm.core.common.factory.MessageRegistryFactory" init-method="init">
         <property name="namespace" value="com.twjitm.core.common.entity.chat"/>
     </bean>
     <bean id="nettyTcpMessageFactory" class="com.twjitm.core.common.factory.NettyTcpMessageFactory"/>
-    <bean id="rpcHandlerThreadPoolFactory"  class="com.twjitm.core.common.factory.thread.NettyRpcHandlerThreadPoolFactory"/>
+    <bean id="rpcHandlerThreadPoolFactory"
+          class="com.twjitm.core.common.factory.thread.NettyRpcHandlerThreadPoolFactory"/>
     <bean id="nettyRpcMethodRegistryFactory" class="com.twjitm.core.common.factory.NettyRpcMethodRegistryFactory"/>
     <bean id="nettyRpcRequestFactory" class="com.twjitm.core.common.factory.NettyRpcRequestFactory"/>
-
     <!--异步线程操作-->
     <bean id="asyncThreadService" class="com.twjitm.core.common.factory.thread.async.poll.AsyncThreadService"/>
-
     <!--原子id生产器-->
     <bean id="longIdGenerator" class="com.twjitm.core.utils.uuid.LongIdGenerator"/>
     <bean id="nettyNetMessageProcessLogic" class="com.twjitm.core.common.process.NettyNetMessageProcessLogic"/>
-
-
-
-
     <!--消息处理队列-->
     <bean id="nettyTcpMessageQueueExecutorProcessor"
           class="com.twjitm.core.common.process.tcp.NettyTcpMessageQueueExecutorProcessor"/>
@@ -56,12 +46,15 @@
         <constructor-arg ref="nettyQueueMessageExecutorProcessor"/>
     </bean>
 
-    <bean  id="nettyUdpOrderNetProtoMessageProcessor" class="com.twjitm.core.common.process.udp.NettyUdpOrderNetProtoMessageProcessor"/>
+    <bean id="nettyUdpOrderNetProtoMessageProcessor"
+          class="com.twjitm.core.common.process.udp.NettyUdpOrderNetProtoMessageProcessor"/>
 
     <!--zookeeper 注册服务-->
-    <bean id="nettyZookeeperRpcServiceRegistryService" class="com.twjitm.core.common.zookeeper.NettyZookeeperRpcServiceRegistryService"/>
+    <bean id="nettyZookeeperRpcServiceRegistryService"
+          class="com.twjitm.core.common.zookeeper.NettyZookeeperRpcServiceRegistryService"/>
     <!--zookeeper 发现服务-->
-    <bean id="nettyZookeeperRpcServiceDiscoveryService" class="com.twjitm.core.common.zookeeper.NettyZookeeperRpcServiceDiscoveryService"/>
+    <bean id="nettyZookeeperRpcServiceDiscoveryService"
+          class="com.twjitm.core.common.zookeeper.NettyZookeeperRpcServiceDiscoveryService"/>
     <bean id="nettyLifeCycleCheckService"
           class="com.twjitm.core.common.check.NettyLifeCycleCheckService"/>
 
