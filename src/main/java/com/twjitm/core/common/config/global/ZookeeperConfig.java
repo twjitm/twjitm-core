@@ -22,7 +22,9 @@ public class ZookeeperConfig {
     private int serverPort;
     private String serverHost;
 
+    private int elapsedTimeMs;
     private Properties properties;
+
 
     public void init() {
         InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(GlobalConstants.ConfigFile.ZOOKEEPER_PROPERTIES_FILE_PATH);
@@ -34,6 +36,7 @@ public class ZookeeperConfig {
             registryPath = properties.getProperty("zookeeper.registry.path");
             serverPort = Integer.parseInt(properties.getProperty("zookeeper.port"));
             serverHost = properties.getProperty("zookeeper.ip");
+            elapsedTimeMs = Integer.parseInt(properties.getProperty("zookeeper.elapsedTimeMs"));
         } catch (IOException e) {
             e.printStackTrace();
             logger.error("error", e);
@@ -62,6 +65,10 @@ public class ZookeeperConfig {
 
     public String getServerHost() {
         return serverHost;
+    }
+
+    public int getElapsedTimeMs() {
+        return elapsedTimeMs;
     }
 
 }
