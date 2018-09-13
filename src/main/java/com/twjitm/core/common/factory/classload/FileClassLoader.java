@@ -52,7 +52,7 @@ public class FileClassLoader extends ClassLoader {
                 InputStream is = jf.getInputStream(je);
                 byte[] classData = getBytesFromInput(is);
                 is.close();
-                //logger.info("jar load Name()" + jf.getName() + "class" + className);
+                //logger.info("jar init Name()" + jf.getName() + "class" + className);
                 classFiles.put(className, classData);
             }
         }

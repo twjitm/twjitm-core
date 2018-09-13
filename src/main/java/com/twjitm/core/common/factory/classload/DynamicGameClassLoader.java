@@ -22,7 +22,7 @@ public class DynamicGameClassLoader extends ClassLoader {
     
     @Override
 	public synchronized Class loadClass(String className, boolean resolve) throws ClassNotFoundException {
-    	//logger.info("class loader load:" + className);
+    	//logger.info("class loader init:" + className);
     	return super.loadClass(className, resolve);
     }
     

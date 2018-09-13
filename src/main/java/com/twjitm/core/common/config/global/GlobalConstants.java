@@ -33,6 +33,10 @@ public class GlobalConstants {
          * zookeeper
          */
         public static final String ZOOKEEPER_PROPERTIES_FILE_PATH = "bean/game-zookeeper.properties";
+        /**
+         * kafka线程配置文件
+         */
+        public static  final String KAFKA_PROPERTIES_FILE_PATH="bean/game-kafka.properties";
 
     }
 

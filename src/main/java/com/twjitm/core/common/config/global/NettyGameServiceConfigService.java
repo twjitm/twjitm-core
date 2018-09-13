@@ -26,6 +26,8 @@ public class NettyGameServiceConfigService implements IService {
     private NettyGameHttpConfig httpConfig;
     @Resource
     private NettyGameRpcConfig rpcNetConfig;
+    @Resource
+    private KafkaConfig kafkaConfig;
 
 
     public NettyGameRpcConfig getRpcNetConfig() {
@@ -50,6 +52,10 @@ public class NettyGameServiceConfigService implements IService {
 
     public RpcServerConfig getRpcServerConfig() {
         return rpcServerConfig;
+    }
+
+    public KafkaConfig getKafkaConfig() {
+        return kafkaConfig;
     }
 
     @Override
@@ -77,6 +83,7 @@ public class NettyGameServiceConfigService implements IService {
 
             rpcServerConfig.init();
             zookeeperConfig.init();
+            kafkaConfig.init();
         } catch (DataConversionException e) {
             e.printStackTrace();
         }

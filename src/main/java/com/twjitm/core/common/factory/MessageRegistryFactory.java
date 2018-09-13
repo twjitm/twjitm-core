@@ -68,11 +68,11 @@ public class MessageRegistryFactory {
 
     //TODO 需优化
     public void init() {
-        //load message
+        //init message
         loadPackage(namespace, ".class");
-        //load handler
+        //init handler
         loadPackage("com.twjitm.core.*.*");
-        //load message enum
+        //init message enum
         loadMessageCommId();
         // loadPackage("com.twjitm.core.common.entity.online",".class");
     }

@@ -13,7 +13,7 @@ public class SpringServiceManager {
     static Logger logger = Logger.getLogger(SpringServiceManager.class);
 
     public static void init() {
-        logger.info("--------------------load spring bootstrap----------------");
+        logger.info("--------------------init spring bootstrap----------------");
 
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
                 "classpath:spring/applicationContext.xml",
@@ -22,7 +22,7 @@ public class SpringServiceManager {
                 "classpath:spring/applicationContext-kafka-producer.xml",
                 "classpath:spring/applicationContext-kafka.consumer.xml");
 
-        logger.info("--------------------load spring end------------------");
+        logger.info("--------------------init spring end------------------");
         springLoadService = (SpringLoadServiceImpl) applicationContext.getBean("springLoadService");
 
 
