@@ -1,1 +1,1 @@
-package com.twjitm.core.common.service.rpc.client;/** * @author EGLS0807 - [Created on 2018-08-20 11:46] * @company http://www.g2us.com/ * @jdk java version "1.8.0_77" * 回掉 */public interface NettyAsyncRPCCallback {    void success(Object result);    void fail(Exception e);}
+package com.twjitm.core.common.service.rpc.client;/** * rpc远程回调接口 * @author twjitm - [Created on 2018-08-20 11:46] * @jdk java version "1.8.0_77" * */public interface NettyAsyncRPCCallback {    void success(Object result);    void fail(Exception e);}
