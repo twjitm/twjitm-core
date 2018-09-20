@@ -270,11 +270,14 @@ public class SpringLoadServiceImpl implements IService {
      * ��������Ϸ���
      */
     @Resource
-    NettyLifeCycleCheckService nettyLifeCycleCheckService;
+    private NettyLifeCycleCheckService nettyLifeCycleCheckService;
 
     @Resource
-    NettyKafkaProducerListener nettyKafkaProducerListener;
+    private NettyKafkaProducerListener nettyKafkaProducerListener;
 
+    public NettyKafkaProducerListener getNettyKafkaProducerListener() {
+        return nettyKafkaProducerListener;
+    }
 
     public AsyncExecutorService getAsyncExecutorService() {
         return asyncExecutorService;
@@ -451,7 +454,6 @@ public class SpringLoadServiceImpl implements IService {
         nettyLifeCycleCheckService.startup();
         nettyKafkaProducerListener.startup();
     }
-
 
 
     @Override
