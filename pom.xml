@@ -6,7 +6,7 @@
 
     <groupId>twjitm-core</groupId>
     <artifactId>twjitm-core</artifactId>
-    <version>2018-08-28-01</version>
+    <version>2018-09-20-01</version>
     <build>
         <resources>
             <!-- 先指定 src/main/resources下所有文件及文件夹为资源文件 -->
