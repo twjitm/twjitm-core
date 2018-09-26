@@ -8,7 +8,7 @@ package com.twjitm.core.common.service;
 public interface INettyLongFindService<T extends ILongId> {
     /**
             * 查找
-     * @param Id
+     * @param id
      * @return
              */
     public T findT(long id);

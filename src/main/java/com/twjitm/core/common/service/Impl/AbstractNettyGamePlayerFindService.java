@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * 维护本地在线玩家集和服务
+ *
  * @author EGLS0807 - [Created on 2018-08-08 14:06]
  * @company http://www.g2us.com/
  * @jdk java version "1.8.0_77"
@@ -18,31 +20,31 @@ public abstract class AbstractNettyGamePlayerFindService<T extends ILongId> impl
 
     @Override
     public T findT(long id) {
-        if(logger.isTraceEnabled()){
-            logger.info("NETTY GAME FIND ID ="+id);
+        if (logger.isTraceEnabled()) {
+            logger.info("NETTY GAME FIND ID =" + id);
         }
         return concurrentHashMap.get(id);
     }
 
     @Override
     public void addT(T t) {
-        if(logger.isTraceEnabled()){
-            logger.info("NETTY GAME ADD ID ="+t.getClass().getSimpleName()+"ID IS"+t.getLongId());
+        if (logger.isTraceEnabled()) {
+            logger.info("NETTY GAME ADD ID =" + t.getClass().getSimpleName() + "ID IS" + t.getLongId());
         }
         concurrentHashMap.put(t.getLongId(), t);
     }
 
     @Override
     public T removeT(T t) {
-        if(logger.isTraceEnabled()){
-            logger.info("NETTY GAME REMOVE ID ="+t.getClass().getSimpleName()+"ID IS"+t.getLongId());
+        if (logger.isTraceEnabled()) {
+            logger.info("NETTY GAME REMOVE ID =" + t.getClass().getSimpleName() + "ID IS" + t.getLongId());
         }
         return concurrentHashMap.remove(t.getLongId());
     }
 
     @Override
     public void clear() {
-        if(logger.isTraceEnabled()){
+        if (logger.isTraceEnabled()) {
             logger.info("NETTY GAME CLEAR ALL");
         }
         concurrentHashMap.clear();

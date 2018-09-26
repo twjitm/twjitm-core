@@ -47,142 +47,141 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * @author �Ľ�
+ * spring bean
+ *
+ * @author
  * @date 2018/4/16
- * ͨ��spring bean����
  */
 @Service
 public class SpringLoadServiceImpl implements IService {
 
+
     @Resource
-    private UserService userService;
-    @Resource
-    AsyncExecutorService asyncExecutorService;
+    private AsyncExecutorService asyncExecutorService;
 
     //-----------------------------------------------------------------------------------------
     /**
-     * ���÷�����
+     *
      */
     @Resource
-    NettyGameServiceConfigService nettyGameServiceConfigService;
+    private NettyGameServiceConfigService nettyGameServiceConfigService;
 
     //-----------------------------------------------------------------------------------------
     /**
-     * �ַ�������
+     *
      */
     @Resource
     private IDispatcherService dispatcherService;
     //------------------------------------------------------------------------------------------
 
     /**
-     * netty��Ϣע�Ṥ��
+     * netty
      */
     @Resource
     private MessageRegistryFactory messageRegistryFactory;
 
     /**
-     * rpc�̹߳���
+     * rpc
      */
     @Resource
     private NettyRpcHandlerThreadPoolFactory nettyRpcHandlerThreadPoolFactory;
 
     /**
-     * rpc ������Ϣ���칤��
+     * rpc
      */
     @Resource
     NettyRpcRequestFactory nettyRpcRequestFactory;
 
     //------------------------------------------------------------------------------------------
     /**
-     * http������
+     * http
      */
     @Resource
     private INettyNetProtoBufHttpMessageEncoderFactory nettyNetProtoBufHttpMessageEncoderFactory;
 
     /**
-     * http������
+     * http
      */
     @Resource
     private INettyNetProtoBuffHttpToMessageDecoderFactory nettyNetProtoBuffHttpToMessageDecoderFactory;
 
     /**
-     * tcpЭ�������
+     * tcp
      */
     @Resource
     private INettyNetProtoBufTcpMessageEncoderFactory nettyNetProtoBufTcpMessageEncoderFactory;
 
     /**
-     * tcpЭ�������
+     * tcp
      */
     @Resource
     private INettyNetProtoBuffTCPToMessageDecoderFactory nettyNetProtoBuffTCPToMessageDecoderFactory;
 
     /**
-     * updЭ�����������
+     * upd
      **/
     @Resource
     private INettyNetProtoBufUdpMessageEncoderFactory nettyNetProtoBufUdpMessageEncoderFactory;
     /**
-     * udpЭ�������
+     * udp
      **/
     @Resource
     private INettyNetProtoBuffUDPToMessageDecoderFactory nettyNetProtoBuffUDPToMessageDecoderFactory;
     //---------------------------------------------------------------------------------------------------
     /**
-     * ԭ��id������
+     *
      **/
     @Resource
     private LongIdGenerator longIdGenerator;
     //-----------------------------------------------------------------------------------------------------
     /**
-     * ��Ϣ����bean
+     *
      **/
     @Resource
     private NettyNetMessageProcessLogic nettyNetMessageProcessLogic;
     /**
-     * ����������Ϣִ����
+     *
      */
     @Resource
     private NettyTcpNetProtoMessageProcess netProtoMessageProcess;
 
     /**
-     * tcp��Ϣ����--������
+     * tcp
      */
     @Resource
     private NettyTcpMessageQueueExecutorProcessor nettyTcpMessageQueueExecutorProcessor;
     /**
-     * ϵͳ�ڲ���Ϣ�������
+     *
      */
     @Resource
     private NettyQueueMessageExecutorProcessor nettyQueueMessageExecutorProcessor;
     /**
-     * udpЭ����Ϣ����---������-������
+     * udp
      */
     @Resource
     private NettyUdpNetProtoMessageProcessor nettyUdpNetProtoMessageProcessor;
 
     /**
-     * netty udp �첽����
+     * netty udp
      */
     @Resource
     private NettyUdpOrderNetProtoMessageProcessor nettyUdpOrderNetProtoMessageProcessor;
 
     //------------------------------------------------------------------------------------------
     /**
-     * session����
+     * session
      */
     @Resource
     private NettyTcpSessionBuilder nettyTcpSessionBuilder;
 
     //------------------------------------------------------------------------------------------
-    //----------------------����������--------------------------------------------------------
     /**
-     * ��ѯ�� netty��channel ���Զ���session�Ĳ�ѯ
+     *
      */
     @Resource
     private NettyChannelOperationServiceImpl netTcpSessionLoopUpService;
     /**
-     * ��ѯ�� �Զ���session���Զ���playerʵ��󶨲�ѯ
+     *
      */
     @Resource
     private NettyGamePlayerFindServiceImpl nettyGamePlayerLoopUpService;
@@ -191,40 +190,40 @@ public class SpringLoadServiceImpl implements IService {
     private NettyRemoteRpcHandlerService nettyRemoteRpcHandlerService;
 
     /**
-     * rpc��Ϣע����
+     * rpc
      */
     @Resource
     private NettyRpcMethodRegistryFactory nettyRpcMethodRegistryFactory;
     /**
-     * �첽�̲߳���
+     *
      */
     @Resource
     private AsyncThreadService asyncThreadService;
 
     /**
-     * rpc �첽��Ϣ������
+     * rpc
      */
     @Resource
     private NettyRPCFutureService nettyRPCFutureService;
 
     /**
-     * rpc �������
+     * rpc
      */
     @Resource
     private NettyRpcProxyService nettyRpcProxyService;
     /**
-     * rpc ������
+     * rpc
      */
     @Resource
     private NettyRpcClientConnectService nettyRpcClientConnectService;
 
     /**
-     * zookeeper ע����
+     * zookeeper
      */
     @Resource
     private NettyZookeeperRpcServiceRegistryService nettyZookeeperRpcServiceRegistryService;
     /**
-     * zookeeper ������
+     * zookeeper
      */
     @Resource
     private NettyZookeeperRpcServiceDiscoveryService nettyZookeeperRpcServiceDiscoveryService;
@@ -234,24 +233,24 @@ public class SpringLoadServiceImpl implements IService {
 
 
     /**
-     * tcp��Ϣ����
+     * tcp
      */
     @Resource
     private NettyTcpMessageFactory nettyTcpMessageFactory;
     //------------------------------------------------------------------------------------------
     /**
-     * tcp�ܵ�
+     * tcp
      */
     @Resource
     private NettyTcpServerPipeLineImpl nettyTcpServerPipeLine;
     /**
-     * udp�ܵ�
+     * udp
      */
     @Resource
     private NettyUdpServerPipeLineImpl nettyUdpServerPipeLine;
     //-------------------------------------------------------------------------------------------
     /**
-     * �첽http handler ����
+     * http handler
      */
     @Resource
     private AsyncNettyHttpHandlerService asyncNettyHttpHandlerService;
@@ -259,19 +258,20 @@ public class SpringLoadServiceImpl implements IService {
     //-------------------------------------------------------------------------------------------
 
     /**
-     * ���л�����
-     *
      * @return
      */
     @Resource
     private NettyProtoBufRpcSerialize nettyProtoBufRpcSerialize;
     //-----------------------------------------------------------------------------------------
     /**
-     * ��������Ϸ���
+     *
      */
     @Resource
     private NettyLifeCycleCheckService nettyLifeCycleCheckService;
 
+    /**
+     *
+     */
     @Resource
     private NettyKafkaProducerListener nettyKafkaProducerListener;
 
@@ -431,8 +431,6 @@ public class SpringLoadServiceImpl implements IService {
     }
 
     /**
-     * ˳���ܸġ������в���Ԥ֪��bug
-     *
      * @throws Exception
      */
     @Override
