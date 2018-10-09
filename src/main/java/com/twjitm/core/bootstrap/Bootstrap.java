@@ -39,7 +39,6 @@ public class Bootstrap {
         Bootstrap.startServer();
         AsyncExecutorService asyncExecutorService = SpringServiceManager.getSpringLoadService().getAsyncExecutorService();
         asyncExecutorService.saveUser(null);
-        logger.info("eeee");
     }
 
     public static void init() {
