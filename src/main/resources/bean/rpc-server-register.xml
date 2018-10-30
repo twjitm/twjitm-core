@@ -2,7 +2,8 @@
 <servers>
 
     <world>
-        <server serverId="8001" domain="127.0.0.1" domainPort="11010" ip="127.0.0.1" port="11010" weight="100" maxNumber="1000" rpcPort="11040" rpcClientNumber="3"/>
+        <server serverId="18001" domain="127.0.0.1" domainPort="11010" ip="127.0.0.1" port="11010" weight="100" maxNumber="1000" rpcPort="11040" rpcClientNumber="3"/>
+
         <server serverId="9001" domain="47.93.22.194" domainPort="11010" ip="47.93.22.194" port="11010" weight="100" maxNumber="1000" rpcPort="11040" rpcClientNumber="3"/>
     </world>
 

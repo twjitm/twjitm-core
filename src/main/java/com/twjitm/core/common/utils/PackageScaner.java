@@ -134,9 +134,10 @@ public class PackageScaner {
 
     /**
      * get parent class to subclass
-     * @param parentClass
-     * @param packagePath
-     * @return
+     *
+     * @param parentClass 父类
+     * @param packagePath 位置
+     * @return 子类集和
      */
     public static List<Class> getSubClasses(final Class parentClass,
                                             final String packagePath) {

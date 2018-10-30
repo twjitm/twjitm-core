@@ -74,6 +74,10 @@ public class NettyGameServiceConfig {
      * 是否开启生命周期任务
      */
     private boolean lifeCycleOpen;
+    /**
+     * 是否开启kafka组件
+     */
+    private boolean kakfkaOpen;
 
 
     public void init() {
@@ -95,7 +99,8 @@ public class NettyGameServiceConfig {
             rpcSendProxyThreadSize = Integer.parseInt(properties.getProperty("rpcSendProxyThreadSize"));
             rpcOpen = Boolean.parseBoolean(properties.getProperty("rpcOpen"));
             zookeeperOpen = Boolean.parseBoolean(properties.getProperty("zookeeperOpen"));
-            lifeCycleOpen=Boolean.parseBoolean(properties.getProperty("lifeCycleOpen"));
+            lifeCycleOpen = Boolean.parseBoolean(properties.getProperty("lifeCycleOpen"));
+            kakfkaOpen=Boolean.parseBoolean(properties.getProperty("kafkaOpen"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -204,5 +209,9 @@ public class NettyGameServiceConfig {
 
     public void setLifeCycleOpen(boolean lifeCycleOpen) {
         this.lifeCycleOpen = lifeCycleOpen;
+    }
+
+    public boolean isKakfkaOpen() {
+        return kakfkaOpen;
     }
 }

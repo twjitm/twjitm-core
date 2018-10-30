@@ -34,6 +34,7 @@ public class Bootstrap {
 
     public static void main(String[] args) {
         getBuddha();
+
         SystemService.getSystem();
         Bootstrap.init();
         Bootstrap.startServer();

@@ -1,7 +1,11 @@
 package com.twjitm.core.spring;
 
+import com.twjitm.core.common.config.global.NettyGameServiceConfig;
 import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * spring service manager
@@ -13,14 +17,24 @@ public class SpringServiceManager {
     static Logger logger = Logger.getLogger(SpringServiceManager.class);
 
     public static void init() {
+        NettyGameServiceConfig gameServiceConfig=new NettyGameServiceConfig();
+        gameServiceConfig.init();
         logger.info("--------------------init spring bootstrap----------------");
+        List<String> application = new ArrayList<>();
+        application.add("classpath:spring/applicationContext.xml");
+        application.add("classpath:spring/applicationContext-spring.xml");
+        application.add("classpath:spring/applicationContext-async-task.xml");
+        if(gameServiceConfig.isKakfkaOpen()){
+            application.add("classpath:spring/applicationContext-kafka-producer.xml");
+            application.add("classpath:spring/applicationContext-kafka.consumer.xml");
+        }
 
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-                "classpath:spring/applicationContext.xml",
-                "classpath:spring/applicationContext-spring.xml",
-                "classpath:spring/applicationContext-async-task.xml",
-                "classpath:spring/applicationContext-kafka-producer.xml",
-                "classpath:spring/applicationContext-kafka.consumer.xml");
+        String[] strings = new String[application.size()];
+        for (int i=0;i<application.size();i++) {
+                strings[i]=application.get(i);
+        }
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(strings);
+
 
         logger.info("--------------------init spring end------------------");
         springLoadService = (SpringLoadServiceImpl) applicationContext.getBean("springLoadService");
