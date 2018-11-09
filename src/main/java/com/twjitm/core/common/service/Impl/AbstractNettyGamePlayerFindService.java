@@ -10,8 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 维护本地在线玩家集和服务
  *
- * @author EGLS0807 - [Created on 2018-08-08 14:06]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-08-08 14:06]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  */
 public abstract class AbstractNettyGamePlayerFindService<T extends ILongId> implements INettyLongFindService<T> {

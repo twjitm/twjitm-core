@@ -7,7 +7,7 @@ import io.netty.channel.Channel;
 import org.apache.log4j.Logger;
 
 /**
- * @author EGLS0807 - [Created on 2018-07-24 16:32]
+ * @author twjitm - [Created on 2018-07-24 16:32]
  * @jdk java version "1.8.0_77"
  * TCP消息发送器
  */

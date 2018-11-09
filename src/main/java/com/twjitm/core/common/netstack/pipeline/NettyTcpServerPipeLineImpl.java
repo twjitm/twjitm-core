@@ -15,8 +15,8 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 /**
- * @author EGLS0807 - [Created on 2018-08-02 20:41]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-08-02 20:41]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  */
 @Service

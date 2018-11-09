@@ -4,8 +4,8 @@ import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import com.twjitm.core.common.netstack.session.NettySession;
 
 /**
- * @author EGLS0807 - [Created on 2018-08-09 16:35]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-08-09 16:35]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  * udp协议消息发送器
  */

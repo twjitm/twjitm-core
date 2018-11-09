@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
  * 中的某个EventExecutor所处理，从而被Channel本身的EventLoop移除，对于这种用法
  * Netty提供了一个种叫做{@link io.netty.util.concurrent.DefaultEventExecutorGroup}的实现
  * 其实也是本类主要的一个核心API，
- * @author EGLS0807 - [Created on 2018-08-16 12:17]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-08-16 12:17]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  */
 @Service

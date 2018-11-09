@@ -3,8 +3,8 @@ package com.twjitm.core.common.factory;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 
 /**
- * @author EGLS0807 - [Created on 2018-07-26 21:03]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-07-26 21:03]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  */
 public interface INettyTcpMessageFactory {

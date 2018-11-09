@@ -4,8 +4,8 @@ import com.twjitm.core.common.netstack.sender.NettyNetTcpMessageSender;
 import com.twjitm.core.common.service.ILongId;
 
 /**
- * @author EGLS0807 - [Created on 2018-08-08 13:52]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-08-08 13:52]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  */
 public class GameNettyPlayer implements IGameNettyPlayer, ILongId {

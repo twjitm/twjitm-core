@@ -3,13 +3,13 @@ package com.twjitm.core.common.netstack.session;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 
 /**
- * @author EGLS0807 - [Created on 2018-07-24 15:55]
+ * @author twjitm - [Created on 2018-07-24 15:55]
  * @jdk java version "1.8.0_77"\
- * sessionµÄÒµÎñÂß¼­
+ * sessionï¿½ï¿½Òµï¿½ï¿½ï¿½ß¼ï¿½
  */
 public interface ISession {
     /**
-     * ÅÐ¶Ïµ±Ç°»á»°ÊÇ·ñ´¦ÓÚÁ¬½Ó×´Ì¬
+     * ï¿½Ð¶Ïµï¿½Ç°ï¿½á»°ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
      *
      * @return
      */
@@ -26,7 +26,7 @@ public interface ISession {
     public void close(boolean immediately);
 
     /**
-     * ³öÏÖÒì³£Ê±ÊÇ·ñ¹Ø±ÕÁ¬½Ó
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ì³£Ê±ï¿½Ç·ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½
      *
      * @return
      */

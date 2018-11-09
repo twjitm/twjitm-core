@@ -3,8 +3,8 @@ package com.twjitm.core.bootstrap;
 import java.net.InetSocketAddress;
 
 /**
- * @author EGLS0807 - [Created on 2018-08-16 13:50]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-08-16 13:50]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  *
  */

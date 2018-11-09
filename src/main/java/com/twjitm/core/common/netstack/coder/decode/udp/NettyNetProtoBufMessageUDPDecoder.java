@@ -12,7 +12,7 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 /**
- * @author EGLS0807 - [Created on 2018-07-30 11:04]
+ * @author twjitm - [Created on 2018-07-30 11:04]
  * udp协议解码器
  *
  * @jdk java version "1.8.0_77"

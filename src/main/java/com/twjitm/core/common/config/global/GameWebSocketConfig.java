@@ -1,1 +1,1 @@
-package com.twjitm.core.common.config.global;/** * @author EGLS0807 - [Created on 2018-08-22 17:43] * @company http://www.g2us.com/ * @jdk java version "1.8.0_77" */public class GameWebSocketConfig {}
+package com.twjitm.core.common.config.global;/** * @author twjitm - [Created on 2018-08-22 17:43] * @company https://github.com/twjitm/ * @jdk java version "1.8.0_77" */public class GameWebSocketConfig {}

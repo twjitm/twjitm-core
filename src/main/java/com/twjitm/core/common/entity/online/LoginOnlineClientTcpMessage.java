@@ -7,8 +7,8 @@ import com.twjitm.core.common.proto.LoginOnlineClientTcpMessagebuf;
 import io.netty.handler.codec.CodecException;
 
 /**
- * @author EGLS0807 - [Created on 2018-08-08 17:41]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-08-08 17:41]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  */
 @MessageCommandAnnotation(messageCmd = MessageComm.PLAYER_LOGIN_MESSAGE)

@@ -7,8 +7,8 @@ import com.twjitm.core.utils.logs.LoggerUtils;
 import org.apache.log4j.Logger;
 
 /**
- * @author EGLS0807 - [Created on 2018-08-08 15:06]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-08-08 15:06]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  * udp协议消息处理的一种方式：生产者-----消费者模式
  */

@@ -1,1 +1,1 @@
-package com.twjitm.core.common.factory.thread.async;/** * @author EGLS0807 - [Created on 2018-08-20 10:43] * @company http://www.g2us.com/ * @jdk java version "1.8.0_77" */public interface AsyncCall extends Runnable {   void asyncCall() throws Exception;}
+package com.twjitm.core.common.factory.thread.async;/** * @author twjitm - [Created on 2018-08-20 10:43] * @company https://github.com/twjitm/ * @jdk java version "1.8.0_77" */public interface AsyncCall extends Runnable {   void asyncCall() throws Exception;}

@@ -8,7 +8,7 @@ import io.netty.buffer.Unpooled;
 import org.springframework.stereotype.Service;
 
 /**
- * @author EGLS0807 - [Created on 2018-07-30 10:46]
+ * @author twjitm - [Created on 2018-07-30 10:46]
  * <p>
  * UPD协议编码工厂
  * @jdk java version "1.8.0_77"

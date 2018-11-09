@@ -3,8 +3,8 @@ package com.twjitm.core.common.service.Impl;
 import com.twjitm.core.common.service.IService;
 
 /**
- * @author EGLS0807 - [Created on 2018-08-16 11:07]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-08-16 11:07]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  */
 public class NettyGameServiceConfigServiceImpl implements IService {

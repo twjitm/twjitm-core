@@ -4,7 +4,7 @@ import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 import io.netty.channel.Channel;
 
 /**
- * @author EGLS0807 - [Created on 2018-07-24 15:56]
+ * @author twjitm - [Created on 2018-07-24 15:56]
  * @jdk java version "1.8.0_77"
  * 自定义session
  */

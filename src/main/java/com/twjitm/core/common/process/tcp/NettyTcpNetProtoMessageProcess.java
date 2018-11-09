@@ -12,7 +12,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
- * @author EGLS0807 - [Created on 2018-07-24 15:49]
+ * @author twjitm - [Created on 2018-07-24 15:49]
  * @jdk java version "1.8.0_77"
  * 消息处理
  */

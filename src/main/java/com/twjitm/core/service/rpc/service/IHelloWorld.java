@@ -1,1 +1,1 @@
-package com.twjitm.core.service.rpc.service;/** * @author EGLS0807 - [Created on 2018-08-20 10:24] * @company http://www.g2us.com/ * @jdk java version "1.8.0_77" */public interface IHelloWorld {    String getHelloWorld(int number);}
+package com.twjitm.core.service.rpc.service;/** * @author twjitm - [Created on 2018-08-20 10:24] * @company https://github.com/twjitm/ * @jdk java version "1.8.0_77" */public interface IHelloWorld {    String getHelloWorld(int number);}

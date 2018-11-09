@@ -12,7 +12,7 @@ import io.netty.handler.codec.CodecException;
 import org.springframework.stereotype.Service;
 
 /**
- * @author EGLS0807 - [Created on 2018-07-30 11:03]
+ * @author twjitm - [Created on 2018-07-30 11:03]
  * udp协议解码工厂
  * @jdk java version "1.8.0_77"
  */

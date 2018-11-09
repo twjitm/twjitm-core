@@ -6,8 +6,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
 /**
- * @author EGLS0807 - [Created on 2018-07-27 11:03]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-07-27 11:03]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  */
 @Service

@@ -23,8 +23,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author EGLS0807 - [Created on 2018-07-27 11:30]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-07-27 11:30]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  * 服务器启动入口
  */

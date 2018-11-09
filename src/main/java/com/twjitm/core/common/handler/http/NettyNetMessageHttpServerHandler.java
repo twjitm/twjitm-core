@@ -25,8 +25,8 @@ import static io.netty.handler.codec.http.HttpResponseStatus.CONTINUE;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 /**
- * @author EGLS0807 - [Created on 2018-08-14 17:09]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-08-14 17:09]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  * http  server handler
  */

@@ -11,8 +11,8 @@ import io.netty.channel.ChannelHandlerContext;
 import javax.annotation.Resource;
 
 /**
- * @author EGLS0807 - [Created on 2018-07-26 21:11]
- * @company http://www.g2us.com/
+ * @author twjitm - [Created on 2018-07-26 21:11]
+ * @company https://github.com/twjitm/
  * @jdk java version "1.8.0_77"
  */
 public class NettyNetMessageTcpServerHandler extends AbstractNettyNetMessageTcpServerHandler {
