@@ -9,7 +9,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
 
 /**
- * Created by ÎÄ½­ on 2018/5/17.
+ * Created by æ–‡æ±Ÿ on 2018/5/17.
  */
 @ChannelHandler.Sharable
 public class EchoServiceHandler extends ChannelInboundHandlerAdapter {
@@ -22,7 +22,7 @@ public class EchoServiceHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-     ctx.writeAndFlush(Unpooled.BIG_ENDIAN).addListener(ChannelFutureListener.CLOSE);
+        ctx.writeAndFlush(Unpooled.BIG_ENDIAN).addListener(ChannelFutureListener.CLOSE);
     }
 
     @Override

@@ -1,6 +1,15 @@
 syntax = "proto3";
-message OnlineClientHttpMessage { 
-   int64 player_id = 1; 
-   string player_name=2;
-   
+option java_multiple_files = true;
+
+option java_package = "com.twjitm.core.common.proto";
+
+message OnlineClientHttpMessage {
+    int64 player_id = 1;
+    string player_name = 2;
+
+}
+
+message LoginProxy {
+    string name = 1;
+    string password = 2;
 }

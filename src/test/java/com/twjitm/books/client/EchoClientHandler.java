@@ -7,7 +7,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
 
 /**
- * Created by �Ľ� on 2018/5/18.
+ * Created by  on 2018/5/18.
  */
 public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 

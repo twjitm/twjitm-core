@@ -8,7 +8,7 @@ package com.twjitm.core.common.process.tcp;
 import com.twjitm.core.common.netstack.entity.AbstractNettyNetMessage;
 
 /**
- * 消息处理器
+ *
  */
 public interface INettyTcpNetProtoMessageProcess {
     public void processNetMessage();

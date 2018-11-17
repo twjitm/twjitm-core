@@ -8,7 +8,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
- * Created by 文江 on 2018/5/18.
+ * Created by 鏂囨睙 on 2018/5/18.
  */
 public class EchoServer {
     private static int port;
@@ -32,11 +32,11 @@ public class EchoServer {
                 .childHandler(echoServiceHandler) //(4)
                 .option(ChannelOption.SO_BACKLOG, 128)          // (5)
                 .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)*/
-        // 绑定端口，开始接收进来的连接
+        // 缁戝畾绔彛锛屽紑濮嬫帴鏀惰繘鏉ョ殑杩炴帴
         ChannelFuture f = null; // (7)
         try {
             f = b.bind("127.0.0.1", port).sync();
-            System.out.println("服务器启动了");
+            System.out.println("鏈嶅姟鍣ㄥ惎鍔ㄤ簡");
             f.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();

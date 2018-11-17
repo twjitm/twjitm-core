@@ -11,7 +11,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import java.net.InetSocketAddress;
 
 /**
- * ¿Í»§¶ËÒýµ¼
+ * å®¢æˆ·ç«¯å¼•å¯¼
  */
 public class EchoClient {
     public static void main(String[] args) {

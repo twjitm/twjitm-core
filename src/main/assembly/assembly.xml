@@ -1,0 +1,46 @@
+<assembly>
+    <id>release</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <useProjectArtifact>true</useProjectArtifact>
+            <unpack>false</unpack>
+        </dependencySet>
+    </dependencySets>
+
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/src/main/assembly</directory>
+            <outputDirectory>/</outputDirectory>
+            <directoryMode>0755</directoryMode>
+            <filtered>true</filtered>
+            <fileMode>0755</fileMode>
+           <!-- <includes>
+                <include>gs.sh</include>
+                <include>fall.vmoptions</include>
+            </includes>-->
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources</directory>
+            <directoryMode>0755</directoryMode>
+            <outputDirectory>/config</outputDirectory>
+            <fileMode>0660</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/lib</directory>
+            <outputDirectory>/lib</outputDirectory>
+            <directoryMode>0755</directoryMode>
+        </fileSet>
+        <fileSet>
+            <directory>.</directory>
+            <outputDirectory>/logs</outputDirectory>
+            <directoryMode>0755</directoryMode>
+            <excludes>
+                <exclude>*/**</exclude>
+            </excludes>
+        </fileSet>
+    </fileSets>
+</assembly>

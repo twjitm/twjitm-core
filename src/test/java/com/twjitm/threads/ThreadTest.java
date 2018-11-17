@@ -1,12 +1,12 @@
 package com.twjitm.threads;
 
 /**
- * Created by ÎÄ½­ on 2018/5/21.
+ * Created by æ–‡æ±Ÿ on 2018/5/21.
  */
 public class ThreadTest implements Runnable {
     @Override
     public void run() {
-        System.out.println("×ÓÏß³Ì¿ªÊ¼Ö´ĞĞ");
+        System.out.println("å­çº¿ç¨‹å¼€å§‹æ‰§è¡Œ");
         for (int i = 0; i < 10; i++) {
           /*  try {
                // Thread.currentThread().sleep(1000);
@@ -15,11 +15,11 @@ public class ThreadTest implements Runnable {
             }*/
             System.out.println(i);
         }
-        System.out.println("×ÓÏß³Ì½áÊøÖ´ĞĞ");
+        System.out.println("å­çº¿ç¨‹ç»“æŸæ‰§è¡Œ");
     }
 
     public static void main(String[] args) {
-        System.out.println("Ö÷Ïß³Ì¿ªÊ¼");
+        System.out.println("ä¸»çº¿ç¨‹å¼€å§‹");
         ThreadTest threadTest = new ThreadTest();
         threadTest.run();
         Thread2 thread2 = new Thread2();
@@ -29,22 +29,22 @@ public class ThreadTest implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Ö÷Ïß³Ì½áÊø");
+        System.out.println("ä¸»çº¿ç¨‹ç»“æŸ");
     }
 
     static class Thread2 extends Thread {
         @Override
         public void run() {
-            System.out.println(Thread.currentThread().getName() + " Ïß³ÌÔËĞĞ¿ªÊ¼!");
+            System.out.println(Thread.currentThread().getName() + " çº¿ç¨‹è¿è¡Œå¼€å§‹!");
             for (int i = 0; i < 5; i++) {
-                System.out.println("×ÓÏß³Ì" + Thread.currentThread().getName() + "ÔËĞĞ : " + i);
+                System.out.println("å­çº¿ç¨‹" + Thread.currentThread().getName() + "è¿è¡Œ : " + i);
                 try {
                     sleep((int) Math.random() * 10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            System.out.println(Thread.currentThread().getName() + " Ïß³ÌÔËĞĞ½áÊø!");
+            System.out.println(Thread.currentThread().getName() + " çº¿ç¨‹è¿è¡Œç»“æŸ!");
 
         }
     }
